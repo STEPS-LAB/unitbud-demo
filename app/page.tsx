@@ -1,7 +1,5 @@
 import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
-import { StickyBookingBar } from "@/components/shared/StickyBookingBar";
-import { AiWidget } from "@/components/shared/AiWidget";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { StatsBar } from "@/components/sections/StatsBar";
 import { InstalledSection } from "@/components/sections/InstalledSection";
@@ -32,8 +30,6 @@ export default function HomePage() {
         <ConsultationSection />
       </main>
       <Footer />
-      <StickyBookingBar />
-      <AiWidget />
     </>
   );
 }
