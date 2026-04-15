@@ -18,11 +18,14 @@ const navLinks = [
 ];
 
 export function Header() {
-  const scrolled = useScrolled(60);
+  // Keep header fully transparent only at the very top of the hero.
+  // As soon as user starts scrolling, switch to frosted glass.
+  const scrolled = useScrolled(8);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const { locale, toggle } = useLocale();
   const logoSrc = scrolled || mobileOpen ? "/logo-dark.svg" : "/logo.svg";
+  const frosted = scrolled || mobileOpen;
 
   // Lock body scroll when mobile menu open
   useEffect(() => {
@@ -34,13 +37,17 @@ export function Header() {
     <>
       <header
         className={[
-          "fixed top-0 inset-x-0 z-50 transition-all duration-300",
-          scrolled
-            ? "glass border-b border-[#e8e8e5]/80 py-3"
-            : "bg-transparent py-5",
+          "fixed top-0 inset-x-0 z-50 h-[88px] border-b border-transparent transition-[background-color,border-color,backdrop-filter,-webkit-backdrop-filter] duration-300 ease-out will-change-[background-color,border-color,backdrop-filter]",
+          frosted
+            ? "border-[#e8e8e5]/80 bg-white/65"
+            : "bg-transparent",
         ].join(" ")}
+        style={{
+          backdropFilter: frosted ? "blur(18px) saturate(180%)" : "blur(0px) saturate(100%)",
+          WebkitBackdropFilter: frosted ? "blur(18px) saturate(180%)" : "blur(0px) saturate(100%)",
+        }}
       >
-        <div className="container-wide flex items-center justify-between">
+        <div className="container-wide h-full flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center group" onClick={() => setMobileOpen(false)}>
             <Image
