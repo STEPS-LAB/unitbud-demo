@@ -1,0 +1,83 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus } from "lucide-react";
+import { faqs } from "@/data/faq";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { useLocale } from "@/hooks/useLocale";
+
+export function FaqSection() {
+  const { tr } = useLocale();
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id));
+
+  return (
+    <section id="faq" className="section-padding bg-white">
+      <div className="container-wide">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20">
+          {/* Left */}
+          <div>
+            <SectionHeader
+              label="FAQ"
+              title={tr.sections.faq}
+              subtitle={tr.sections.faqSub}
+            />
+            <p className="text-[14px] text-[#7c7c78] leading-relaxed">
+              Не знайшли відповідь? Зателефонуйте нам або залиште заявку — відповімо на будь-яке запитання.
+            </p>
+            <a href="tel:+380800000000" className="mt-4 inline-flex btn-outline text-sm">
+              0 800 000 000
+            </a>
+          </div>
+
+          {/* Right */}
+          <div className="space-y-0 divide-y divide-[#e8e8e5]">
+            {faqs.map((faq, i) => (
+              <motion.div
+                key={faq.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05, duration: 0.5 }}
+              >
+                <button
+                  onClick={() => toggle(faq.id)}
+                  className="w-full flex items-center justify-between gap-4 py-5 text-left group"
+                >
+                  <span className="text-[15px] font-500 text-[#131311] group-hover:text-[#728c4a] transition-colors">
+                    {faq.question}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: openId === faq.id ? 45 : 0 }}
+                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e8e8e5] flex items-center justify-center text-[#728c4a]"
+                  >
+                    <Plus size={14} />
+                  </motion.div>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {openId === faq.id && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <p className="pb-5 text-[14px] text-[#555552] leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

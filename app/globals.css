@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+/* ============================================================
+   UNITBUD — DESIGN TOKENS
+   Premium architectural real estate
+   ============================================================ */
+
+@theme inline {
+  /* ── Typography ─────────────────────────────────────────── */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Montserrat", "Inter", sans-serif;
+
+  /* ── Brand Colors ──────────────────────────────────────── */
+  --color-brand-50:  #f4f6f0;
+  --color-brand-100: #e6ebdc;
+  --color-brand-200: #cdd7b9;
+  --color-brand-300: #afc08f;
+  --color-brand-400: #91a668;
+  --color-brand-500: #728c4a;
+  --color-brand-600: #5a7039;
+  --color-brand-700: #44552b;
+  --color-brand-800: #2e3b1e;
+  --color-brand-900: #1a2111;
+
+  /* ── Neutral ─────────────────────────────────────────────── */
+  --color-neutral-0:   #ffffff;
+  --color-neutral-50:  #f9f9f8;
+  --color-neutral-100: #f2f2f0;
+  --color-neutral-200: #e8e8e5;
+  --color-neutral-300: #d4d4d0;
+  --color-neutral-400: #a8a8a3;
+  --color-neutral-500: #7c7c78;
+  --color-neutral-600: #555552;
+  --color-neutral-700: #3a3a38;
+  --color-neutral-800: #242422;
+  --color-neutral-900: #131311;
+  --color-neutral-950: #0a0a09;
+}
+
+/* ── Base Reset ──────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: #ffffff;
+  color: #131311;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(114,140,74,0.15);
+  color: #131311;
+}
+
+:focus-visible {
+  outline: 2px solid #728c4a;
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f2f2f0; }
+::-webkit-scrollbar-thumb { background: #d4d4d0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #a8a8a3; }
+
+/* ── Container ──────────────────────────────────────────── */
+.container-wide {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 5rem);
+}
+.container-narrow {
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 5rem);
+}
+.section-padding {
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+/* ── Glassmorphism ─────────────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.80);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* ── Buttons ────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #728c4a;
+  color: white;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  padding: 0.875rem 2rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1;
+}
+.btn-primary:hover {
+  background: #44552b;
+  box-shadow: 0 4px 20px rgba(114,140,74,0.35);
+}
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: #131311;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  padding: 0.875rem 2rem;
+  border-radius: 4px;
+  border: 1px solid #d4d4d0;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1;
+}
+.btn-outline:hover { border-color: #131311; }
+.btn-outline:active { transform: scale(0.98); }
+
+/* ── Input ──────────────────────────────────────────────── */
+.input-field {
+  width: 100%;
+  background: #f9f9f8;
+  border: 1px solid #e8e8e5;
+  border-radius: 4px;
+  padding: 0.875rem 1rem;
+  font-size: 0.9375rem;
+  color: #131311;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+}
+.input-field::placeholder { color: #a8a8a3; }
+.input-field:focus {
+  border-color: #728c4a;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(114,140,74,0.12);
+}
+.input-field.error {
+  border-color: #cc4444;
+  box-shadow: 0 0 0 3px rgba(204,68,68,0.12);
+}
+
+/* ── Skeleton ───────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #f2f2f0 25%, #e8e8e5 50%, #f2f2f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-wave 1.6s ease-in-out infinite;
+  border-radius: 4px;
+}
+@keyframes skeleton-wave {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Section Label ──────────────────────────────────────── */
+.section-label {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #728c4a;
+}
+
+/* ── Card ───────────────────────────────────────────────── */
+.card-premium {
+  background: #ffffff;
+  border: 1px solid #e8e8e5;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card-premium:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  transform: translateY(-2px);
+}
+
+/* ── Scroll X ───────────────────────────────────────────── */
+.scroll-x {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-x::-webkit-scrollbar { display: none; }
+
+/* ── Sticky bar ─────────────────────────────────────────── */
+@keyframes slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.sticky-bar { animation: slide-up 0.5s cubic-bezier(0.25,0.46,0.45,0.94) 0.8s both; }
+
+/* ── Map pulse ──────────────────────────────────────────── */
+@keyframes pulse-ring {
+  0%   { transform: scale(0.8); opacity: 0.7; }
+  70%  { transform: scale(2);   opacity: 0; }
+  100% { transform: scale(0.8); opacity: 0; }
+}

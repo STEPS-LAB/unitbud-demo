@@ -1,0 +1,48 @@
+import { MapPoint } from "@/types";
+
+export const mapPoints: MapPoint[] = [
+  {
+    id: "1",
+    lat: 50.4501,
+    lng: 30.5234,
+    title: "Sokil 120",
+    area: 120,
+    price: 1890000,
+    image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&q=80",
+    slug: "sokil-120",
+    city: "Київська обл.",
+  },
+  {
+    id: "2",
+    lat: 49.8397,
+    lng: 24.0297,
+    title: "Yastub 100",
+    area: 100,
+    price: 1620000,
+    image: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=400&q=80",
+    slug: "yastyb-100",
+    city: "Львівська обл.",
+  },
+  {
+    id: "3",
+    lat: 48.4647,
+    lng: 35.0462,
+    title: "Phoenix 180",
+    area: 180,
+    price: 3100000,
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&q=80",
+    slug: "phoenix-180",
+    city: "Дніпропетровська обл.",
+  },
+  {
+    id: "4",
+    lat: 46.4825,
+    lng: 30.7233,
+    title: "Berkut 85",
+    area: 85,
+    price: 1350000,
+    image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400&q=80",
+    slug: "berkut-85",
+    city: "Одеська обл.",
+  },
+];
