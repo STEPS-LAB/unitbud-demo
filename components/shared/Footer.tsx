@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 const catalog = [
@@ -28,16 +29,14 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-5">
-              <div className="w-8 h-8 bg-[#728c4a] rounded-[4px] flex items-center justify-center">
-                <span className="text-white font-bold text-sm">U</span>
-              </div>
-              <span
-                className="text-lg font-semibold text-white tracking-tight"
-                style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
-              >
-                Unitbud
-              </span>
+            <Link href="/" className="flex items-center mb-5">
+              <Image
+                src="/logo.svg"
+                alt="Unitbud logo"
+                width={56}
+                height={56}
+                className="w-14 h-14 object-contain"
+              />
             </Link>
             <p className="text-sm leading-relaxed mb-6">
               Преміальне каркасне будівництво. Від проєкту до ключів — під ключ.

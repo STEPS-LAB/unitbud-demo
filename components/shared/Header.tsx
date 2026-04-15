@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { useScrolled } from "@/hooks/useScrolled";
@@ -21,6 +22,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const { locale, toggle } = useLocale();
+  const logoSrc = scrolled || mobileOpen ? "/logo-dark.svg" : "/logo.svg";
 
   // Lock body scroll when mobile menu open
   useEffect(() => {
@@ -40,19 +42,15 @@ export function Header() {
       >
         <div className="container-wide flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group" onClick={() => setMobileOpen(false)}>
-            <div className="w-8 h-8 bg-[#728c4a] rounded-[4px] flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-bold text-sm tracking-tight">U</span>
-            </div>
-            <span
-              className={[
-                "text-lg font-semibold tracking-tight transition-colors",
-                scrolled || mobileOpen ? "text-[#131311]" : "text-white",
-              ].join(" ")}
-              style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
-            >
-              Unitbud
-            </span>
+          <Link href="/" className="flex items-center group" onClick={() => setMobileOpen(false)}>
+            <Image
+              src={logoSrc}
+              alt="Unitbud logo"
+              width={56}
+              height={56}
+              className="w-14 h-14 object-contain flex-shrink-0"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}
