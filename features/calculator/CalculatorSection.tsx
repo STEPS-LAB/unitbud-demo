@@ -79,7 +79,7 @@ export function CalculatorSection() {
       </div>
       <div className="relative h-1.5 bg-[#e8e8e5] rounded-full">
         <div
-          className="absolute h-1.5 bg-[#728c4a] rounded-full"
+          className="absolute h-1.5 bg-[#77d14d] rounded-full"
           style={{ width: `${((value - min) / (max - min)) * 100}%` }}
         />
         <input
@@ -123,8 +123,8 @@ export function CalculatorSection() {
             className={[
               "px-4 py-2 text-[13px] font-500 rounded-[4px] border transition-all duration-200",
               value === opt
-                ? "bg-[#728c4a] border-[#728c4a] text-white"
-                : "bg-white border-[#e8e8e5] text-[#555552] hover:border-[#728c4a] hover:text-[#728c4a]",
+                ? "bg-[#77d14d] border-[#77d14d] text-white"
+                : "bg-white border-[#e8e8e5] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]",
             ].join(" ")}
           >
             {labels[opt]}
@@ -177,8 +177,8 @@ export function CalculatorSection() {
                     className={[
                       "flex-1 py-3 text-sm font-500 rounded-[4px] border transition-all duration-200",
                       floors === f
-                        ? "bg-[#728c4a] border-[#728c4a] text-white"
-                        : "bg-white border-[#e8e8e5] text-[#555552] hover:border-[#728c4a]",
+                        ? "bg-[#77d14d] border-[#77d14d] text-white"
+                        : "bg-white border-[#e8e8e5] text-[#555552] hover:border-[#77d14d]",
                     ].join(" ")}
                   >
                     {f} {f === 1 ? "поверх" : "поверхи"}
@@ -247,7 +247,7 @@ export function CalculatorSection() {
 
             <button
               onClick={() => setModalOpen(true)}
-              className="w-full bg-[#728c4a] hover:bg-[#44552b] text-white text-sm font-500 py-3.5 rounded-[4px] transition-colors duration-200"
+              className="w-full bg-[#77d14d] hover:bg-[#4e8f31] text-white text-sm font-500 py-3.5 rounded-[4px] transition-colors duration-200"
             >
               Отримати точний розрахунок
             </button>

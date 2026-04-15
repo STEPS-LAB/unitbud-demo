@@ -41,7 +41,7 @@ export function HouseCard({ house, priority = false }: Props) {
 
         {/* Tag */}
         {house.tag && (
-          <div className="absolute top-3 left-3 bg-[#728c4a] text-white text-[11px] font-600 tracking-wide px-2.5 py-1 rounded-[3px]">
+          <div className="absolute top-3 left-3 bg-[#77d14d] text-white text-[11px] font-600 tracking-wide px-2.5 py-1 rounded-[3px]">
             {house.tag}
           </div>
         )}
@@ -96,7 +96,7 @@ export function HouseCard({ house, priority = false }: Props) {
           </div>
           <Link
             href={`/house/${house.slug}`}
-            className="flex items-center gap-1.5 text-[13px] font-500 text-[#728c4a] hover:text-[#44552b] transition-colors group/arrow"
+            className="flex items-center gap-1.5 text-[13px] font-500 text-[#77d14d] hover:text-[#4e8f31] transition-colors group/arrow"
           >
             Детальніше
             <ArrowRight

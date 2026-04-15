@@ -22,7 +22,7 @@ export function PopularSection() {
           />
           <Link
             href="/catalog"
-            className="text-sm font-500 text-[#728c4a] hover:text-[#44552b] transition-colors flex items-center gap-1.5"
+            className="text-sm font-500 text-[#77d14d] hover:text-[#4e8f31] transition-colors flex items-center gap-1.5"
           >
             Весь каталог →
           </Link>

@@ -17,7 +17,7 @@ export function ReviewsSection() {
           label="Відгуки"
           title={tr.sections.reviews}
           subtitle={tr.sections.reviewsSub}
-          className="[&_h2]:text-white [&_.section-label]:text-[#91a668] [&_p]:text-white/50"
+          className="[&_h2]:text-white [&_.section-label]:text-[#95dc6a] [&_p]:text-white/50"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -33,7 +33,7 @@ export function ReviewsSection() {
               {/* Stars */}
               <div className="flex gap-0.5 mb-4">
                 {Array.from({ length: review.rating }).map((_, j) => (
-                  <Star key={j} size={13} className="text-[#728c4a] fill-[#728c4a]" />
+                  <Star key={j} size={13} className="text-[#77d14d] fill-[#77d14d]" />
                 ))}
               </div>
 

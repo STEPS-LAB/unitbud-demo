@@ -69,7 +69,7 @@ export function WhySection() {
               className="bg-white border border-[#e8e8e5] rounded-[6px] p-6 md:p-7 hover:shadow-md transition-shadow duration-300"
             >
               <div className="w-10 h-10 rounded-[4px] bg-[#f4f6f0] flex items-center justify-center mb-5">
-                <r.icon size={20} className="text-[#728c4a]" strokeWidth={1.5} />
+                <r.icon size={20} className="text-[#77d14d]" strokeWidth={1.5} />
               </div>
               <h3
                 className="text-base font-500 text-[#131311] mb-2 tracking-tight"

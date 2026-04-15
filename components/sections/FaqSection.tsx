@@ -46,13 +46,13 @@ export function FaqSection() {
                   onClick={() => toggle(faq.id)}
                   className="w-full flex items-center justify-between gap-4 py-5 text-left group"
                 >
-                  <span className="text-[15px] font-500 text-[#131311] group-hover:text-[#728c4a] transition-colors">
+                  <span className="text-[15px] font-500 text-[#131311] group-hover:text-[#77d14d] transition-colors">
                     {faq.question}
                   </span>
                   <motion.div
                     animate={{ rotate: openId === faq.id ? 45 : 0 }}
                     transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e8e8e5] flex items-center justify-center text-[#728c4a]"
+                    className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e8e8e5] flex items-center justify-center text-[#77d14d]"
                   >
                     <Plus size={14} />
                   </motion.div>

@@ -77,8 +77,8 @@ export function CatalogClient() {
                 className={[
                   "px-4 py-2 text-[13px] font-500 rounded-[4px] border transition-all duration-200",
                   category === c.key
-                    ? "bg-[#728c4a] border-[#728c4a] text-white"
-                    : "bg-white border-[#e8e8e5] text-[#555552] hover:border-[#728c4a]",
+                    ? "bg-[#77d14d] border-[#77d14d] text-white"
+                    : "bg-white border-[#e8e8e5] text-[#555552] hover:border-[#77d14d]",
                 ].join(" ")}
               >
                 {c.label}
@@ -136,7 +136,7 @@ export function CatalogClient() {
                       step={10}
                       value={areaMin}
                       onChange={(e) => setAreaMin(Math.min(Number(e.target.value), areaMax - 10))}
-                      className="w-full accent-[#728c4a]"
+                      className="w-full accent-[#77d14d]"
                     />
                   </div>
                   <div>
@@ -150,7 +150,7 @@ export function CatalogClient() {
                       step={10}
                       value={areaMax}
                       onChange={(e) => setAreaMax(Math.max(Number(e.target.value), areaMin + 10))}
-                      className="w-full accent-[#728c4a]"
+                      className="w-full accent-[#77d14d]"
                     />
                   </div>
                 </div>

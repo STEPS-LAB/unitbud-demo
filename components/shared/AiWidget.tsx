@@ -27,7 +27,7 @@ export function AiWidget() {
             {/* Header */}
             <div className="bg-[#131311] px-4 py-3.5 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-full bg-[#728c4a] flex items-center justify-center">
+                <div className="w-7 h-7 rounded-full bg-[#77d14d] flex items-center justify-center">
                   <span className="text-white text-[10px] font-700">AI</span>
                 </div>
                 <div>
@@ -47,7 +47,7 @@ export function AiWidget() {
             <div className="p-4 min-h-[120px]">
               <div className="flex gap-2.5">
                 <div className="w-7 h-7 rounded-full bg-[#f4f6f0] flex-shrink-0 flex items-center justify-center">
-                  <span className="text-[#728c4a] text-[10px] font-700">AI</span>
+                  <span className="text-[#77d14d] text-[10px] font-700">AI</span>
                 </div>
                 <div className="bg-[#f9f9f8] rounded-[4px] rounded-tl-0 px-3.5 py-2.5 text-[13px] text-[#3a3a38] leading-relaxed whitespace-pre-line">
                   {INITIAL_MESSAGE}
@@ -67,7 +67,7 @@ export function AiWidget() {
               />
               <button
                 onClick={() => setInput("")}
-                className="p-1.5 text-[#728c4a] hover:text-[#44552b] transition-colors"
+                className="p-1.5 text-[#77d14d] hover:text-[#4e8f31] transition-colors"
               >
                 <Send size={14} />
               </button>
@@ -85,8 +85,8 @@ export function AiWidget() {
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.94 }}
         onClick={() => setOpen((v) => !v)}
-        className="w-12 h-12 bg-[#728c4a] hover:bg-[#44552b] rounded-full text-white flex items-center justify-center transition-colors duration-200"
-        style={{ boxShadow: "0 4px 20px rgba(114,140,74,0.4)" }}
+        className="w-12 h-12 bg-[#77d14d] hover:bg-[#4e8f31] rounded-full text-white flex items-center justify-center transition-colors duration-200"
+        style={{ boxShadow: "0 4px 20px rgba(119,209,77,0.4)" }}
         aria-label="Запитайте що завгодно"
       >
         <AnimatePresence mode="wait">

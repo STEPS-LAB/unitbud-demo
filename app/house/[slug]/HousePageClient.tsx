@@ -36,9 +36,9 @@ export function HousePageClient({ house }: Props) {
         {/* Breadcrumb */}
         <RevealOnScroll>
           <div className="flex items-center gap-2 text-sm text-[#7c7c78] mb-8">
-            <Link href="/" className="hover:text-[#728c4a] transition-colors">Головна</Link>
+            <Link href="/" className="hover:text-[#77d14d] transition-colors">Головна</Link>
             <span>/</span>
-            <Link href="/catalog" className="hover:text-[#728c4a] transition-colors">Каталог</Link>
+            <Link href="/catalog" className="hover:text-[#77d14d] transition-colors">Каталог</Link>
             <span>/</span>
             <span className="text-[#131311]">{house.name}</span>
           </div>
@@ -105,7 +105,7 @@ export function HousePageClient({ house }: Props) {
                     className={[
                       "relative flex-1 aspect-[4/3] rounded-[4px] overflow-hidden border-2 transition-all",
                       i === activeImg
-                        ? "border-[#728c4a]"
+                        ? "border-[#77d14d]"
                         : "border-transparent opacity-60 hover:opacity-100",
                     ].join(" ")}
                   >
@@ -139,7 +139,7 @@ export function HousePageClient({ house }: Props) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                 {house.features.map((f, i) => (
                   <div key={i} className="flex items-start gap-2.5 text-[14px] text-[#3a3a38]">
-                    <CheckCircle2 size={15} className="text-[#728c4a] mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 size={15} className="text-[#77d14d] mt-0.5 flex-shrink-0" />
                     {f}
                   </div>
                 ))}
@@ -181,7 +181,7 @@ export function HousePageClient({ house }: Props) {
                 >
                   {/* Tag */}
                   {house.tag && (
-                    <div className="inline-block bg-[#f4f6f0] text-[#728c4a] text-[11px] font-600 uppercase tracking-wider px-2.5 py-1 rounded-[3px] mb-4">
+                    <div className="inline-block bg-[#f3fbef] text-[#77d14d] text-[11px] font-600 uppercase tracking-wider px-2.5 py-1 rounded-[3px] mb-4">
                       {house.tag}
                     </div>
                   )}
@@ -207,7 +207,7 @@ export function HousePageClient({ house }: Props) {
                       >
                         <spec.icon
                           size={16}
-                          className="text-[#728c4a] mx-auto mb-1.5"
+                          className="text-[#77d14d] mx-auto mb-1.5"
                           strokeWidth={1.5}
                         />
                         <p className="text-[11px] text-[#a8a8a3] mb-0.5">{spec.label}</p>
@@ -258,7 +258,7 @@ export function HousePageClient({ house }: Props) {
                 {/* Back link */}
                 <Link
                   href="/catalog"
-                  className="flex items-center gap-1.5 text-sm text-[#7c7c78] hover:text-[#728c4a] transition-colors"
+                  className="flex items-center gap-1.5 text-sm text-[#7c7c78] hover:text-[#77d14d] transition-colors"
                 >
                   <ArrowLeft size={14} />
                   Назад до каталогу

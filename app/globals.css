@@ -11,16 +11,16 @@
   --font-display: "Montserrat", "Inter", sans-serif;
 
   /* ── Brand Colors ──────────────────────────────────────── */
-  --color-brand-50:  #f4f6f0;
-  --color-brand-100: #e6ebdc;
-  --color-brand-200: #cdd7b9;
-  --color-brand-300: #afc08f;
-  --color-brand-400: #91a668;
-  --color-brand-500: #728c4a;
-  --color-brand-600: #5a7039;
-  --color-brand-700: #44552b;
-  --color-brand-800: #2e3b1e;
-  --color-brand-900: #1a2111;
+  --color-brand-50:  #f3fbef;
+  --color-brand-100: #e4f7d8;
+  --color-brand-200: #c8efb0;
+  --color-brand-300: #ace889;
+  --color-brand-400: #93de67;
+  --color-brand-500: #77d14d;
+  --color-brand-600: #62b23f;
+  --color-brand-700: #4a872f;
+  --color-brand-800: #336020;
+  --color-brand-900: #1f3c14;
 
   /* ── Neutral ─────────────────────────────────────────────── */
   --color-neutral-0:   #ffffff;
@@ -60,12 +60,12 @@ body {
 }
 
 ::selection {
-  background: rgba(114,140,74,0.15);
+  background: rgba(119,209,77,0.15);
   color: #131311;
 }
 
 :focus-visible {
-  outline: 2px solid #728c4a;
+  outline: 2px solid #77d14d;
   outline-offset: 2px;
 }
 
@@ -104,7 +104,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #728c4a;
+  background: #77d14d;
   color: white;
   font-weight: 500;
   font-size: 0.875rem;
@@ -119,8 +119,8 @@ body {
   line-height: 1;
 }
 .btn-primary:hover {
-  background: #44552b;
-  box-shadow: 0 4px 20px rgba(114,140,74,0.35);
+  background: #4a872f;
+  box-shadow: 0 4px 20px rgba(119,209,77,0.35);
 }
 .btn-primary:active { transform: scale(0.98); }
 
@@ -143,7 +143,7 @@ body {
   text-decoration: none;
   line-height: 1;
 }
-.btn-outline:hover { border-color: #131311; }
+.btn-outline:hover { border-color: #77d14d; color: #77d14d; }
 .btn-outline:active { transform: scale(0.98); }
 
 /* ── Input ──────────────────────────────────────────────── */
@@ -162,9 +162,9 @@ body {
 }
 .input-field::placeholder { color: #a8a8a3; }
 .input-field:focus {
-  border-color: #728c4a;
+  border-color: #77d14d;
   background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(114,140,74,0.12);
+  box-shadow: 0 0 0 3px rgba(119,209,77,0.12);
 }
 .input-field.error {
   border-color: #cc4444;
@@ -190,7 +190,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #728c4a;
+  color: #77d14d;
 }
 
 /* ── Card ───────────────────────────────────────────────── */

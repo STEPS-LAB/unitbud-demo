@@ -141,7 +141,7 @@ export function ConsultationModal({ open, onClose }: Props) {
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.1, type: "spring", stiffness: 260, damping: 20 }}
                     >
-                      <CheckCircle2 size={56} className="text-[#728c4a] mb-4" />
+                      <CheckCircle2 size={56} className="text-[#77d14d] mb-4" />
                     </motion.div>
                     <p className="text-[#555552] text-sm leading-relaxed max-w-xs">
                       Дякуємо за вашу заявку! Очікуйте дзвінка від нашого архітектора. Ми відповідаємо протягом 1 хвилини в робочий час.
@@ -231,7 +231,7 @@ export function ConsultationModal({ open, onClose }: Props) {
 
                     <p className="text-center text-[11px] text-[#a8a8a3]">
                       Натискаючи кнопку, ви погоджуєтесь з{" "}
-                      <a href="/privacy" className="underline hover:text-[#728c4a] transition-colors">
+                      <a href="/privacy" className="underline hover:text-[#77d14d] transition-colors">
                         політикою конфіденційності
                       </a>
                     </p>

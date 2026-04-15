@@ -46,7 +46,7 @@ export function MapSection() {
           {/* Stylized Ukraine map SVG background */}
           <div className="absolute inset-0 flex items-center justify-center opacity-10">
             <svg viewBox="0 0 400 300" className="w-full h-full" style={{ maxWidth: "80%" }}>
-              <rect x="40" y="60" width="320" height="180" rx="40" fill="#728c4a" />
+              <rect x="40" y="60" width="320" height="180" rx="40" fill="#77d14d" />
               <text x="200" y="160" textAnchor="middle" fill="#2e3b1e" fontSize="24" fontFamily="Montserrat, sans-serif">
                 Україна
               </text>
@@ -56,10 +56,10 @@ export function MapSection() {
           {/* Grid lines */}
           <div className="absolute inset-0 opacity-20">
             {[25, 50, 75].map((p) => (
-              <div key={`h${p}`} className="absolute left-0 right-0 border-t border-[#728c4a]/20" style={{ top: `${p}%` }} />
+              <div key={`h${p}`} className="absolute left-0 right-0 border-t border-[#77d14d]/20" style={{ top: `${p}%` }} />
             ))}
             {[25, 50, 75].map((p) => (
-              <div key={`v${p}`} className="absolute top-0 bottom-0 border-l border-[#728c4a]/20" style={{ left: `${p}%` }} />
+              <div key={`v${p}`} className="absolute top-0 bottom-0 border-l border-[#77d14d]/20" style={{ left: `${p}%` }} />
             ))}
           </div>
 
@@ -80,13 +80,13 @@ export function MapSection() {
                 onClick={() => setActive(active?.id === point.id ? null : point)}
               >
                 {/* Pulse ring */}
-                <span className="absolute inset-0 rounded-full bg-[#728c4a]/30 animate-ping" style={{ animationDuration: "2s" }} />
+                <span className="absolute inset-0 rounded-full bg-[#77d14d]/30 animate-ping" style={{ animationDuration: "2s" }} />
                 <div
                   className={[
                     "relative z-10 w-9 h-9 rounded-full border-2 flex items-center justify-center transition-all duration-200",
                     active?.id === point.id
-                      ? "bg-[#728c4a] border-[#728c4a] text-white scale-110"
-                      : "bg-white border-[#728c4a] text-[#728c4a] hover:bg-[#728c4a] hover:text-white",
+                      ? "bg-[#77d14d] border-[#77d14d] text-white scale-110"
+                      : "bg-white border-[#77d14d] text-[#77d14d] hover:bg-[#77d14d] hover:text-white",
                   ].join(" ")}
                 >
                   <MapPin size={14} fill="currentColor" />
@@ -133,7 +133,7 @@ export function MapSection() {
                     <p className="text-base font-500 text-[#131311]">{formatPrice(active.price)}</p>
                     <Link
                       href={`/house/${active.slug}`}
-                      className="flex items-center gap-1 text-[13px] font-500 text-[#728c4a] hover:text-[#44552b] transition-colors"
+                      className="flex items-center gap-1 text-[13px] font-500 text-[#77d14d] hover:text-[#4e8f31] transition-colors"
                     >
                       Детальніше <ArrowRight size={13} />
                     </Link>

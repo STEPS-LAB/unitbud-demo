@@ -46,18 +46,18 @@ export function Footer() {
                 href="tel:+380800000000"
                 className="flex items-center gap-2.5 text-sm hover:text-white transition-colors"
               >
-                <Phone size={14} className="text-[#728c4a] flex-shrink-0" />
+                <Phone size={14} className="text-[#77d14d] flex-shrink-0" />
                 0 800 000 000
               </a>
               <a
                 href="mailto:info@unitbud.com"
                 className="flex items-center gap-2.5 text-sm hover:text-white transition-colors"
               >
-                <Mail size={14} className="text-[#728c4a] flex-shrink-0" />
+                <Mail size={14} className="text-[#77d14d] flex-shrink-0" />
                 info@unitbud.com
               </a>
               <div className="flex items-start gap-2.5 text-sm">
-                <MapPin size={14} className="text-[#728c4a] flex-shrink-0 mt-0.5" />
+                <MapPin size={14} className="text-[#77d14d] flex-shrink-0 mt-0.5" />
                 <span>Київ, вул. Архітекторів, 1</span>
               </div>
             </div>
@@ -80,7 +80,7 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <Link href="/catalog" className="text-[#728c4a] text-sm hover:text-[#91a668] transition-colors">
+                <Link href="/catalog" className="text-[#77d14d] text-sm hover:text-[#95dc6a] transition-colors">
                   Всі моделі →
                 </Link>
               </li>
@@ -113,7 +113,7 @@ export function Footer() {
             </p>
             <a
               href="/#contacts"
-              className="inline-block bg-[#728c4a] hover:bg-[#44552b] text-white text-sm font-500 px-5 py-2.5 rounded-[4px] transition-colors duration-200"
+              className="inline-block bg-[#77d14d] hover:bg-[#4e8f31] text-white text-sm font-500 px-5 py-2.5 rounded-[4px] transition-colors duration-200"
             >
               Отримати консультацію
             </a>
@@ -140,7 +140,7 @@ export function Footer() {
               href="https://stepslab.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#728c4a] hover:text-[#91a668] transition-colors font-500"
+              className="text-[#77d14d] hover:text-[#95dc6a] transition-colors font-500"
             >
               STEPS LAB
             </a>

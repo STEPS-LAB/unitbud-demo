@@ -53,13 +53,13 @@ export function ProcessSection() {
                 >
                   {/* Dot */}
                   <div className="flex-shrink-0 relative z-10 w-12 h-12 rounded-full bg-white border-2 border-[#e8e8e5] flex items-center justify-center mt-1 transition-colors">
-                    <Icon size={18} className="text-[#728c4a]" strokeWidth={1.5} />
+                    <Icon size={18} className="text-[#77d14d]" strokeWidth={1.5} />
                   </div>
 
                   {/* Content */}
                   <div className="flex-1 pb-8 border-b border-[#f2f2f0] last:border-0">
                     <div className="flex items-center gap-3 mb-2">
-                      <span className="text-[11px] font-600 text-[#728c4a] uppercase tracking-wider">
+                      <span className="text-[11px] font-600 text-[#77d14d] uppercase tracking-wider">
                         Крок {step.id}
                       </span>
                       <span className="h-px flex-1 bg-[#f2f2f0]" />
@@ -96,9 +96,9 @@ export function ProcessSection() {
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-9 h-9 rounded-full bg-white border border-[#e8e8e5] flex items-center justify-center">
-                    <Icon size={16} className="text-[#728c4a]" strokeWidth={1.5} />
+                    <Icon size={16} className="text-[#77d14d]" strokeWidth={1.5} />
                   </div>
-                  <span className="text-[11px] font-600 text-[#728c4a] uppercase tracking-wider">
+                  <span className="text-[11px] font-600 text-[#77d14d] uppercase tracking-wider">
                     Крок {step.id}
                   </span>
                 </div>

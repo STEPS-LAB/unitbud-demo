@@ -46,8 +46,8 @@ export function HeroSection() {
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="inline-flex items-center gap-2 mb-6"
           >
-            <div className="h-px w-8 bg-[#728c4a]" />
-            <span className="text-[#91a668] text-[11px] font-600 tracking-[0.16em] uppercase">
+            <div className="h-px w-8 bg-[#77d14d]" />
+            <span className="text-[#95dc6a] text-[11px] font-600 tracking-[0.16em] uppercase">
               {tr.hero.label}
             </span>
           </motion.div>

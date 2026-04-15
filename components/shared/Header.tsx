@@ -60,7 +60,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={[
-                  "text-sm font-400 transition-colors hover:text-[#728c4a]",
+                  "text-sm font-400 transition-colors hover:text-[#77d14d]",
                   scrolled ? "text-[#3a3a38]" : "text-white/90",
                 ].join(" ")}
               >
@@ -75,7 +75,7 @@ export function Header() {
             <a
               href="tel:+380800000000"
               className={[
-                "flex items-center gap-1.5 text-sm font-500 transition-colors hover:text-[#728c4a]",
+                "flex items-center gap-1.5 text-sm font-500 transition-colors hover:text-[#77d14d]",
                 scrolled ? "text-[#3a3a38]" : "text-white/90",
               ].join(" ")}
             >
@@ -89,7 +89,7 @@ export function Header() {
               className={[
                 "text-[11px] font-600 uppercase tracking-widest border rounded-[3px] px-2 py-1 transition-colors",
                 scrolled
-                  ? "border-[#d4d4d0] text-[#555552] hover:border-[#728c4a] hover:text-[#728c4a]"
+                  ? "border-[#d4d4d0] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]"
                   : "border-white/40 text-white/70 hover:border-white hover:text-white",
               ].join(" ")}
             >
@@ -141,7 +141,7 @@ export function Header() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block text-3xl font-300 text-[#131311] tracking-tight py-3 border-b border-[#f2f2f0] hover:text-[#728c4a] transition-colors"
+                    className="block text-3xl font-300 text-[#131311] tracking-tight py-3 border-b border-[#f2f2f0] hover:text-[#77d14d] transition-colors"
                     style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
                   >
                     {locale === "uk" ? link.labelUk : link.labelEn}
@@ -159,9 +159,9 @@ export function Header() {
             >
               <a
                 href="tel:+380800000000"
-                className="flex items-center gap-2 text-base text-[#3a3a38] hover:text-[#728c4a] transition-colors"
+                className="flex items-center gap-2 text-base text-[#3a3a38] hover:text-[#77d14d] transition-colors"
               >
-                <Phone size={16} className="text-[#728c4a]" />
+                <Phone size={16} className="text-[#77d14d]" />
                 0 800 000 000
               </a>
               <div className="flex items-center gap-3">

@@ -67,7 +67,7 @@ export function ConsultationSection() {
               animate={{ opacity: 1, scale: 1 }}
               className="flex flex-col items-center text-center py-6"
             >
-              <CheckCircle2 size={56} className="text-[#728c4a] mb-4" />
+              <CheckCircle2 size={56} className="text-[#77d14d] mb-4" />
               <h3
                 className="text-xl font-400 text-[#131311] mb-2"
                 style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
@@ -138,7 +138,7 @@ export function ConsultationSection() {
 
               <p className="text-center text-[11px] text-[#a8a8a3]">
                 Погоджуючись, ви приймаєте{" "}
-                <a href="/privacy" className="underline hover:text-[#728c4a] transition-colors">
+                <a href="/privacy" className="underline hover:text-[#77d14d] transition-colors">
                   політику конфіденційності
                 </a>
               </p>

@@ -37,7 +37,7 @@ export default function PrivacyPage() {
             <h2 className="text-lg font-500 text-[#131311] mt-8 mb-3">4. Контакти</h2>
             <p>
               З питань щодо обробки персональних даних звертайтесь:{" "}
-              <a href="mailto:privacy@unitbud.com" className="text-[#728c4a] hover:underline">
+              <a href="mailto:privacy@unitbud.com" className="text-[#77d14d] hover:underline">
                 privacy@unitbud.com
               </a>
             </p>
