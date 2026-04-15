@@ -96,7 +96,7 @@ export function Header() {
               className={[
                 "text-[11px] font-600 uppercase tracking-widest border rounded-[3px] px-2 py-1 transition-colors",
                 scrolled
-                  ? "border-[#d4d4d0] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]"
+                  ? "border-[#555552] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]"
                   : "border-white/40 text-white/70 hover:border-white hover:text-white",
               ].join(" ")}
             >
@@ -119,7 +119,7 @@ export function Header() {
               className={[
                 "text-[11px] font-600 uppercase tracking-widest border rounded-[3px] px-2 py-1 transition-colors",
                 scrolled || mobileOpen
-                  ? "border-[#d4d4d0] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]"
+                  ? "border-[#555552] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]"
                   : "border-white/40 text-white/80 hover:border-white hover:text-white",
               ].join(" ")}
               aria-label="Toggle language"
