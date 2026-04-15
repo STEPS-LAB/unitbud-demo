@@ -10,13 +10,13 @@ import { useLocale } from "@/hooks/useLocale";
 import { formatPrice } from "@/lib/utils";
 
 export function InstalledSection() {
-  const { tr } = useLocale();
+  const { locale, tr } = useLocale();
 
   return (
     <section id="installed" className="section-padding bg-[#f9f9f8]">
       <div className="container-wide">
         <SectionHeader
-          label="Реалізовані проєкти"
+          label={locale === "en" ? "Completed projects" : "Реалізовані проєкти"}
           title={tr.sections.installed}
           subtitle={tr.sections.installedSub}
         />
@@ -55,7 +55,7 @@ export function InstalledSection() {
                   {house.location && (
                     <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white text-[12px] font-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <MapPin size={12} />
-                      {house.location}
+                      {locale === "en" ? house.locationEn ?? house.location : house.location}
                     </div>
                   )}
                 </div>
@@ -75,7 +75,7 @@ export function InstalledSection() {
                         {house.location && (
                           <>
                             <span className="text-[#d4d4d0]">·</span>
-                            {house.location}
+                            {locale === "en" ? house.locationEn ?? house.location : house.location}
                           </>
                         )}
                       </p>
@@ -92,7 +92,7 @@ export function InstalledSection() {
 
         <div className="mt-12 flex justify-center">
           <Link href="/catalog" className="btn-outline">
-            Переглянути всі проєкти
+            {tr.common.allProjects}
           </Link>
         </div>
       </div>

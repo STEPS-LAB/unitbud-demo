@@ -18,12 +18,14 @@ import { House } from "@/types";
 import { formatPrice } from "@/lib/utils";
 import { ConsultationModal } from "@/features/forms/ConsultationModal";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { useLocale } from "@/hooks/useLocale";
 
 interface Props {
   house: House;
 }
 
 export function HousePageClient({ house }: Props) {
+  const { locale, tr } = useLocale();
   const [activeImg, setActiveImg] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -36,9 +38,9 @@ export function HousePageClient({ house }: Props) {
         {/* Breadcrumb */}
         <RevealOnScroll>
           <div className="flex items-center gap-2 text-sm text-[#7c7c78] mb-8">
-            <Link href="/" className="hover:text-[#77d14d] transition-colors">Головна</Link>
+            <Link href="/" className="hover:text-[#77d14d] transition-colors">{tr.housePage.home}</Link>
             <span>/</span>
-            <Link href="/catalog" className="hover:text-[#77d14d] transition-colors">Каталог</Link>
+            <Link href="/catalog" className="hover:text-[#77d14d] transition-colors">{tr.housePage.catalog}</Link>
             <span>/</span>
             <span className="text-[#131311]">{house.name}</span>
           </div>
@@ -61,7 +63,7 @@ export function HousePageClient({ house }: Props) {
                   >
                     <Image
                       src={house.images[activeImg]}
-                      alt={`${house.name} — фото ${activeImg + 1}`}
+                      alt={`${house.name} — ${locale === "en" ? "photo" : "фото"} ${activeImg + 1}`}
                       fill
                       className="object-cover"
                       priority={activeImg === 0}
@@ -121,10 +123,10 @@ export function HousePageClient({ house }: Props) {
                 className="text-xl font-500 text-[#131311] mb-4 tracking-tight"
                 style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
               >
-                Про будинок
+                {tr.housePage.aboutHouse}
               </h2>
               <p className="text-[15px] text-[#555552] leading-relaxed mb-8">
-                {house.description}
+                {locale === "en" ? house.descriptionEn ?? house.description : house.description}
               </p>
             </RevealOnScroll>
 
@@ -134,10 +136,10 @@ export function HousePageClient({ house }: Props) {
                 className="text-xl font-500 text-[#131311] mb-4 tracking-tight"
                 style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
               >
-                Особливості
+                {tr.housePage.features}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                {house.features.map((f, i) => (
+                {(locale === "en" ? house.featuresEn ?? house.features : house.features).map((f, i) => (
                   <div key={i} className="flex items-start gap-2.5 text-[14px] text-[#3a3a38]">
                     <CheckCircle2 size={15} className="text-[#77d14d] mt-0.5 flex-shrink-0" />
                     {f}
@@ -152,10 +154,10 @@ export function HousePageClient({ house }: Props) {
                 className="text-xl font-500 text-[#131311] mb-4 tracking-tight"
                 style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
               >
-                Характеристики
+                {tr.housePage.specs}
               </h2>
               <div className="border border-[#e8e8e5] rounded-[6px] overflow-hidden">
-                {Object.entries(house.specs).map(([key, value], i) => (
+                {Object.entries(locale === "en" ? house.specsEn ?? house.specs : house.specs).map(([key, value], i) => (
                   <div
                     key={key}
                     className={[
@@ -197,9 +199,9 @@ export function HousePageClient({ house }: Props) {
                   {/* Quick specs */}
                   <div className="grid grid-cols-3 gap-3 mb-6">
                     {[
-                      { icon: Maximize2, label: "Площа", value: `${house.area} м²` },
-                      { icon: BedDouble, label: "Спальні", value: house.bedrooms },
-                      { icon: Bath, label: "Санвузли", value: house.bathrooms },
+                      { icon: Maximize2, label: tr.common.area, value: `${house.area} м²` },
+                      { icon: BedDouble, label: tr.common.bedrooms, value: house.bedrooms },
+                      { icon: Bath, label: tr.common.bathrooms, value: house.bathrooms },
                     ].map((spec) => (
                       <div
                         key={spec.label}
@@ -218,16 +220,16 @@ export function HousePageClient({ house }: Props) {
 
                   <div className="flex items-center gap-2 text-sm text-[#555552] mb-6">
                     <Layers size={14} className="text-[#a8a8a3]" />
-                    {house.floors} {house.floors === 1 ? "поверх" : "поверхи"}
+                    {house.floors} {house.floors === 1 ? tr.common.floor : tr.common.floors}
                     <span className="text-[#d4d4d0] mx-1">·</span>
-                    <span className="capitalize">{house.material === "frame" ? "Каркасна" : house.material}</span>
+                    <span className="capitalize">{house.material === "frame" ? tr.housePage.frame : house.material}</span>
                   </div>
 
                   {/* Price */}
                   <div className="h-px bg-[#e8e8e5] mb-5" />
                   <div className="mb-6">
                     <p className="text-[11px] uppercase tracking-widest text-[#a8a8a3] mb-1">
-                      {house.priceFrom ? "від" : ""}
+                      {house.priceFrom ? tr.common.from : ""}
                     </p>
                     <p
                       className="text-3xl font-300 text-[#131311] tracking-tight"
@@ -236,7 +238,7 @@ export function HousePageClient({ house }: Props) {
                       {formatPrice(house.price)}
                     </p>
                     <p className="text-[12px] text-[#a8a8a3] mt-1">
-                      * включно з монтажем та оздобленням
+                      {tr.housePage.included}
                     </p>
                   </div>
 
@@ -245,13 +247,13 @@ export function HousePageClient({ house }: Props) {
                     onClick={() => setModalOpen(true)}
                     className="btn-primary w-full justify-center py-4 mb-3"
                   >
-                    Отримати безкоштовну консультацію
+                    {tr.housePage.getConsultation}
                   </button>
                   <a
                     href="tel:+380800000000"
                     className="btn-outline w-full justify-center py-3.5 text-sm"
                   >
-                    Зателефонувати
+                    {tr.common.call}
                   </a>
                 </div>
 
@@ -261,7 +263,7 @@ export function HousePageClient({ house }: Props) {
                   className="flex items-center gap-1.5 text-sm text-[#7c7c78] hover:text-[#77d14d] transition-colors"
                 >
                   <ArrowLeft size={14} />
-                  Назад до каталогу
+                  {tr.housePage.backToCatalog}
                 </Link>
               </RevealOnScroll>
             </div>

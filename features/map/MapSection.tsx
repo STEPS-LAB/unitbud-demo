@@ -23,14 +23,14 @@ function toPercent(lat: number, lng: number) {
 }
 
 export function MapSection() {
-  const { tr } = useLocale();
+  const { locale, tr } = useLocale();
   const [active, setActive] = useState<MapPoint | null>(null);
 
   return (
     <section id="map" className="section-padding bg-white">
       <div className="container-wide">
         <SectionHeader
-          label="Карта"
+          label={locale === "en" ? "Map" : "Карта"}
           title={tr.sections.map}
           subtitle={tr.sections.mapSub}
         />
@@ -48,7 +48,7 @@ export function MapSection() {
             <svg viewBox="0 0 400 300" className="w-full h-full" style={{ maxWidth: "80%" }}>
               <rect x="40" y="60" width="320" height="180" rx="40" fill="#77d14d" />
               <text x="200" y="160" textAnchor="middle" fill="#2e3b1e" fontSize="24" fontFamily="Montserrat, sans-serif">
-                Україна
+                {tr.common.ukraine}
               </text>
             </svg>
           </div>
@@ -65,7 +65,7 @@ export function MapSection() {
 
           {/* Map label */}
           <div className="absolute top-4 left-4 bg-white/80 backdrop-blur-sm rounded-[4px] px-3 py-1.5 text-[11px] font-600 text-[#555552] uppercase tracking-wider">
-            Україна
+            {tr.common.ukraine}
           </div>
 
           {/* Pins */}
@@ -93,7 +93,7 @@ export function MapSection() {
                 </div>
                 {/* City label */}
                 <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1.5 whitespace-nowrap text-[10px] font-600 text-[#3a3a38] bg-white/90 px-1.5 py-0.5 rounded-[2px] shadow-sm opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                  {point.city}
+                  {locale === "en" ? point.cityEn ?? point.city : point.city}
                 </div>
               </motion.button>
             );
@@ -128,14 +128,14 @@ export function MapSection() {
                   <p className="text-sm font-500 text-[#131311]" style={{ fontFamily: "Montserrat, Inter, sans-serif" }}>
                     {active.title}
                   </p>
-                  <p className="text-[12px] text-[#7c7c78] mt-0.5 mb-3">{active.city} · {active.area} м²</p>
+                  <p className="text-[12px] text-[#7c7c78] mt-0.5 mb-3">{locale === "en" ? active.cityEn ?? active.city : active.city} · {active.area} m²</p>
                   <div className="flex items-center justify-between">
                     <p className="text-base font-500 text-[#131311]">{formatPrice(active.price)}</p>
                     <Link
                       href={`/house/${active.slug}`}
                       className="flex items-center gap-1 text-[13px] font-500 text-[#77d14d] hover:text-[#4e8f31] transition-colors"
                     >
-                      Детальніше <ArrowRight size={13} />
+                      {tr.common.details} <ArrowRight size={13} />
                     </Link>
                   </div>
                 </div>

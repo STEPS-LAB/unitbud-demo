@@ -15,7 +15,7 @@ export function PopularSection() {
       <div className="container-wide">
         <div className="flex items-end justify-between mb-12 md:mb-16 flex-wrap gap-4">
           <SectionHeader
-            label="Каталог"
+            label={tr.nav.catalog}
             title={tr.sections.popular}
             subtitle={tr.sections.popularSub}
             className="mb-0"
@@ -24,7 +24,7 @@ export function PopularSection() {
             href="/catalog"
             className="text-sm font-500 text-[#77d14d] hover:text-[#4e8f31] transition-colors flex items-center gap-1.5"
           >
-            Весь каталог →
+            {tr.common.allCatalog} →
           </Link>
         </div>
 

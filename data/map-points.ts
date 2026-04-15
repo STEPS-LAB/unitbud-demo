@@ -11,6 +11,7 @@ export const mapPoints: MapPoint[] = [
     image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&q=80",
     slug: "sokil-120",
     city: "Київська обл.",
+    cityEn: "Kyiv region",
   },
   {
     id: "2",
@@ -22,6 +23,7 @@ export const mapPoints: MapPoint[] = [
     image: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=400&q=80",
     slug: "yastyb-100",
     city: "Львівська обл.",
+    cityEn: "Lviv region",
   },
   {
     id: "3",
@@ -33,6 +35,7 @@ export const mapPoints: MapPoint[] = [
     image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&q=80",
     slug: "phoenix-180",
     city: "Дніпропетровська обл.",
+    cityEn: "Dnipropetrovsk region",
   },
   {
     id: "4",
@@ -44,5 +47,6 @@ export const mapPoints: MapPoint[] = [
     image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400&q=80",
     slug: "berkut-85",
     city: "Одеська обл.",
+    cityEn: "Odesa region",
   },
 ];

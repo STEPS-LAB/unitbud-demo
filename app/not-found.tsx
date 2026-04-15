@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
+import { useLocale } from "@/hooks/useLocale";
 
 export default function NotFound() {
+  const { tr } = useLocale();
   return (
     <>
       <Header />
@@ -18,17 +22,17 @@ export default function NotFound() {
             className="text-2xl font-500 text-[#131311] mb-4 tracking-tight"
             style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
           >
-            Сторінку не знайдено
+            {tr.notFound.title}
           </h1>
           <p className="text-[#7c7c78] text-sm mb-8">
-            Можливо, сторінку було переміщено або видалено.
+            {tr.notFound.sub}
           </p>
           <div className="flex gap-3 justify-center">
             <Link href="/" className="btn-primary">
-              На головну
+              {tr.notFound.home}
             </Link>
             <Link href="/catalog" className="btn-outline">
-              До каталогу
+              {tr.notFound.toCatalog}
             </Link>
           </div>
         </div>

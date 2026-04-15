@@ -8,7 +8,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLocale } from "@/hooks/useLocale";
 
 export function FaqSection() {
-  const { tr } = useLocale();
+  const { locale, tr } = useLocale();
   const [openId, setOpenId] = useState<string | null>(null);
 
   const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id));
@@ -25,7 +25,9 @@ export function FaqSection() {
               subtitle={tr.sections.faqSub}
             />
             <p className="text-[14px] text-[#7c7c78] leading-relaxed">
-              Не знайшли відповідь? Зателефонуйте нам або залиште заявку — відповімо на будь-яке запитання.
+              {locale === "en"
+                ? "Didn't find the answer? Call us or leave a request, and we'll answer any question."
+                : "Не знайшли відповідь? Зателефонуйте нам або залиште заявку — відповімо на будь-яке запитання."}
             </p>
             <a href="tel:+380800000000" className="mt-4 inline-flex btn-outline text-sm">
               0 800 000 000
@@ -47,7 +49,7 @@ export function FaqSection() {
                   className="w-full flex items-center justify-between gap-4 py-5 text-left group"
                 >
                   <span className="text-[15px] font-500 text-[#131311] group-hover:text-[#77d14d] transition-colors">
-                    {faq.question}
+                    {locale === "en" ? faq.questionEn ?? faq.question : faq.question}
                   </span>
                   <motion.div
                     animate={{ rotate: openId === faq.id ? 45 : 0 }}
@@ -68,7 +70,7 @@ export function FaqSection() {
                       style={{ overflow: "hidden" }}
                     >
                       <p className="pb-5 text-[14px] text-[#555552] leading-relaxed">
-                        {faq.answer}
+                        {locale === "en" ? faq.answerEn ?? faq.answer : faq.answer}
                       </p>
                     </motion.div>
                   )}

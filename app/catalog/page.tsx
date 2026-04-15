@@ -6,9 +6,9 @@ import { AiWidget } from "@/components/shared/AiWidget";
 import { CatalogClient } from "./CatalogClient";
 
 export const metadata: Metadata = {
-  title: "Каталог будинків",
+  title: "House Catalog",
   description:
-    "Каталог каркасних будинків Unitbud. Compact, Comfort, Premium та Elite серії. Оберіть свій ідеальний будинок.",
+    "Unitbud frame house catalog. Compact, Comfort, Premium and Elite series. Choose your perfect house.",
 };
 
 export default function CatalogPage() {

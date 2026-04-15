@@ -1,28 +1,30 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
-
-const catalog = [
-  { href: "/catalog?cat=compact", label: "Компакт" },
-  { href: "/catalog?cat=comfort", label: "Комфорт" },
-  { href: "/catalog?cat=premium", label: "Преміум" },
-  { href: "/catalog?cat=elite", label: "Еліт" },
-];
-
-const company = [
-  { href: "/#why", label: "Про нас" },
-  { href: "/#process", label: "Як будуємо" },
-  { href: "/#installed", label: "Проєкти" },
-  { href: "/#reviews", label: "Відгуки" },
-  { href: "/#faq", label: "FAQ" },
-];
-
-const legal = [
-  { href: "/privacy", label: "Конфіденційність" },
-  { href: "/terms", label: "Умови використання" },
-];
+import { useLocale } from "@/hooks/useLocale";
 
 export function Footer() {
+  const { tr } = useLocale();
+  const catalog = [
+    { href: "/catalog?cat=compact", label: tr.catalogPage.catCompact },
+    { href: "/catalog?cat=comfort", label: tr.catalogPage.catComfort },
+    { href: "/catalog?cat=premium", label: tr.catalogPage.catPremium },
+    { href: "/catalog?cat=elite", label: tr.catalogPage.catElite },
+  ];
+  const company = [
+    { href: "/#why", label: tr.footerText.about },
+    { href: "/#process", label: tr.footerText.howWeBuild },
+    { href: "/#installed", label: tr.footerText.projects },
+    { href: "/#reviews", label: tr.footerText.reviews },
+    { href: "/#faq", label: "FAQ" },
+  ];
+  const legal = [
+    { href: "/privacy", label: tr.footerText.privacy },
+    { href: "/terms", label: tr.footerText.terms },
+  ];
+
   return (
     <footer className="bg-[#0a0a09] text-white/60">
       <div className="container-wide py-16 md:py-20">
@@ -39,7 +41,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-sm leading-relaxed mb-6">
-              Преміальне каркасне будівництво. Від проєкту до ключів — під ключ.
+              {tr.footerText.brandDesc}
             </p>
             <div className="space-y-3">
               <a
@@ -58,7 +60,7 @@ export function Footer() {
               </a>
               <div className="flex items-start gap-2.5 text-sm">
                 <MapPin size={14} className="text-[#77d14d] flex-shrink-0 mt-0.5" />
-                <span>Київ, вул. Архітекторів, 1</span>
+                <span>{tr.footerText.address}</span>
               </div>
             </div>
           </div>
@@ -66,7 +68,7 @@ export function Footer() {
           {/* Catalog */}
           <div>
             <h4 className="text-white text-sm font-600 uppercase tracking-wider mb-5">
-              Каталог
+              {tr.footerText.catalog}
             </h4>
             <ul className="space-y-3">
               {catalog.map((l) => (
@@ -81,7 +83,7 @@ export function Footer() {
               ))}
               <li>
                 <Link href="/catalog" className="text-[#77d14d] text-sm hover:text-[#95dc6a] transition-colors">
-                  Всі моделі →
+                  {tr.footerText.allModels} →
                 </Link>
               </li>
             </ul>
@@ -90,7 +92,7 @@ export function Footer() {
           {/* Company */}
           <div>
             <h4 className="text-white text-sm font-600 uppercase tracking-wider mb-5">
-              Компанія
+              {tr.footerText.company}
             </h4>
             <ul className="space-y-3">
               {company.map((l) => (
@@ -106,16 +108,16 @@ export function Footer() {
           {/* CTA */}
           <div>
             <h4 className="text-white text-sm font-600 uppercase tracking-wider mb-5">
-              Зв'язок
+              {tr.footerText.contact}
             </h4>
             <p className="text-sm mb-5 leading-relaxed">
-              Отримайте безкоштовну консультацію архітектора вже сьогодні.
+              {tr.footerText.ctaText}
             </p>
             <a
               href="/#contacts"
               className="inline-block bg-[#77d14d] hover:bg-[#4e8f31] text-white text-sm font-500 px-5 py-2.5 rounded-[4px] transition-colors duration-200"
             >
-              Отримати консультацію
+              {tr.footerText.ctaButton}
             </a>
           </div>
         </div>
@@ -125,7 +127,7 @@ export function Footer() {
       <div className="border-t border-white/6">
         <div className="container-wide py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[12px]">
-            © {new Date().getFullYear()} Unitbud. Всі права захищено.
+            © {new Date().getFullYear()} Unitbud. {tr.footerText.allRights}
           </p>
           <div className="flex items-center gap-4">
             {legal.map((l) => (
@@ -135,7 +137,7 @@ export function Footer() {
             ))}
           </div>
           <p className="text-[12px]">
-            Розроблено{" "}
+            {tr.footer.dev}{" "}
             <a
               href="https://stepslab.com"
               target="_blank"

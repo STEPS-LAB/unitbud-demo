@@ -39,12 +39,18 @@ const FLOOR_COEFF: Record<number, number> = {
 };
 
 export function CalculatorSection() {
-  const { tr } = useLocale();
+  const { locale, tr } = useLocale();
   const [area, setArea] = useState(100);
   const [floors, setFloors] = useState(1);
   const [material, setMaterial] = useState<Material>("frame");
   const [completion, setCompletion] = useState<Completion>("standard");
   const [modalOpen, setModalOpen] = useState(false);
+  const materialLabels = locale === "en"
+    ? { frame: "Frame", gasoblock: "Aerated concrete", sip: "SIP panels" }
+    : MATERIAL_LABELS;
+  const completionLabels = locale === "en"
+    ? { base: "Base", standard: "Standard", premium: "Premium" }
+    : COMPLETION_LABELS;
 
   const estimate = useMemo(() => {
     const base = BASE_PRICE[material] * area;
@@ -138,7 +144,7 @@ export function CalculatorSection() {
     <section id="calculator" className="section-padding bg-[#f9f9f8]">
       <div className="container-wide">
         <SectionHeader
-          label="Калькулятор"
+          label={locale === "en" ? "Calculator" : "Калькулятор"}
           title={tr.sections.calculator}
           subtitle={tr.sections.calculatorSub}
         />
@@ -153,18 +159,18 @@ export function CalculatorSection() {
             className="bg-white border border-[#e8e8e5] rounded-[6px] p-7 space-y-8"
           >
             <SliderRow
-              label="Площа будинку"
+              label={locale === "en" ? "House area" : "Площа будинку"}
               value={area}
               min={50}
               max={300}
               step={5}
-              unit="м²"
+              unit={locale === "en" ? "m²" : "м²"}
               onChange={setArea}
             />
 
             <div>
               <div className="flex justify-between items-baseline mb-3">
-                <label className="text-sm font-500 text-[#3a3a38]">Кількість поверхів</label>
+                <label className="text-sm font-500 text-[#3a3a38]">{locale === "en" ? "Number of floors" : "Кількість поверхів"}</label>
                 <span className="text-lg font-300 text-[#131311]" style={{ fontFamily: "Montserrat, Inter, sans-serif" }}>
                   {floors}
                 </span>
@@ -181,25 +187,25 @@ export function CalculatorSection() {
                         : "bg-white border-[#e8e8e5] text-[#555552] hover:border-[#77d14d]",
                     ].join(" ")}
                   >
-                    {f} {f === 1 ? "поверх" : "поверхи"}
+                    {f} {f === 1 ? tr.common.floor : tr.common.floors}
                   </button>
                 ))}
               </div>
             </div>
 
             <TabGroup
-              label="Технологія будівництва"
+              label={locale === "en" ? "Construction technology" : "Технологія будівництва"}
               options={["frame", "gasoblock", "sip"] as Material[]}
               value={material}
-              labels={MATERIAL_LABELS}
+              labels={materialLabels}
               onChange={setMaterial}
             />
 
             <TabGroup
-              label="Комплектація"
+              label={locale === "en" ? "Completion level" : "Комплектація"}
               options={["base", "standard", "premium"] as Completion[]}
               value={completion}
-              labels={COMPLETION_LABELS}
+              labels={completionLabels}
               onChange={setCompletion}
             />
           </motion.div>
@@ -213,7 +219,7 @@ export function CalculatorSection() {
             className="lg:w-80 bg-[#131311] rounded-[6px] p-7 text-white sticky top-24"
           >
             <p className="text-[11px] font-600 uppercase tracking-[0.14em] text-white/45 mb-2">
-              Орієнтовна вартість
+              {locale === "en" ? "Estimated cost" : "Орієнтовна вартість"}
             </p>
             <motion.p
               key={estimate}
@@ -226,15 +232,17 @@ export function CalculatorSection() {
               {formatPrice(estimate)}
             </motion.p>
             <p className="text-[12px] text-white/35 mb-7">
-              * Орієнтовний розрахунок. Точна вартість після консультації.
+              {locale === "en"
+                ? "* Approximate estimate. Final price is provided after consultation."
+                : "* Орієнтовний розрахунок. Точна вартість після консультації."}
             </p>
 
             <div className="space-y-2.5 mb-7">
               {[
-                { label: "Площа", value: `${area} м²` },
-                { label: "Поверхів", value: floors },
-                { label: "Технологія", value: MATERIAL_LABELS[material] },
-                { label: "Комплектація", value: COMPLETION_LABELS[completion] },
+                { label: tr.common.area, value: `${area} ${locale === "en" ? "m²" : "м²"}` },
+                { label: locale === "en" ? "Floors" : "Поверхів", value: floors },
+                { label: tr.common.technology, value: materialLabels[material] },
+                { label: tr.common.completion, value: completionLabels[completion] },
               ].map((row) => (
                 <div key={row.label} className="flex justify-between text-[13px]">
                   <span className="text-white/45">{row.label}</span>
@@ -249,7 +257,7 @@ export function CalculatorSection() {
               onClick={() => setModalOpen(true)}
               className="w-full bg-[#77d14d] hover:bg-[#4e8f31] text-white text-sm font-500 py-3.5 rounded-[4px] transition-colors duration-200"
             >
-              Отримати точний розрахунок
+              {locale === "en" ? "Get exact estimate" : "Отримати точний розрахунок"}
             </button>
           </motion.div>
         </div>

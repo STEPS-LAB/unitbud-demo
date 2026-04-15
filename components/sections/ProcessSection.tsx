@@ -23,13 +23,13 @@ const iconMap = {
 };
 
 export function ProcessSection() {
-  const { tr } = useLocale();
+  const { locale, tr } = useLocale();
 
   return (
     <section id="process" className="section-padding bg-white">
       <div className="container-wide">
         <SectionHeader
-          label="Процес"
+          label={locale === "en" ? "Process" : "Процес"}
           title={tr.sections.process}
           subtitle={tr.sections.processSub}
         />
@@ -60,19 +60,19 @@ export function ProcessSection() {
                   <div className="flex-1 pb-8 border-b border-[#f2f2f0] last:border-0">
                     <div className="flex items-center gap-3 mb-2">
                       <span className="text-[11px] font-600 text-[#77d14d] uppercase tracking-wider">
-                        Крок {step.id}
+                        {tr.common.step} {step.id}
                       </span>
                       <span className="h-px flex-1 bg-[#f2f2f0]" />
-                      <span className="text-[12px] text-[#a8a8a3]">{step.duration}</span>
+                      <span className="text-[12px] text-[#a8a8a3]">{locale === "en" ? step.durationEn ?? step.duration : step.duration}</span>
                     </div>
                     <h3
                       className="text-lg font-500 text-[#131311] mb-2 tracking-tight"
                       style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
                     >
-                      {step.title}
+                      {locale === "en" ? step.titleEn ?? step.title : step.title}
                     </h3>
                     <p className="text-[14px] text-[#555552] leading-relaxed max-w-xl">
-                      {step.description}
+                      {locale === "en" ? step.descriptionEn ?? step.description : step.description}
                     </p>
                   </div>
                 </motion.div>
@@ -99,17 +99,17 @@ export function ProcessSection() {
                     <Icon size={16} className="text-[#77d14d]" strokeWidth={1.5} />
                   </div>
                   <span className="text-[11px] font-600 text-[#77d14d] uppercase tracking-wider">
-                    Крок {step.id}
+                    {tr.common.step} {step.id}
                   </span>
                 </div>
                 <h3
                   className="text-base font-500 text-[#131311] mb-2"
                   style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
                 >
-                  {step.title}
+                  {locale === "en" ? step.titleEn ?? step.title : step.title}
                 </h3>
-                <p className="text-[13px] text-[#555552] leading-relaxed">{step.description}</p>
-                <p className="mt-3 text-[11px] text-[#a8a8a3]">{step.duration}</p>
+                <p className="text-[13px] text-[#555552] leading-relaxed">{locale === "en" ? step.descriptionEn ?? step.description : step.description}</p>
+                <p className="mt-3 text-[11px] text-[#a8a8a3]">{locale === "en" ? step.durationEn ?? step.duration : step.duration}</p>
               </motion.div>
             );
           })}

@@ -14,7 +14,7 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const house = getHouseBySlug(slug);
-  if (!house) return { title: "Будинок не знайдено" };
+  if (!house) return { title: "House not found" };
 
   return {
     title: `${house.name} — ${house.area} м²`,

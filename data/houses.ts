@@ -14,15 +14,26 @@ export const houses: House[] = [
     category: "compact",
     material: "frame",
     style: "Сучасний мінімалізм",
+    styleEn: "Modern minimalism",
     tag: "Популярний",
+    tagEn: "Popular",
     description:
       "Компактний та функціональний будинок для сімейного комфорту. Продумане планування дозволяє максимально використати кожен квадратний метр. Ідеальний варіант для молодої сім'ї або як заміська резиденція.",
+    descriptionEn:
+      "A compact and functional house designed for family comfort. Smart planning maximizes every square meter. Perfect for a young family or as a countryside residence.",
     features: [
       "Енергоефективне утеплення",
       "Панорамні вікна",
       "Відкрита тераса",
       "Простора вітальня",
       "Вбудований гардероб",
+    ],
+    featuresEn: [
+      "Energy-efficient insulation",
+      "Panoramic windows",
+      "Open terrace",
+      "Spacious living room",
+      "Built-in wardrobe",
     ],
     specs: {
       "Площа": "85 м²",
@@ -33,6 +44,16 @@ export const houses: House[] = [
       "Утеплення": "200 мм мінвата",
       "Терміни": "90 днів",
       "Гарантія": "5 років",
+    },
+    specsEn: {
+      "Area": "85 m²",
+      "Floors": "1 floor",
+      "Bedrooms": "2",
+      "Bathrooms": "1",
+      "Wall material": "Frame technology",
+      "Insulation": "200 mm mineral wool",
+      "Timeline": "90 days",
+      "Warranty": "5 years",
     },
     images: [
       "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&q=80",
@@ -56,15 +77,26 @@ export const houses: House[] = [
     category: "comfort",
     material: "frame",
     style: "Скандинавський",
+    styleEn: "Scandinavian",
     tag: "Новинка",
+    tagEn: "New",
     description:
       "Двоповерховий будинок з продуманою функціональністю та сучасним дизайном. Скандинавська естетика поєднується з українськими традиціями якісного будівництва. Ідеальний для великої родини.",
+    descriptionEn:
+      "A two-story home with smart functionality and contemporary design. Scandinavian aesthetics meet practical construction standards. Ideal for a large family.",
     features: [
       "Другий поверх з балконом",
       "Мансардні вікна",
       "Камін у вітальні",
       "Просторі спальні",
       "Дитяча кімната",
+    ],
+    featuresEn: [
+      "Second floor with balcony",
+      "Dormer windows",
+      "Living room fireplace",
+      "Spacious bedrooms",
+      "Kids room",
     ],
     specs: {
       "Площа": "120 м²",
@@ -76,6 +108,16 @@ export const houses: House[] = [
       "Терміни": "110 днів",
       "Гарантія": "5 років",
     },
+    specsEn: {
+      "Area": "120 m²",
+      "Floors": "2 floors",
+      "Bedrooms": "3",
+      "Bathrooms": "2",
+      "Wall material": "Frame technology",
+      "Insulation": "200 mm mineral wool",
+      "Timeline": "110 days",
+      "Warranty": "5 years",
+    },
     images: [
       "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&q=80",
       "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80",
@@ -85,6 +127,7 @@ export const houses: House[] = [
     popular: true,
     installed: true,
     location: "Київська обл., Бориспільський р-н",
+    locationEn: "Kyiv region, Boryspil district",
   },
   {
     id: "3",
@@ -99,14 +142,24 @@ export const houses: House[] = [
     category: "premium",
     material: "frame",
     style: "Сучасний",
+    styleEn: "Modern",
     description:
       "Просторий преміальний будинок для комфортного сімейного проживання. Великі панорамні вікна наповнюють простір природнім світлом. Чотири спальні та дві ванні кімнати — для великої родини.",
+    descriptionEn:
+      "A spacious premium home for comfortable family living. Large panoramic windows fill the interior with natural light. Four bedrooms and two bathrooms for a big family.",
     features: [
       "Панорамне засклення",
       "Відкрита планування кухня-вітальня",
       "Тераса з панорамним виглядом",
       "Господарська кімната",
       "Гараж на 1 авто",
+    ],
+    featuresEn: [
+      "Panoramic glazing",
+      "Open-plan kitchen and living room",
+      "Terrace with panoramic view",
+      "Utility room",
+      "Garage for 1 car",
     ],
     specs: {
       "Площа": "150 м²",
@@ -117,6 +170,16 @@ export const houses: House[] = [
       "Утеплення": "250 мм ековата",
       "Терміни": "120 днів",
       "Гарантія": "10 років",
+    },
+    specsEn: {
+      "Area": "150 m²",
+      "Floors": "2 floors",
+      "Bedrooms": "4",
+      "Bathrooms": "2",
+      "Wall material": "Frame technology",
+      "Insulation": "250 mm eco-wool",
+      "Timeline": "120 days",
+      "Warranty": "10 years",
     },
     images: [
       "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&q=80",
@@ -140,13 +203,22 @@ export const houses: House[] = [
     category: "comfort",
     material: "frame",
     style: "Класичний",
+    styleEn: "Classic",
     description:
       "Зручний одноповерховий будинок з трьома спальнями та просторою вітальнею. Класичний стиль та сучасні матеріали — ідеальне поєднання для тривалого комфорту.",
+    descriptionEn:
+      "A comfortable single-story home with three bedrooms and a spacious living room. Classic style and modern materials provide long-term comfort.",
     features: [
       "Три повноцінні спальні",
       "Простора тераса",
       "Відкритий камін",
       "Велике вікно у вітальні",
+    ],
+    featuresEn: [
+      "Three full-size bedrooms",
+      "Spacious terrace",
+      "Open fireplace",
+      "Large living room window",
     ],
     specs: {
       "Площа": "100 м²",
@@ -158,6 +230,16 @@ export const houses: House[] = [
       "Терміни": "100 днів",
       "Гарантія": "5 років",
     },
+    specsEn: {
+      "Area": "100 m²",
+      "Floors": "1 floor",
+      "Bedrooms": "3",
+      "Bathrooms": "1",
+      "Wall material": "Frame technology",
+      "Insulation": "200 mm mineral wool",
+      "Timeline": "100 days",
+      "Warranty": "5 years",
+    },
     images: [
       "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&q=80",
       "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=1200&q=80",
@@ -166,6 +248,7 @@ export const houses: House[] = [
     popular: false,
     installed: true,
     location: "Львівська обл., Пустомитівський р-н",
+    locationEn: "Lviv region, Pustomyty district",
   },
   {
     id: "5",
@@ -180,9 +263,13 @@ export const houses: House[] = [
     category: "elite",
     material: "frame",
     style: "Преміум модерн",
+    styleEn: "Premium modern",
     tag: "Топ продаж",
+    tagEn: "Best seller",
     description:
       "Елітний будинок для найвибагливіших. П'ять спальень, три санвузли та безліч преміальних опцій. Архітектурна перлина, що поєднує функціональність та розкіш.",
+    descriptionEn:
+      "An elite home for the most demanding clients. Five bedrooms, three bathrooms, and multiple premium options. Architectural elegance combined with functionality.",
     features: [
       "П'ять спалень + кабінет",
       "Три повноцінні ванні",
@@ -190,6 +277,14 @@ export const houses: House[] = [
       "Тераса з зоною барбекю",
       "Гараж на 2 авто",
       "Басейн (опція)",
+    ],
+    featuresEn: [
+      "Five bedrooms + office",
+      "Three full bathrooms",
+      "Double-height living room",
+      "Terrace with barbecue area",
+      "Garage for 2 cars",
+      "Pool (optional)",
     ],
     specs: {
       "Площа": "180 м²",
@@ -201,6 +296,16 @@ export const houses: House[] = [
       "Терміни": "150 днів",
       "Гарантія": "10 років",
     },
+    specsEn: {
+      "Area": "180 m²",
+      "Floors": "2 floors",
+      "Bedrooms": "5",
+      "Bathrooms": "3",
+      "Wall material": "Frame technology",
+      "Insulation": "300 mm eco-wool",
+      "Timeline": "150 days",
+      "Warranty": "10 years",
+    },
     images: [
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
@@ -210,6 +315,7 @@ export const houses: House[] = [
     popular: true,
     installed: true,
     location: "Дніпропетровська обл.",
+    locationEn: "Dnipropetrovsk region",
   },
   {
     id: "6",
@@ -224,12 +330,20 @@ export const houses: House[] = [
     category: "compact",
     material: "frame",
     style: "Мінімалізм",
+    styleEn: "Minimalism",
     description:
       "Ультракомпактний будинок для тих, хто цінує мінімалізм та ефективність. Ідеальний для заміської дачі або невеликої родини.",
+    descriptionEn:
+      "An ultra-compact home for people who value minimalism and efficiency. Perfect for a countryside retreat or a small family.",
     features: [
       "Компактний дизайн",
       "Ефективне планування",
       "Терраса",
+    ],
+    featuresEn: [
+      "Compact design",
+      "Efficient layout",
+      "Terrace",
     ],
     specs: {
       "Площа": "65 м²",
@@ -240,6 +354,16 @@ export const houses: House[] = [
       "Утеплення": "150 мм мінвата",
       "Терміни": "75 днів",
       "Гарантія": "5 років",
+    },
+    specsEn: {
+      "Area": "65 m²",
+      "Floors": "1 floor",
+      "Bedrooms": "2",
+      "Bathrooms": "1",
+      "Wall material": "Frame technology",
+      "Insulation": "150 mm mineral wool",
+      "Timeline": "75 days",
+      "Warranty": "5 years",
     },
     images: [
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80",

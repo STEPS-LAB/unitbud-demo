@@ -6,31 +6,31 @@ import { SlidersHorizontal, X } from "lucide-react";
 import { houses } from "@/data/houses";
 import { HouseCard } from "@/components/ui/HouseCard";
 import { House } from "@/types";
+import { useLocale } from "@/hooks/useLocale";
 
 type Category = House["category"] | "all";
 type SortKey = "price-asc" | "price-desc" | "area-asc" | "area-desc";
 
-const categories: { key: Category; label: string }[] = [
-  { key: "all", label: "Всі" },
-  { key: "compact", label: "Компакт" },
-  { key: "comfort", label: "Комфорт" },
-  { key: "premium", label: "Преміум" },
-  { key: "elite", label: "Еліт" },
-];
-
-const sortOptions: { key: SortKey; label: string }[] = [
-  { key: "price-asc", label: "Ціна: від низької" },
-  { key: "price-desc", label: "Ціна: від високої" },
-  { key: "area-asc", label: "Площа: від меншої" },
-  { key: "area-desc", label: "Площа: від більшої" },
-];
-
 export function CatalogClient() {
+  const { tr } = useLocale();
   const [category, setCategory] = useState<Category>("all");
   const [sort, setSort] = useState<SortKey>("price-asc");
   const [areaMin, setAreaMin] = useState(50);
   const [areaMax, setAreaMax] = useState(300);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const categories: { key: Category; label: string }[] = [
+    { key: "all", label: tr.catalogPage.catAll },
+    { key: "compact", label: tr.catalogPage.catCompact },
+    { key: "comfort", label: tr.catalogPage.catComfort },
+    { key: "premium", label: tr.catalogPage.catPremium },
+    { key: "elite", label: tr.catalogPage.catElite },
+  ];
+  const sortOptions: { key: SortKey; label: string }[] = [
+    { key: "price-asc", label: tr.catalogPage.sortPriceAsc },
+    { key: "price-desc", label: tr.catalogPage.sortPriceDesc },
+    { key: "area-asc", label: tr.catalogPage.sortAreaAsc },
+    { key: "area-desc", label: tr.catalogPage.sortAreaDesc },
+  ];
 
   const filtered = useMemo(() => {
     let list = houses.filter(
@@ -54,15 +54,15 @@ export function CatalogClient() {
       <div className="container-wide">
         {/* Page header */}
         <div className="mb-10">
-          <span className="section-label mb-3">Каталог</span>
+          <span className="section-label mb-3">{tr.nav.catalog}</span>
           <h1
             className="text-4xl md:text-5xl font-300 text-[#131311] tracking-tight mt-3"
             style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
           >
-            Наші будинки
+            {tr.catalogPage.title}
           </h1>
           <p className="mt-3 text-[#555552] text-base">
-            {filtered.length} {filtered.length === 1 ? "модель" : "моделей"} у каталозі
+            {filtered.length} {tr.catalogPage.modelsInCatalog}
           </p>
         </div>
 
@@ -107,7 +107,7 @@ export function CatalogClient() {
               className="btn-outline py-2 px-4 text-[13px] flex items-center gap-2"
             >
               <SlidersHorizontal size={14} />
-              Фільтри
+              {tr.catalogPage.filters}
               {filtersOpen && <X size={13} className="ml-0.5" />}
             </button>
           </div>
@@ -127,7 +127,7 @@ export function CatalogClient() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="text-sm font-500 text-[#3a3a38] block mb-3">
-                      Площа від {areaMin} м²
+                      {tr.catalogPage.areaFrom} {areaMin} м²
                     </label>
                     <input
                       type="range"
@@ -141,7 +141,7 @@ export function CatalogClient() {
                   </div>
                   <div>
                     <label className="text-sm font-500 text-[#3a3a38] block mb-3">
-                      Площа до {areaMax} м²
+                      {tr.catalogPage.areaTo} {areaMax} м²
                     </label>
                     <input
                       type="range"
@@ -169,8 +169,8 @@ export function CatalogClient() {
               exit={{ opacity: 0 }}
               className="py-20 text-center text-[#7c7c78]"
             >
-              <p className="text-xl mb-2">Нічого не знайдено</p>
-              <p className="text-sm">Спробуйте змінити фільтри</p>
+              <p className="text-xl mb-2">{tr.catalogPage.emptyTitle}</p>
+              <p className="text-sm">{tr.catalogPage.emptySub}</p>
             </motion.div>
           ) : (
             <motion.div

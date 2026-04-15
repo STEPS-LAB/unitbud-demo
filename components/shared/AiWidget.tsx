@@ -3,13 +3,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send } from "lucide-react";
-
-const INITIAL_MESSAGE =
-  "Привіт! Я AI-помічник Unitbud.\nЯ знаю все про наші будинки.\nЧим можу допомогти?";
+import { useLocale } from "@/hooks/useLocale";
 
 export function AiWidget() {
+  const { locale, tr } = useLocale();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const initialMessage =
+    locale === "en"
+      ? "Hi! I'm Unitbud's AI assistant.\nI know everything about our houses.\nHow can I help you?"
+      : "Привіт! Я AI-помічник Unitbud.\nЯ знаю все про наші будинки.\nЧим можу допомогти?";
 
   return (
     <div className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-50">
@@ -31,7 +34,7 @@ export function AiWidget() {
                   <span className="text-white text-[10px] font-700">AI</span>
                 </div>
                 <div>
-                  <p className="text-white text-[13px] font-500">AI-помічник</p>
+                  <p className="text-white text-[13px] font-500">{locale === "en" ? "AI assistant" : "AI-помічник"}</p>
                   <p className="text-white/40 text-[10px]">Unitbud Assistant</p>
                 </div>
               </div>
@@ -50,7 +53,7 @@ export function AiWidget() {
                   <span className="text-[#77d14d] text-[10px] font-700">AI</span>
                 </div>
                 <div className="bg-[#f9f9f8] rounded-[4px] rounded-tl-0 px-3.5 py-2.5 text-[13px] text-[#3a3a38] leading-relaxed whitespace-pre-line">
-                  {INITIAL_MESSAGE}
+                  {initialMessage}
                 </div>
               </div>
             </div>
@@ -61,7 +64,7 @@ export function AiWidget() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Запитайте що завгодно..."
+                placeholder={tr.common.askAnything + "..."}
                 className="flex-1 text-[13px] text-[#131311] placeholder-[#a8a8a3] outline-none bg-transparent py-1"
                 onKeyDown={(e) => { if (e.key === "Enter") setInput(""); }}
               />
@@ -87,7 +90,7 @@ export function AiWidget() {
         onClick={() => setOpen((v) => !v)}
         className="w-12 h-12 bg-[#77d14d] hover:bg-[#4e8f31] rounded-full text-white flex items-center justify-center transition-colors duration-200"
         style={{ boxShadow: "0 4px 20px rgba(119,209,77,0.4)" }}
-        aria-label="Запитайте що завгодно"
+        aria-label={tr.common.askAnything}
       >
         <AnimatePresence mode="wait">
           {open ? (
@@ -111,7 +114,7 @@ export function AiWidget() {
           className="absolute right-full top-1/2 -translate-y-1/2 mr-3 bg-[#131311] text-white text-[12px] font-500 px-3 py-1.5 rounded-[4px] whitespace-nowrap pointer-events-none"
           style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.2)" }}
         >
-          Запитайте що завгодно
+          {tr.common.askAnything}
           <div className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-full border-4 border-transparent border-l-[#131311]" />
         </motion.div>
       )}

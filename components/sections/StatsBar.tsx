@@ -11,7 +11,7 @@ const stats = [
 ];
 
 export function StatsBar() {
-  const { tr } = useLocale();
+  const { locale, tr } = useLocale();
 
   return (
     <section className="bg-[#131311] py-10 md:py-12">
@@ -31,7 +31,7 @@ export function StatsBar() {
                 style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
               >
                 {stat.value}
-                {stat.suffix}
+                {stat.suffix && locale === "uk" ? stat.suffix : ""}
               </p>
               <p className="mt-1.5 text-[12px] text-white/45 uppercase tracking-[0.12em] font-500">
                 {tr.stats[stat.keyUk as keyof typeof tr.stats]}

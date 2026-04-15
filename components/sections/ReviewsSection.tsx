@@ -8,13 +8,13 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLocale } from "@/hooks/useLocale";
 
 export function ReviewsSection() {
-  const { tr } = useLocale();
+  const { locale, tr } = useLocale();
 
   return (
     <section id="reviews" className="section-padding bg-[#131311]">
       <div className="container-wide">
         <SectionHeader
-          label="Відгуки"
+          label={locale === "en" ? "Reviews" : "Відгуки"}
           title={tr.sections.reviews}
           subtitle={tr.sections.reviewsSub}
           className="[&_h2]:text-white [&_.section-label]:text-[#95dc6a] [&_p]:text-white/50"
@@ -39,7 +39,7 @@ export function ReviewsSection() {
 
               {/* Text */}
               <p className="text-white/75 text-[14px] leading-relaxed mb-6">
-                &ldquo;{review.text}&rdquo;
+                &ldquo;{locale === "en" ? review.textEn ?? review.text : review.text}&rdquo;
               </p>
 
               {/* Author */}
@@ -56,7 +56,7 @@ export function ReviewsSection() {
                 <div>
                   <p className="text-white text-sm font-500">{review.name}</p>
                   <p className="text-white/40 text-[12px]">
-                    {review.location} · {review.houseModel} · {review.date}
+                    {locale === "en" ? review.locationEn ?? review.location : review.location} · {review.houseModel} · {locale === "en" ? review.dateEn ?? review.date : review.date}
                   </p>
                 </div>
               </div>

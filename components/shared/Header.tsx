@@ -105,17 +105,31 @@ export function Header() {
             </button>
           </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            onClick={() => setMobileOpen((v) => !v)}
-            className={[
-              "lg:hidden p-2 rounded-[4px] transition-colors",
-              scrolled || mobileOpen ? "text-[#131311]" : "text-white",
-            ].join(" ")}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Mobile Right */}
+          <div className="lg:hidden flex items-center gap-2">
+            <button
+              onClick={toggle}
+              className={[
+                "text-[11px] font-600 uppercase tracking-widest border rounded-[3px] px-2 py-1 transition-colors",
+                scrolled || mobileOpen
+                  ? "border-[#d4d4d0] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]"
+                  : "border-white/40 text-white/80 hover:border-white hover:text-white",
+              ].join(" ")}
+              aria-label="Toggle language"
+            >
+              {locale === "uk" ? "EN" : "UA"}
+            </button>
+            <button
+              onClick={() => setMobileOpen((v) => !v)}
+              className={[
+                "p-2 rounded-[4px] transition-colors",
+                scrolled || mobileOpen ? "text-[#131311]" : "text-white",
+              ].join(" ")}
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -170,12 +184,6 @@ export function Header() {
                   className="btn-primary flex-1"
                 >
                   {locale === "uk" ? "Безкоштовна консультація" : "Free Consultation"}
-                </button>
-                <button
-                  onClick={toggle}
-                  className="btn-outline px-3 py-3.5 text-xs tracking-widest uppercase"
-                >
-                  {locale === "uk" ? "EN" : "UA"}
                 </button>
               </div>
             </motion.div>

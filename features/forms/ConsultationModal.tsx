@@ -7,14 +7,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { formatPhone, isValidPhone } from "@/lib/utils";
+import { useLocale, getLocale } from "@/hooks/useLocale";
 
 const schema = z.object({
   name: z
     .string()
-    .min(2, "Мінімум 2 символи")
-    .max(60, "Максимум 60 символів")
-    .regex(/^[a-zA-Zа-яА-ЯіІїЇєЄ\s'-]+$/, "Тільки літери"),
-  phone: z.string().refine(isValidPhone, "Введіть коректний номер"),
+    .min(2, getLocale() === "en" ? "Minimum 2 characters" : "Мінімум 2 символи")
+    .max(60, getLocale() === "en" ? "Maximum 60 characters" : "Максимум 60 символів")
+    .regex(/^[a-zA-Zа-яА-ЯіІїЇєЄ\s'-]+$/, getLocale() === "en" ? "Letters only" : "Тільки літери"),
+  phone: z.string().refine(isValidPhone, getLocale() === "en" ? "Enter a valid phone number" : "Введіть коректний номер"),
   comment: z.string().max(300).optional(),
 });
 
@@ -26,6 +27,7 @@ interface Props {
 }
 
 export function ConsultationModal({ open, onClose }: Props) {
+  const { locale, tr } = useLocale();
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const phoneInputRef = useRef<HTMLInputElement>(null);
@@ -108,12 +110,14 @@ export function ConsultationModal({ open, onClose }: Props) {
                   className="text-xl font-400 text-[#131311] tracking-tight"
                   style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
                 >
-                  {success ? "Дякуємо!" : "Безкоштовна консультація"}
+                  {success ? (locale === "en" ? "Thank you!" : "Дякуємо!") : tr.common.consultation}
                 </h2>
                 <p className="text-sm text-[#7c7c78] mt-1">
                   {success
                     ? "Ми зв'яжемось з вами протягом хвилини"
-                    : "Наш архітектор зателефонує вам найближчим часом"}
+                    : locale === "en"
+                      ? "Our architect will call you shortly"
+                      : "Наш архітектор зателефонує вам найближчим часом"}
                 </p>
               </div>
               <button
@@ -144,13 +148,15 @@ export function ConsultationModal({ open, onClose }: Props) {
                       <CheckCircle2 size={56} className="text-[#77d14d] mb-4" />
                     </motion.div>
                     <p className="text-[#555552] text-sm leading-relaxed max-w-xs">
-                      Дякуємо за вашу заявку! Очікуйте дзвінка від нашого архітектора. Ми відповідаємо протягом 1 хвилини в робочий час.
+                      {locale === "en"
+                        ? "Thank you for your request! Expect a call from our architect. We respond within 1 minute during working hours."
+                        : "Дякуємо за вашу заявку! Очікуйте дзвінка від нашого архітектора. Ми відповідаємо протягом 1 хвилини в робочий час."}
                     </p>
                     <button
                       onClick={handleClose}
                       className="mt-6 btn-outline text-sm"
                     >
-                      Закрити
+                      {tr.form.close}
                     </button>
                   </motion.div>
                 ) : (
@@ -170,7 +176,7 @@ export function ConsultationModal({ open, onClose }: Props) {
                         <input
                           {...register("name")}
                           type="text"
-                          placeholder="Ваше ім'я"
+                          placeholder={tr.form.name}
                           className={["input-field pl-10", errors.name ? "error" : ""].join(" ")}
                           autoComplete="given-name"
                         />
@@ -206,7 +212,7 @@ export function ConsultationModal({ open, onClose }: Props) {
                         <MessageSquare size={15} className="absolute left-3.5 top-3.5 text-[#a8a8a3] pointer-events-none" />
                         <textarea
                           {...register("comment")}
-                          placeholder="Коментар або побажання (необов'язково)"
+                          placeholder={locale === "en" ? "Comment or preferences (optional)" : "Коментар або побажання (необов'язково)"}
                           rows={3}
                           className="input-field pl-10 resize-none"
                         />
@@ -222,17 +228,17 @@ export function ConsultationModal({ open, onClose }: Props) {
                       {submitting ? (
                         <>
                           <Loader2 size={15} className="animate-spin" />
-                          Відправляємо...
+                          {tr.form.sending}
                         </>
                       ) : (
-                        "Отримати безкоштовну консультацію"
+                        tr.housePage.getConsultation
                       )}
                     </button>
 
                     <p className="text-center text-[11px] text-[#a8a8a3]">
-                      Натискаючи кнопку, ви погоджуєтесь з{" "}
+                      {locale === "en" ? "By clicking the button, you agree to the " : "Натискаючи кнопку, ви погоджуєтесь з "}
                       <a href="/privacy" className="underline hover:text-[#77d14d] transition-colors">
-                        політикою конфіденційності
+                        {tr.form.privacyPolicy}
                       </a>
                     </p>
                   </motion.form>

@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { BedDouble, Bath, Maximize2, ArrowRight } from "lucide-react";
 import { House } from "@/types";
 import { formatPrice } from "@/lib/utils";
+import { useLocale } from "@/hooks/useLocale";
 
 interface Props {
   house: House;
@@ -13,6 +14,16 @@ interface Props {
 }
 
 export function HouseCard({ house, priority = false }: Props) {
+  const { locale, tr } = useLocale();
+  const categoryLabel =
+    house.category === "compact"
+      ? tr.catalogPage.catCompact
+      : house.category === "comfort"
+        ? tr.catalogPage.catComfort
+        : house.category === "premium"
+          ? tr.catalogPage.catPremium
+          : tr.catalogPage.catElite;
+
   return (
     <motion.div
       whileHover={{ y: -4 }}
@@ -42,16 +53,13 @@ export function HouseCard({ house, priority = false }: Props) {
         {/* Tag */}
         {house.tag && (
           <div className="absolute top-3 left-3 bg-[#77d14d] text-white text-[11px] font-600 tracking-wide px-2.5 py-1 rounded-[3px]">
-            {house.tag}
+            {locale === "en" ? house.tagEn ?? house.tag : house.tag}
           </div>
         )}
 
         {/* Category badge */}
         <div className="absolute top-3 right-3 bg-white/85 backdrop-blur-sm text-[#555552] text-[11px] font-500 uppercase tracking-wider px-2 py-1 rounded-[3px]">
-          {house.category === "compact" && "Компакт"}
-          {house.category === "comfort" && "Комфорт"}
-          {house.category === "premium" && "Преміум"}
-          {house.category === "elite" && "Еліт"}
+          {categoryLabel}
         </div>
       </div>
 
@@ -63,7 +71,7 @@ export function HouseCard({ house, priority = false }: Props) {
         >
           {house.name}
         </h3>
-        <p className="text-[13px] text-[#7c7c78] mb-4">{house.style}</p>
+        <p className="text-[13px] text-[#7c7c78] mb-4">{locale === "en" ? house.styleEn ?? house.style : house.style}</p>
 
         {/* Specs row */}
         <div className="flex items-center gap-4 text-[13px] text-[#555552] mb-5">
@@ -88,7 +96,7 @@ export function HouseCard({ house, priority = false }: Props) {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-[11px] text-[#a8a8a3] uppercase tracking-widest mb-0.5">
-              {house.priceFrom ? "від" : ""}
+              {house.priceFrom ? tr.common.from : ""}
             </p>
             <p className="text-xl font-500 text-[#131311] tracking-tight">
               {formatPrice(house.price)}
@@ -98,7 +106,7 @@ export function HouseCard({ house, priority = false }: Props) {
             href={`/house/${house.slug}`}
             className="flex items-center gap-1.5 text-[13px] font-500 text-[#77d14d] hover:text-[#4e8f31] transition-colors group/arrow"
           >
-            Детальніше
+            {tr.common.details}
             <ArrowRight
               size={14}
               className="transition-transform group-hover/arrow:translate-x-1"

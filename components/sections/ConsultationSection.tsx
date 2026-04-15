@@ -7,21 +7,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Phone, User, MessageSquare, Loader2, CheckCircle2 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { useLocale } from "@/hooks/useLocale";
+import { useLocale, getLocale } from "@/hooks/useLocale";
 import { formatPhone, isValidPhone } from "@/lib/utils";
 
 const schema = z.object({
   name: z
     .string()
-    .min(2, "Мінімум 2 символи")
-    .regex(/^[a-zA-Zа-яА-ЯіІїЇєЄ\s'-]+$/, "Тільки літери"),
-  phone: z.string().refine(isValidPhone, "Введіть коректний номер"),
+    .min(2, getLocale() === "en" ? "Minimum 2 characters" : "Мінімум 2 символи")
+    .regex(/^[a-zA-Zа-яА-ЯіІїЇєЄ\s'-]+$/, getLocale() === "en" ? "Letters only" : "Тільки літери"),
+  phone: z.string().refine(isValidPhone, getLocale() === "en" ? "Enter a valid phone number" : "Введіть коректний номер"),
   comment: z.string().max(300).optional(),
 });
 type FormData = z.infer<typeof schema>;
 
 export function ConsultationSection() {
-  const { tr } = useLocale();
+  const { locale, tr } = useLocale();
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -48,6 +48,7 @@ export function ConsultationSection() {
       <div className="container-narrow">
         <SectionHeader
           label="Консультація"
+          label={locale === "en" ? "Consultation" : "Консультація"}
           title={tr.sections.consultation}
           subtitle={tr.sections.consultationSub}
           centered
@@ -79,7 +80,7 @@ export function ConsultationSection() {
                 onClick={() => { reset(); setSuccess(false); }}
                 className="mt-6 btn-outline text-sm"
               >
-                Надіслати ще заявку
+                {tr.form.submitAnother}
               </button>
             </motion.div>
           ) : (
@@ -130,16 +131,16 @@ export function ConsultationSection() {
                 className="btn-primary w-full justify-center py-4 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {submitting ? (
-                  <><Loader2 size={15} className="animate-spin" /> Відправляємо...</>
+                  <><Loader2 size={15} className="animate-spin" /> {tr.form.sending}</>
                 ) : (
                   tr.form.submit
                 )}
               </button>
 
               <p className="text-center text-[11px] text-[#a8a8a3]">
-                Погоджуючись, ви приймаєте{" "}
+                {tr.form.privacyLead}{" "}
                 <a href="/privacy" className="underline hover:text-[#77d14d] transition-colors">
-                  політику конфіденційності
+                  {tr.form.privacyPolicy}
                 </a>
               </p>
             </form>
