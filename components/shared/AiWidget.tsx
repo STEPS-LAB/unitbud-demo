@@ -15,7 +15,7 @@ export function AiWidget() {
       : "Привіт! Я AI-помічник Unitbud.\nЯ знаю все про наші будинки.\nЧим можу допомогти?";
 
   return (
-    <div className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-50">
+    <div className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-30">
       {/* Chat Window */}
       <AnimatePresence>
         {open && (

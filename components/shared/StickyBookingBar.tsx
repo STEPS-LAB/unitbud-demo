@@ -12,7 +12,7 @@ export function StickyBookingBar() {
   return (
     <>
       {/* Mobile only */}
-      <div className="lg:hidden sticky-bar fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#e8e8e5] px-4 py-3 flex gap-3">
+      <div className="lg:hidden sticky-bar fixed bottom-0 inset-x-0 z-30 bg-white border-t border-[#e8e8e5] px-4 py-3 flex gap-3">
         <a
           href="tel:+380800000000"
           className="flex items-center justify-center gap-2 flex-1 border border-[#e8e8e5] rounded-[4px] py-3 text-sm font-500 text-[#3a3a38] hover:border-[#77d14d] transition-colors"

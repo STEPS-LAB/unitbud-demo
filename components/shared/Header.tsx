@@ -129,7 +129,7 @@ export function Header() {
             <button
               onClick={() => setMobileOpen((v) => !v)}
               className={[
-                "p-2 rounded-[4px] transition-colors",
+                "p-2 rounded-[4px] transition-colors outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0",
                 scrolled || mobileOpen ? "text-[#131311]" : "text-white",
               ].join(" ")}
               aria-label="Toggle menu"
@@ -141,13 +141,13 @@ export function Header() {
       </header>
 
       {/* Mobile Fullscreen Overlay */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait" initial={false}>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: -10, scale: 0.995 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.995 }}
+            transition={{ duration: 0.46, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-40 bg-white flex flex-col pt-20 pb-8 px-6 lg:hidden"
           >
             {/* Nav links */}
@@ -155,9 +155,10 @@ export function Header() {
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 + i * 0.05, duration: 0.4 }}
+                  exit={{ opacity: 0, x: -8 }}
+                  transition={{ delay: 0.08 + i * 0.055, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <Link
                     href={link.href}
@@ -170,30 +171,18 @@ export function Header() {
                 </motion.div>
               ))}
             </nav>
-
-            {/* Bottom */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
+            <motion.a
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.4 }}
-              className="space-y-4"
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ delay: 0.24, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              href="tel:+380800000000"
+              className="flex items-center gap-3 text-3xl font-300 tracking-tight text-[#131311] hover:text-[#77d14d] transition-colors pt-4 border-t border-[#f2f2f0]"
+              style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
             >
-              <a
-                href="tel:+380800000000"
-                className="flex items-center gap-2 text-base text-[#3a3a38] hover:text-[#77d14d] transition-colors"
-              >
-                <Phone size={16} className="text-[#77d14d]" />
-                0 800 000 000
-              </a>
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => { setModalOpen(true); setMobileOpen(false); }}
-                  className="btn-primary flex-1"
-                >
-                  {locale === "uk" ? "Безкоштовна консультація" : "Free Consultation"}
-                </button>
-              </div>
-            </motion.div>
+              <Phone size={22} className="text-[#77d14d] flex-shrink-0" />
+              0 800 000 000
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
