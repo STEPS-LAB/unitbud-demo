@@ -2,41 +2,35 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 import { faqs } from "@/data/faq";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLocale } from "@/hooks/useLocale";
+import { ConsultationModal } from "@/features/forms/ConsultationModal";
 
 export function FaqSection() {
   const { locale, tr } = useLocale();
   const [openId, setOpenId] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id));
 
   return (
     <section id="faq" className="section-padding bg-white">
       <div className="container-wide">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20">
-          {/* Left */}
-          <div>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_2fr] lg:grid-rows-[auto_auto] lg:gap-20 lg:items-start">
+          {/* Title block: first on mobile, top-left on desktop */}
+          <div className="order-1 lg:col-start-1 lg:row-start-1">
             <SectionHeader
               title={tr.sections.faq}
               subtitle={tr.sections.faqSub}
               titleClassName="font-black"
               showTitleMarker
             />
-            <p className="text-[14px] text-[#7c7c78] leading-relaxed">
-              {locale === "en"
-                ? "Didn't find the answer? Call us or leave a request, and we'll answer any question."
-                : "Не знайшли відповідь? Зателефонуйте нам або залиште заявку — відповімо на будь-яке запитання."}
-            </p>
-            <a href="tel:+380800000000" className="mt-4 inline-flex btn-outline text-sm">
-              0 800 000 000
-            </a>
           </div>
 
-          {/* Right */}
-          <div className="space-y-0 divide-y divide-[#e8e8e5]">
+          {/* FAQ list: after title on mobile, right column full height on desktop */}
+          <div className="order-2 space-y-0 divide-y divide-[#e8e8e5] lg:col-start-2 lg:row-start-1 lg:row-span-2">
             {faqs.map((faq, i) => (
               <motion.div
                 key={faq.id}
@@ -49,16 +43,12 @@ export function FaqSection() {
                   onClick={() => toggle(faq.id)}
                   className="w-full flex items-center justify-between gap-4 py-5 text-left group"
                 >
-                  <span className="text-[15px] font-500 text-[#131311] group-hover:text-[#77d14d] transition-colors">
+                  <span className="text-[15px] font-600 text-[#131311] group-hover:text-[#77d14d] transition-colors">
                     {locale === "en" ? faq.questionEn ?? faq.question : faq.question}
                   </span>
-                  <motion.div
-                    animate={{ rotate: openId === faq.id ? 45 : 0 }}
-                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e8e8e5] flex items-center justify-center text-[#77d14d]"
-                  >
-                    <Plus size={14} />
-                  </motion.div>
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e8e8e5] flex items-center justify-center text-[#77d14d]">
+                    {openId === faq.id ? <Minus size={14} strokeWidth={2} /> : <Plus size={14} />}
+                  </div>
                 </button>
 
                 <AnimatePresence initial={false}>
@@ -79,8 +69,26 @@ export function FaqSection() {
               </motion.div>
             ))}
           </div>
+
+          {/* CTA: last on mobile, under title on desktop */}
+          <div className="order-3 lg:col-start-1 lg:row-start-2">
+            <p className="text-[14px] text-[#7c7c78] leading-relaxed">
+              {locale === "en"
+                ? "Didn't find the answer? Call us or leave a request, and we'll answer any question."
+                : "Не знайшли відповідь? Зателефонуйте нам або залиште заявку — відповімо на будь-яке запитання."}
+            </p>
+            <button
+              type="button"
+              onClick={() => setModalOpen(true)}
+              className="mt-4 inline-flex btn-primary btn-text-graphite text-sm px-5 py-2.5"
+            >
+              {locale === "en" ? "Consultation" : "Консультація"}
+            </button>
+          </div>
         </div>
       </div>
+
+      <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 }

@@ -94,18 +94,6 @@ export function Header() {
 
           {/* Desktop Right */}
           <div className="hidden lg:flex shrink-0 items-center gap-4">
-            {/* Phone */}
-            <a
-              href="tel:+380800000000"
-              className={[
-                "flex items-center gap-1.5 text-sm font-500 transition-colors hover:text-[#77d14d]",
-                scrolled ? "text-[#3a3a38]" : "text-white/90",
-              ].join(" ")}
-            >
-              <Phone size={14} />
-              0 800 000 000
-            </a>
-
             {/* Locale */}
             <button
               onClick={toggle}
@@ -141,16 +129,6 @@ export function Header() {
               aria-label="Toggle language"
             >
               {locale === "uk" ? "EN" : "UA"}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setMobileOpen(false);
-                setModalOpen(true);
-              }}
-              className="btn-primary btn-text-graphite shrink-0 text-xs px-3 py-2"
-            >
-              {locale === "uk" ? "Консультація" : "Consultation"}
             </button>
             <button
               onClick={() => setMobileOpen((v) => !v)}

@@ -3,82 +3,52 @@ import { FAQ } from "@/types";
 export const faqs: FAQ[] = [
   {
     id: "1",
-    category: "Будівництво",
-    question: "Скільки часу займає будівництво будинку?",
-    questionEn: "How long does it take to build a house?",
+    category: "Загальне",
+    question: "Чим відрізняється збірний будинок від звичайного будинку?",
+    questionEn: "How does a prefabricated house differ from a conventional house?",
     answer:
-      "Терміни будівництва залежать від площі та складності проєкту. В середньому будинок площею до 100 м² будується за 75–100 днів, від 100 до 150 м² — 100–120 днів, понад 150 м² — 120–150 днів. Ми суворо дотримуємося погоджених термінів і надаємо щоденні звіти про прогрес.",
+      "На будівництво звичайного будинку йдуть роки. Іноді таке будівництво ніколи не закінчується. Швидкомонтовані будинки будуються за 1-1,5 місяці і готові для проживання відразу після встановлення. Будівництво будинку, що швидко зводиться – дешевше, ніж цегляний будинок або будинок з піноблоку. Всі будівельники знаходяться на підприємстві і будують його на своєму робочому місці.",
     answerEn:
-      "Construction time depends on the area and project complexity. On average: up to 100 m2 takes 75-100 days, 100-150 m2 takes 100-120 days, and over 150 m2 takes 120-150 days. We strictly follow agreed timelines and provide daily progress reports.",
+      "Building a conventional house takes years, and sometimes it never really finishes. Prefabricated houses are built in 1-1.5 months and are ready to live in right after installation. A fast-erected house costs less than brick or foam block. All builders work at the factory on their own workstations.",
   },
   {
     id: "2",
-    category: "Фінанси",
-    question: "Які умови оплати та можливість розстрочки?",
-    questionEn: "What are the payment terms and installment options?",
+    category: "Загальне",
+    question: "Плюси і мінуси швидкомонтованих будинків",
+    questionEn: "Pros and cons of prefabricated houses",
     answer:
-      "Ми пропонуємо гнучкі умови оплати: перший внесок 30% при підписанні договору, 40% по готовності фундаменту та коробки, 30% при здачі об'єкта. Також доступна співпраця з банками-партнерами для іпотечного кредитування та розстрочки.",
+      "Плюси швидкомонтованих будинків: 1. Ціна нижча у порівнянні зі стандартними будинками. 2. Швидкість виготовлення до початку проживання в будинку – 1-1,5 місяця. 3. Стильний і новаторський дизайн. З мінусів – рекомендація не підключати газ і складність транспортування готового будинку.",
     answerEn:
-      "We offer flexible payment terms: 30% at contract signing, 40% after foundation and structure completion, and 30% at project handover. We also cooperate with partner banks for mortgage and installment programs.",
+      "Pros: 1. Lower price than standard houses. 2. Production-to-move-in timeline of 1-1.5 months. 3. Stylish, innovative design. Cons: gas connection is not recommended, and transporting the finished house is complex.",
   },
   {
     id: "3",
-    category: "Якість",
-    question: "Яку гарантію ви надаєте на будинки?",
-    questionEn: "What warranty do you provide for houses?",
+    category: "Загальне",
+    question: "Скільки може прослужити збірний будинок?",
+    questionEn: "How long can a prefabricated house last?",
     answer:
-      "На всі конструктивні елементи будинку надається гарантія 5–10 років залежно від комплектації. Інженерні системи — 2 роки. Ми використовуємо лише сертифіковані матеріали від перевірених постачальників та маємо власний відділ контролю якості.",
+      "Всі товари мають свою інструкцію для правильного догляду та експлуатації. При правильній експлуатації збірного будинку він прослужить довгий час для вас. Термін служби розрахований на 50 років. Є країни, де модульні будинки стоять понад 100 років.",
     answerEn:
-      "All structural elements are covered by a 5-10 year warranty depending on the selected package. Engineering systems are covered for 2 years. We use only certified materials from trusted suppliers and run internal quality control.",
+      "Every product comes with care and operation instructions. With proper use, a prefabricated house will serve you for a long time. The design service life is 50 years. In some countries modular homes have stood for over 100 years.",
   },
   {
     id: "4",
-    category: "Будівництво",
-    question: "Чи можна змінити планування або вибрати нестандартний проєкт?",
-    questionEn: "Can I change the layout or choose a custom project?",
+    category: "Загальне",
+    question: "Що дешевше, збірний будинок чи звичайний?",
+    questionEn: "What is cheaper — a prefabricated house or a conventional one?",
     answer:
-      "Так, ми пропонуємо повну кастомізацію. Можна адаптувати будь-який готовий проєкт або розробити індивідуальний з нуля. Наші архітектори та дизайнери допоможуть втілити ваші ідеї з урахуванням бюджету та технічних вимог.",
+      "Якщо порівнювати звичайний і швидкомонтований будинок однакових розмірів, то економія на збірному будинку складе від 25 до 50%. Економія досягається завдяки використанню нових технологій будівництва.",
     answerEn:
-      "Yes, we provide full customization. You can adapt any ready-made project or create an individual one from scratch. Our architects and designers help implement your ideas within budget and technical requirements.",
+      "For the same size, a prefabricated house saves about 25-50% compared with a conventional build. Savings come from newer construction technologies.",
   },
   {
     id: "5",
-    category: "Земля",
-    question: "Чи надаєте ви послуги з пошуку земельної ділянки?",
-    questionEn: "Do you help with finding a land plot?",
+    category: "Загальне",
+    question: "Чи придатний швидкомонтований будинок для житла відразу після купівлі?",
+    questionEn: "Is a prefabricated house ready to live in right after purchase?",
     answer:
-      "Так, ми допомагаємо з підбором земельної ділянки через наших партнерів. Також надаємо повний супровід юридичного оформлення: від перевірки документів до реєстрації права власності.",
+      "У будинок можна заселятися відразу після того, як його встановили на фундамент і під'єднали всі комунікації.",
     answerEn:
-      "Yes, we help select land plots through our partners. We also provide full legal support, from document verification to ownership registration.",
-  },
-  {
-    id: "6",
-    category: "Матеріали",
-    question: "Які технології та матеріали використовуєте?",
-    questionEn: "Which technologies and materials do you use?",
-    answer:
-      "Основна технологія — каркасне будівництво з утепленням мінеральною ватою або ековатою. Також пропонуємо газобетон та SIP-панелі. Всі матеріали сертифіковані, мають відповідні санітарні висновки та пройшли наш внутрішній контроль якості.",
-    answerEn:
-      "Our main technology is frame construction with mineral wool or eco-wool insulation. We also offer aerated concrete and SIP panels. All materials are certified and pass internal quality control.",
-  },
-  {
-    id: "7",
-    category: "Процес",
-    question: "Як відбувається моніторинг будівництва?",
-    questionEn: "How is construction progress monitored?",
-    answer:
-      "Ми забезпечуємо повну прозорість процесу: щоденні фотозвіти з будмайданчика, онлайн-кабінет клієнта з актуальним статусом, регулярні відеодзвінки з прорабом. Ви завжди знаєте, що відбувається на вашому об'єкті.",
-    answerEn:
-      "We provide full transparency: daily site photo reports, a client portal with current status, and regular video calls with the site manager. You always know what is happening on your project.",
-  },
-  {
-    id: "8",
-    category: "Фінанси",
-    question: "Що входить у вказану вартість будинку?",
-    questionEn: "What is included in the listed house price?",
-    answer:
-      "Вказана вартість включає: фундамент, коробку з покрівлею, утеплення, вікна та двері, інженерні системи (електрика, водопостачання, каналізація, опалення), чистове оздоблення стін та підлоги. Окремо оплачується земельна ділянка та зовнішній благоустрій.",
-    answerEn:
-      "The listed price includes foundation, structure with roof, insulation, windows and doors, engineering systems (electricity, water, sewage, heating), and final wall/floor finishing. Land cost and external landscaping are charged separately.",
+      "You can move in as soon as the house is placed on the foundation and all utilities are connected.",
   },
 ];
