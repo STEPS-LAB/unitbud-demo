@@ -7,12 +7,13 @@ import { houses } from "@/data/houses";
 import { HouseCard } from "@/components/ui/HouseCard";
 import { House } from "@/types";
 import { useLocale } from "@/hooks/useLocale";
+import { formatAreaSqm } from "@/lib/utils";
 
 type Category = House["category"] | "all";
 type SortKey = "price-asc" | "price-desc" | "area-asc" | "area-desc";
 
 export function CatalogClient() {
-  const { tr } = useLocale();
+  const { tr, locale } = useLocale();
   const [category, setCategory] = useState<Category>("all");
   const [sort, setSort] = useState<SortKey>("price-asc");
   const [areaMin, setAreaMin] = useState(50);
@@ -127,7 +128,7 @@ export function CatalogClient() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="text-sm font-500 text-[#3a3a38] block mb-3">
-                      {tr.catalogPage.areaFrom} {areaMin} м²
+                      {tr.catalogPage.areaFrom} {formatAreaSqm(areaMin, locale)}
                     </label>
                     <input
                       type="range"
@@ -141,7 +142,7 @@ export function CatalogClient() {
                   </div>
                   <div>
                     <label className="text-sm font-500 text-[#3a3a38] block mb-3">
-                      {tr.catalogPage.areaTo} {areaMax} м²
+                      {tr.catalogPage.areaTo} {formatAreaSqm(areaMax, locale)}
                     </label>
                     <input
                       type="range"

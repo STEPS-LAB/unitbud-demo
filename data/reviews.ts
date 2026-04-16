@@ -5,6 +5,7 @@ export const reviews: Review[] = [
   {
     id: "1",
     name: "Олена Коваль",
+    nameEn: "Olena Koval",
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
     rating: 5,
     text: "Баня 23 м²: від першого дзвінка до монтажу все пройшло без нарікань, завжди були на зв’язку. Встановили вчасно — простора й затишна, залишились дуже задоволені.",
@@ -16,6 +17,7 @@ export const reviews: Review[] = [
   {
     id: "2",
     name: "Василь Мороз",
+    nameEn: "Vasyl Moroz",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
     rating: 5,
     text: "Обійшли багатьох виробників — тут сильніші шумоізоляція, стіни та оздоблення. Консультанти реально розуміють будівництво, а не лише продають. Замовили дім тут.",
@@ -27,6 +29,7 @@ export const reviews: Review[] = [
   {
     id: "3",
     name: "Тетяна Іванченко",
+    nameEn: "Tetiana Ivanchenko",
     avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80",
     rating: 5,
     text: "Будинок зібрали рівно за три місяці, як обіцяли — швидко й без зайвого стресу. Дякую команді та Анатолію за підтримку на всіх етапах.",
@@ -38,6 +41,7 @@ export const reviews: Review[] = [
   {
     id: "4",
     name: "Дмитро Savchenko",
+    nameEn: "Dmytro Savchenko",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80",
     rating: 5,
     text: "Живемо в 75 м² від літа — узимку комфортно й тепло. Очікування повністю виправдані, будинком дуже задоволені.",

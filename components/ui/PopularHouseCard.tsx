@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Bath, BedDouble, Maximize2 } from "lucide-react";
 import { House } from "@/types";
-import { formatUsd } from "@/lib/utils";
+import { formatAreaSqm, formatUsd } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
 
 interface Props {
@@ -14,6 +14,7 @@ interface Props {
 
 export function PopularHouseCard({ house, priority = false }: Props) {
   const { locale, tr } = useLocale();
+  const displayName = locale === "en" ? house.nameEn ?? house.name : house.name;
   const isFirstPopularCard = house.id === "1";
   const categoryLabel =
     isFirstPopularCard
@@ -30,12 +31,12 @@ export function PopularHouseCard({ house, priority = false }: Props) {
     <article
       className="group relative overflow-hidden rounded-2xl border border-[#dfdfda] bg-[#f2f2f0] shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
     >
-      <Link href={`/house/${house.slug}`} className="absolute inset-0 z-10" aria-label={`${house.name} ${tr.common.details}`} />
+      <Link href={`/house/${house.slug}`} className="absolute inset-0 z-10" aria-label={`${displayName} ${tr.common.details}`} />
 
       <div className="relative aspect-[16/10] bg-[#f2f2f0]">
         <Image
           src={house.thumbnail}
-          alt={house.name}
+          alt={displayName}
           fill
           priority={priority}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -58,21 +59,21 @@ export function PopularHouseCard({ house, priority = false }: Props) {
               className="truncate text-[20px] font-semibold tracking-tight text-[#131311]"
               style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
             >
-              {house.name}
+              {displayName}
             </h3>
             <p className="mt-1 line-clamp-2 text-[14px] leading-snug text-[#6f6f6a]">
               {locale === "en" ? house.descriptionEn ?? house.description : house.description}
             </p>
           </div>
           <span className="shrink-0 rounded-full bg-[#131311] px-3 py-1 text-[11px] font-600 tracking-wide text-white">
-            {house.area} м²
+            {formatAreaSqm(house.area, locale)}
           </span>
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-2 text-[12px] text-[#555552]">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-[#f6f6f4] px-3 py-1 ring-1 ring-black/5">
             <Maximize2 size={13} className="text-[#a8a8a3]" />
-            {house.area} м²
+            {formatAreaSqm(house.area, locale)}
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-[#f6f6f4] px-3 py-1 ring-1 ring-black/5">
             <BedDouble size={13} className="text-[#a8a8a3]" />
@@ -89,7 +90,7 @@ export function PopularHouseCard({ house, priority = false }: Props) {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-[11px] uppercase tracking-widest text-[#a8a8a3]">{house.priceFrom ? tr.common.from : ""}</p>
-            <p className="mt-0.5 text-[22px] font-600 tracking-tight text-[#131311]">{formatUsd(house.price)}</p>
+            <p className="mt-0.5 text-[22px] font-600 tracking-tight text-[#131311]">{formatUsd(house.price, locale)}</p>
           </div>
 
           <Link

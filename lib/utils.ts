@@ -1,25 +1,36 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+/** Matches `Locale` from `@/hooks/useLocale` — kept here to avoid importing a client module into shared utils. */
+export type FormatLocale = "uk" | "en";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatPrice(price: number): string {
+export function formatPrice(price: number, locale: FormatLocale = "uk"): string {
   if (price >= 1_000_000) {
     const millions = price / 1_000_000;
-    return `${millions % 1 === 0 ? millions : millions.toFixed(1)} млн грн`;
+    const m = millions % 1 === 0 ? String(millions) : millions.toFixed(1);
+    if (locale === "en") {
+      return `${m}M UAH`;
+    }
+    return `${m} млн грн`;
+  }
+  if (locale === "en") {
+    return new Intl.NumberFormat("en-US").format(price) + " UAH";
   }
   return new Intl.NumberFormat("uk-UA").format(price) + " грн";
 }
 
 /** USD for catalog models / calculator (e.g. «94 608 $»). */
-export function formatUsd(price: number): string {
-  return `${new Intl.NumberFormat("uk-UA").format(price)} $`;
+export function formatUsd(price: number, locale: FormatLocale = "uk"): string {
+  const loc = locale === "en" ? "en-US" : "uk-UA";
+  return `${new Intl.NumberFormat(loc).format(price)} $`;
 }
 
-export function formatArea(area: number): string {
-  return `${area} м²`;
+export function formatAreaSqm(area: number, locale: FormatLocale = "uk"): string {
+  return `${area} ${locale === "en" ? "m²" : "м²"}`;
 }
 
 export function slugify(text: string): string {

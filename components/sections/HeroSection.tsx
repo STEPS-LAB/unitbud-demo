@@ -252,7 +252,7 @@ export function HeroSection() {
             key={slide.image}
             type="button"
             onClick={() => setActiveSlide(index)}
-            aria-label={locale === "uk" ? `Перейти до слайду ${index + 1}` : `Go to slide ${index + 1}`}
+            aria-label={locale === "en" ? `Go to slide ${index + 1}` : `Перейти до слайду ${index + 1}`}
             className={`h-2.5 rounded-full border border-white/70 transition-all duration-300 ${
               activeSlide === index ? "w-8 bg-white" : "w-2.5 bg-white/30 hover:bg-white/70"
             }`}

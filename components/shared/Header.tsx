@@ -103,8 +103,9 @@ export function Header() {
                   ? "border-[#555552] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]"
                   : "border-white/40 text-white/70 hover:border-white hover:text-white",
               ].join(" ")}
+              aria-label={locale === "en" ? "Language: English. Click to switch to Ukrainian." : "Мова: українська. Натисніть, щоб перейти на англійську."}
             >
-              {locale === "uk" ? "EN" : "UA"}
+              {locale === "uk" ? "UA" : "EN"}
             </button>
 
             {/* CTA */}
@@ -126,9 +127,9 @@ export function Header() {
                   ? "border-[#555552] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]"
                   : "border-white/40 text-white/80 hover:border-white hover:text-white",
               ].join(" ")}
-              aria-label="Toggle language"
+              aria-label={locale === "en" ? "Language: English. Click to switch to Ukrainian." : "Мова: українська. Натисніть, щоб перейти на англійську."}
             >
-              {locale === "uk" ? "EN" : "UA"}
+              {locale === "uk" ? "UA" : "EN"}
             </button>
             <button
               onClick={() => setMobileOpen((v) => !v)}

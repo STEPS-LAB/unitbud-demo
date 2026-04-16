@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { BedDouble, Bath, Maximize2, ArrowRight } from "lucide-react";
 import { House } from "@/types";
-import { formatPrice } from "@/lib/utils";
+import { formatAreaSqm, formatPrice } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
 
 interface Props {
@@ -15,6 +15,7 @@ interface Props {
 
 export function HouseCard({ house, priority = false }: Props) {
   const { locale, tr } = useLocale();
+  const displayName = locale === "en" ? house.nameEn ?? house.name : house.name;
   const categoryLabel =
     house.category === "compact"
       ? tr.catalogPage.catCompact
@@ -39,7 +40,7 @@ export function HouseCard({ house, priority = false }: Props) {
         >
           <Image
             src={house.thumbnail}
-            alt={house.name}
+            alt={displayName}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover"
@@ -68,7 +69,7 @@ export function HouseCard({ house, priority = false }: Props) {
           className="text-lg font-medium text-[#131311] mb-1 tracking-tight"
           style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
         >
-          {house.name}
+          {displayName}
         </h3>
         <p className="text-[13px] text-[#7c7c78] mb-4">{locale === "en" ? house.styleEn ?? house.style : house.style}</p>
 
@@ -76,7 +77,7 @@ export function HouseCard({ house, priority = false }: Props) {
         <div className="flex items-center gap-4 text-[13px] text-[#555552] mb-5">
           <span className="flex items-center gap-1.5">
             <Maximize2 size={13} className="text-[#a8a8a3]" />
-            {house.area} м²
+            {formatAreaSqm(house.area, locale)}
           </span>
           <span className="flex items-center gap-1.5">
             <BedDouble size={13} className="text-[#a8a8a3]" />
@@ -98,7 +99,7 @@ export function HouseCard({ house, priority = false }: Props) {
               {house.priceFrom ? tr.common.from : ""}
             </p>
             <p className="text-xl font-500 text-[#131311] tracking-tight">
-              {formatPrice(house.price)}
+              {formatPrice(house.price, locale)}
             </p>
           </div>
           <Link

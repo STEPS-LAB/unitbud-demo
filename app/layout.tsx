@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@/components/shared/Analytics";
+import { DocumentLang } from "@/components/shared/DocumentLang";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -74,6 +75,7 @@ export default function RootLayout({
       style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
     >
       <body className="min-h-full antialiased">
+        <DocumentLang />
         {children}
         <Analytics />
       </body>

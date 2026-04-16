@@ -99,14 +99,16 @@ export function ReviewsSection() {
                     <div className="relative size-11 shrink-0 overflow-hidden rounded-full ring-1 ring-white/12">
                       <Image
                         src={review.avatar}
-                        alt={review.name}
+                        alt={locale === "en" ? review.nameEn ?? review.name : review.name}
                         width={44}
                         height={44}
                         className="size-full object-cover"
                       />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-white">{review.name}</p>
+                      <p className="truncate text-sm font-medium text-white">
+                        {locale === "en" ? review.nameEn ?? review.name : review.name}
+                      </p>
                       <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-white/45">
                         <span className="inline-flex items-center gap-1">
                           <CalendarDays className="size-3.5 shrink-0 opacity-75" strokeWidth={1.5} aria-hidden />

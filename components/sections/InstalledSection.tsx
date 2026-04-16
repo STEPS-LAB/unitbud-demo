@@ -8,6 +8,12 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { installedHouses } from "@/data/houses";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLocale } from "@/hooks/useLocale";
+import { formatAreaSqm } from "@/lib/utils";
+import type { House } from "@/types";
+
+function houseDisplayName(house: House, locale: "uk" | "en") {
+  return locale === "en" ? house.nameEn ?? house.name : house.name;
+}
 
 export function InstalledSection() {
   const { locale, tr } = useLocale();
@@ -156,7 +162,7 @@ export function InstalledSection() {
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={images[currentIdx]}
-                              alt={`${house.name} — ${currentIdx + 1}/${images.length}`}
+                              alt={`${houseDisplayName(house, locale)} — ${currentIdx + 1}/${images.length}`}
                               className="h-full w-full object-cover"
                               loading="eager"
                               fetchPriority={i < 3 ? "high" : "auto"}
@@ -204,7 +210,7 @@ export function InstalledSection() {
                     className="truncate text-[20px] font-semibold leading-snug tracking-tight text-[#131311]"
                     style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
                   >
-                    {house.name}
+                    {houseDisplayName(house, locale)}
                   </h3>
 
                   <div
@@ -213,7 +219,7 @@ export function InstalledSection() {
                   >
                     <div className="flex items-center justify-between py-4 border-b border-[#ededea]">
                       <span>{locale === "en" ? "Area" : "Площа"}</span>
-                      <span className="font-500 text-[#44443f]">{house.area} м²</span>
+                      <span className="font-500 text-[#44443f]">{formatAreaSqm(house.area, locale)}</span>
                     </div>
                     <div className="flex items-center justify-between py-4 border-b border-[#ededea]">
                       <span>{locale === "en" ? "Completion" : "Комплектація"}</span>
@@ -287,7 +293,7 @@ export function InstalledSection() {
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               <img
                                 src={images[currentIdx]}
-                                alt={`${house.name} — ${currentIdx + 1}/${images.length}`}
+                                alt={`${houseDisplayName(house, locale)} — ${currentIdx + 1}/${images.length}`}
                                 className="h-full w-full object-cover"
                                 loading="eager"
                                 fetchPriority={i < 3 ? "high" : "auto"}
@@ -335,7 +341,7 @@ export function InstalledSection() {
                       className="truncate text-[20px] font-semibold leading-snug tracking-tight text-[#131311]"
                       style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
                     >
-                      {house.name}
+                      {houseDisplayName(house, locale)}
                     </h3>
 
                     <div
@@ -344,7 +350,7 @@ export function InstalledSection() {
                     >
                       <div className="flex items-center justify-between py-4 border-b border-[#ededea]">
                         <span>{locale === "en" ? "Area" : "Площа"}</span>
-                        <span className="font-500 text-[#44443f]">{house.area} м²</span>
+                        <span className="font-500 text-[#44443f]">{formatAreaSqm(house.area, locale)}</span>
                       </div>
                       <div className="flex items-center justify-between py-4 border-b border-[#ededea]">
                         <span>{locale === "en" ? "Completion" : "Комплектація"}</span>

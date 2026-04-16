@@ -8,7 +8,7 @@ import { MapPin, X, ArrowRight } from "lucide-react";
 import { mapPoints } from "@/data/map-points";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLocale } from "@/hooks/useLocale";
-import { formatPrice } from "@/lib/utils";
+import { formatAreaSqm, formatPrice } from "@/lib/utils";
 import { MapPoint } from "@/types";
 
 // Pseudo map with relative positioning
@@ -30,7 +30,7 @@ export function MapSection() {
     <section id="map" className="section-padding bg-white">
       <div className="container-wide">
         <SectionHeader
-          label={locale === "en" ? "Map" : "Карта"}
+          label={tr.sections.mapLabel}
           title={tr.sections.map}
           subtitle={tr.sections.mapSub}
         />
@@ -128,9 +128,11 @@ export function MapSection() {
                   <p className="text-sm font-500 text-[#131311]" style={{ fontFamily: "Montserrat, Inter, sans-serif" }}>
                     {active.title}
                   </p>
-                  <p className="text-[12px] text-[#7c7c78] mt-0.5 mb-3">{locale === "en" ? active.cityEn ?? active.city : active.city} · {active.area} m²</p>
+                  <p className="text-[12px] text-[#7c7c78] mt-0.5 mb-3">
+                    {locale === "en" ? active.cityEn ?? active.city : active.city} · {formatAreaSqm(active.area, locale)}
+                  </p>
                   <div className="flex items-center justify-between">
-                    <p className="text-base font-500 text-[#131311]">{formatPrice(active.price)}</p>
+                    <p className="text-base font-500 text-[#131311]">{formatPrice(active.price, locale)}</p>
                     <Link
                       href={`/house/${active.slug}`}
                       className="flex items-center gap-1 text-[13px] font-500 text-[#77d14d] hover:text-[#4e8f31] transition-colors"

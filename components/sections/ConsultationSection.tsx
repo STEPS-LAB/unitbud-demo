@@ -1,7 +1,7 @@
 "use client";
 
 import type { ChangeEvent, ReactNode } from "react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,18 +9,20 @@ import { z } from "zod";
 import type { LucideIcon } from "lucide-react";
 import { Phone, User, MessageSquare, Loader2, CheckCircle2 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { useLocale, getLocale } from "@/hooks/useLocale";
+import { useLocale, type Locale } from "@/hooks/useLocale";
 import { cn, formatPhone, isValidPhone } from "@/lib/utils";
 
-const schema = z.object({
-  name: z
-    .string()
-    .min(2, getLocale() === "en" ? "Minimum 2 characters" : "Мінімум 2 символи")
-    .regex(/^[a-zA-Zа-яА-ЯіІїЇєЄ\s'-]+$/, getLocale() === "en" ? "Letters only" : "Тільки літери"),
-  phone: z.string().refine(isValidPhone, getLocale() === "en" ? "Enter a valid phone number" : "Введіть коректний номер"),
-  comment: z.string().max(300).optional(),
-});
-type FormData = z.infer<typeof schema>;
+function buildSchema(locale: Locale) {
+  return z.object({
+    name: z
+      .string()
+      .min(2, locale === "en" ? "Minimum 2 characters" : "Мінімум 2 символи")
+      .regex(/^[a-zA-Zа-яА-ЯіІїЇєЄ\s'-]+$/, locale === "en" ? "Letters only" : "Тільки літери"),
+    phone: z.string().refine(isValidPhone, locale === "en" ? "Enter a valid phone number" : "Введіть коректний номер"),
+    comment: z.string().max(300).optional(),
+  });
+}
+type FormData = z.infer<ReturnType<typeof buildSchema>>;
 
 /** Без власного outline: глобальний :focus-visible малював би другу рамку всередині рядка з іконкою */
 const fieldInnerClass =
@@ -60,7 +62,8 @@ function FieldIconWrap({
 }
 
 export function ConsultationSection() {
-  const { tr } = useLocale();
+  const { locale, tr } = useLocale();
+  const schema = useMemo(() => buildSchema(locale), [locale]);
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -148,7 +151,7 @@ export function ConsultationSection() {
                 </button>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+              <form key={locale} onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
                 <div>
                   <FieldIconWrap icon={User} error={!!errors.name}>
                     <input

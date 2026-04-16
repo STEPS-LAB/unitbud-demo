@@ -254,7 +254,7 @@ export function CalculatorSection() {
               className="mt-2 text-4xl font-300 tracking-tight text-[#131311] md:text-[2.65rem]"
               style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
             >
-              {formatUsd(estimate)}
+              {formatUsd(estimate, locale)}
             </motion.p>
 
             <p className="mt-3 max-w-md text-[13px] leading-relaxed text-[#6f6f6a] transition-colors duration-300 ease-out">

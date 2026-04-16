@@ -82,7 +82,7 @@ export function FaqSection() {
               onClick={() => setModalOpen(true)}
               className="mt-4 inline-flex btn-primary btn-text-graphite text-sm px-5 py-2.5"
             >
-              {locale === "en" ? "Consultation" : "Консультація"}
+              {tr.common.consultation}
             </button>
           </div>
         </div>

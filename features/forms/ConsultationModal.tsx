@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import { X, CheckCircle2, Loader2, Phone, User, MessageSquare } from "lucide-react";
@@ -9,19 +9,21 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { cn, formatPhone, isValidPhone } from "@/lib/utils";
-import { useLocale, getLocale } from "@/hooks/useLocale";
+import { useLocale, type Locale } from "@/hooks/useLocale";
 
-const schema = z.object({
-  name: z
-    .string()
-    .min(2, getLocale() === "en" ? "Minimum 2 characters" : "Мінімум 2 символи")
-    .max(60, getLocale() === "en" ? "Maximum 60 characters" : "Максимум 60 символів")
-    .regex(/^[a-zA-Zа-яА-ЯіІїЇєЄ\s'-]+$/, getLocale() === "en" ? "Letters only" : "Тільки літери"),
-  phone: z.string().refine(isValidPhone, getLocale() === "en" ? "Enter a valid phone number" : "Введіть коректний номер"),
-  comment: z.string().max(300).optional(),
-});
+function buildSchema(locale: Locale) {
+  return z.object({
+    name: z
+      .string()
+      .min(2, locale === "en" ? "Minimum 2 characters" : "Мінімум 2 символи")
+      .max(60, locale === "en" ? "Maximum 60 characters" : "Максимум 60 символів")
+      .regex(/^[a-zA-Zа-яА-ЯіІїЇєЄ\s'-]+$/, locale === "en" ? "Letters only" : "Тільки літери"),
+    phone: z.string().refine(isValidPhone, locale === "en" ? "Enter a valid phone number" : "Введіть коректний номер"),
+    comment: z.string().max(300).optional(),
+  });
+}
 
-type FormData = z.infer<typeof schema>;
+type FormData = z.infer<ReturnType<typeof buildSchema>>;
 
 const fieldInnerClass =
   "no-outline w-full min-h-0 rounded-none border-0 bg-transparent px-3 py-3.5 text-[0.9375rem] text-[#131311] shadow-none outline-none placeholder:text-[#8e8e88] focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0";
@@ -66,6 +68,7 @@ interface Props {
 
 export function ConsultationModal({ open, onClose }: Props) {
   const { locale, tr } = useLocale();
+  const schema = useMemo(() => buildSchema(locale), [locale]);
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const phoneInputRef = useRef<HTMLInputElement>(null);
@@ -156,7 +159,9 @@ export function ConsultationModal({ open, onClose }: Props) {
                 </h2>
                 <p className="text-sm text-[#7c7c78] mt-1">
                   {success
-                    ? "Ми зв'яжемось з вами протягом хвилини"
+                    ? locale === "en"
+                      ? "We'll contact you within a minute"
+                      : "Ми зв'яжемось з вами протягом хвилини"
                     : locale === "en"
                       ? "Our architect will call you shortly"
                       : "Наш архітектор зателефонує вам найближчим часом"}
@@ -203,7 +208,7 @@ export function ConsultationModal({ open, onClose }: Props) {
                   </motion.div>
                 ) : (
                   <motion.form
-                    key="form"
+                    key={`form-${locale}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}

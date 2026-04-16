@@ -15,7 +15,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { House } from "@/types";
-import { formatPrice } from "@/lib/utils";
+import { formatAreaSqm, formatPrice } from "@/lib/utils";
 import { ConsultationModal } from "@/features/forms/ConsultationModal";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { useLocale } from "@/hooks/useLocale";
@@ -26,6 +26,7 @@ interface Props {
 
 export function HousePageClient({ house }: Props) {
   const { locale, tr } = useLocale();
+  const displayName = locale === "en" ? house.nameEn ?? house.name : house.name;
   const [activeImg, setActiveImg] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -42,7 +43,7 @@ export function HousePageClient({ house }: Props) {
             <span>/</span>
             <Link href="/catalog" className="hover:text-[#77d14d] transition-colors">{tr.housePage.catalog}</Link>
             <span>/</span>
-            <span className="text-[#131311]">{house.name}</span>
+            <span className="text-[#131311]">{displayName}</span>
           </div>
         </RevealOnScroll>
 
@@ -63,7 +64,7 @@ export function HousePageClient({ house }: Props) {
                   >
                     <Image
                       src={house.images[activeImg]}
-                      alt={`${house.name} — ${locale === "en" ? "photo" : "фото"} ${activeImg + 1}`}
+                      alt={`${displayName} — ${locale === "en" ? "photo" : "фото"} ${activeImg + 1}`}
                       fill
                       className="object-cover"
                       priority={activeImg === 0}
@@ -184,7 +185,7 @@ export function HousePageClient({ house }: Props) {
                   {/* Tag */}
                   {house.tag && (
                     <div className="inline-block bg-[#f3fbef] text-[#77d14d] text-[11px] font-600 uppercase tracking-wider px-2.5 py-1 rounded-[3px] mb-4">
-                      {house.tag}
+                      {locale === "en" ? house.tagEn ?? house.tag : house.tag}
                     </div>
                   )}
 
@@ -192,14 +193,14 @@ export function HousePageClient({ house }: Props) {
                     className="text-2xl font-500 text-[#131311] tracking-tight mb-1"
                     style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
                   >
-                    {house.name}
+                    {displayName}
                   </h1>
-                  <p className="text-sm text-[#7c7c78] mb-6">{house.style}</p>
+                  <p className="text-sm text-[#7c7c78] mb-6">{locale === "en" ? house.styleEn ?? house.style : house.style}</p>
 
                   {/* Quick specs */}
                   <div className="grid grid-cols-3 gap-3 mb-6">
                     {[
-                      { icon: Maximize2, label: tr.common.area, value: `${house.area} м²` },
+                      { icon: Maximize2, label: tr.common.area, value: formatAreaSqm(house.area, locale) },
                       { icon: BedDouble, label: tr.common.bedrooms, value: house.bedrooms },
                       { icon: Bath, label: tr.common.bathrooms, value: house.bathrooms },
                     ].map((spec) => (
@@ -235,7 +236,7 @@ export function HousePageClient({ house }: Props) {
                       className="text-3xl font-300 text-[#131311] tracking-tight"
                       style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
                     >
-                      {formatPrice(house.price)}
+                      {formatPrice(house.price, locale)}
                     </p>
                     <p className="text-[12px] text-[#a8a8a3] mt-1">
                       {tr.housePage.included}

@@ -2,6 +2,7 @@ export interface House {
   id: string;
   slug: string;
   name: string;
+  nameEn?: string;
   area: number;
   floors: number;
   bedrooms: number;
@@ -31,6 +32,7 @@ export interface House {
 export interface Review {
   id: string;
   name: string;
+  nameEn?: string;
   location?: string;
   locationEn?: string;
   avatar: string;
