@@ -1,12 +1,14 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import type { LucideIcon } from "lucide-react";
 import { X, CheckCircle2, Loader2, Phone, User, MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { formatPhone, isValidPhone } from "@/lib/utils";
+import { cn, formatPhone, isValidPhone } from "@/lib/utils";
 import { useLocale, getLocale } from "@/hooks/useLocale";
 
 const schema = z.object({
@@ -20,6 +22,42 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
+
+const fieldInnerClass =
+  "no-outline w-full min-h-0 rounded-none border-0 bg-transparent px-3 py-3.5 text-[0.9375rem] text-[#131311] shadow-none outline-none placeholder:text-[#8e8e88] focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0";
+
+function FieldIconWrap({
+  icon: Icon,
+  multiline,
+  children,
+  error,
+}: {
+  icon: LucideIcon;
+  multiline?: boolean;
+  children: ReactNode;
+  error?: boolean;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex overflow-hidden rounded-[8px] border transition-[border-color,box-shadow]",
+        error
+          ? "border-[#cc4444] bg-[#fff8f8] shadow-[0_0_0_3px_rgba(204,68,68,0.1)]"
+          : "border-[#dfdfdb] bg-[#f6f6f4] focus-within:border-[#77d14d] focus-within:shadow-[0_0_0_3px_rgba(119,209,77,0.12)]",
+      )}
+    >
+      <div
+        className={cn(
+          "flex w-[3.25rem] shrink-0 items-center justify-center text-[#6b6b66]",
+          multiline ? "items-start pt-3.5" : "",
+        )}
+      >
+        <Icon size={16} strokeWidth={1.75} aria-hidden />
+      </div>
+      <div className="min-w-0 flex-1">{children}</div>
+    </div>
+  );
+}
 
 interface Props {
   open: boolean;
@@ -43,6 +81,10 @@ export function ConsultationModal({ open, onClose }: Props) {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const phoneValue = watch("phone", "");
+
+  const nameRegister = register("name", {
+    setValueAs: (v: unknown) => (typeof v === "string" ? v.replace(/\d/g, "") : v),
+  });
 
   // Lock scroll
   useEffect(() => {
@@ -171,16 +213,20 @@ export function ConsultationModal({ open, onClose }: Props) {
                   >
                     {/* Name */}
                     <div>
-                      <div className="relative">
-                        <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#a8a8a3] pointer-events-none" />
+                      <FieldIconWrap icon={User} error={!!errors.name}>
                         <input
-                          {...register("name")}
+                          {...nameRegister}
                           type="text"
                           placeholder={tr.form.name}
-                          className={["input-field pl-10", errors.name ? "error" : ""].join(" ")}
                           autoComplete="given-name"
+                          onKeyDown={(e) => {
+                            if (e.key.length === 1 && /\d/.test(e.key) && !e.ctrlKey && !e.metaKey) {
+                              e.preventDefault();
+                            }
+                          }}
+                          className={fieldInnerClass}
                         />
-                      </div>
+                      </FieldIconWrap>
                       {errors.name && (
                         <p className="mt-1.5 text-[12px] text-[#cc4444]">{errors.name.message}</p>
                       )}
@@ -188,19 +234,18 @@ export function ConsultationModal({ open, onClose }: Props) {
 
                     {/* Phone */}
                     <div>
-                      <div className="relative">
-                        <Phone size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#a8a8a3] pointer-events-none" />
+                      <FieldIconWrap icon={Phone} error={!!errors.phone}>
                         <input
                           ref={phoneInputRef}
                           value={phoneValue}
                           onChange={handlePhoneInput}
                           type="tel"
                           placeholder="+38 (0__) ___-__-__"
-                          className={["input-field pl-10", errors.phone ? "error" : ""].join(" ")}
                           autoComplete="tel"
                           inputMode="numeric"
+                          className={fieldInnerClass}
                         />
-                      </div>
+                      </FieldIconWrap>
                       {errors.phone && (
                         <p className="mt-1.5 text-[12px] text-[#cc4444]">{errors.phone.message}</p>
                       )}
@@ -208,15 +253,14 @@ export function ConsultationModal({ open, onClose }: Props) {
 
                     {/* Comment */}
                     <div>
-                      <div className="relative">
-                        <MessageSquare size={15} className="absolute left-3.5 top-3.5 text-[#a8a8a3] pointer-events-none" />
+                      <FieldIconWrap icon={MessageSquare} multiline>
                         <textarea
                           {...register("comment")}
                           placeholder={locale === "en" ? "Comment or preferences (optional)" : "Коментар або побажання (необов'язково)"}
                           rows={3}
-                          className="input-field pl-10 resize-none"
+                          className={cn(fieldInnerClass, "min-h-[6.5rem] resize-none")}
                         />
-                      </div>
+                      </FieldIconWrap>
                     </div>
 
                     {/* Submit */}
@@ -234,13 +278,6 @@ export function ConsultationModal({ open, onClose }: Props) {
                         tr.housePage.getConsultation
                       )}
                     </button>
-
-                    <p className="text-center text-[11px] text-[#a8a8a3]">
-                      {locale === "en" ? "By clicking the button, you agree to the " : "Натискаючи кнопку, ви погоджуєтесь з "}
-                      <a href="/privacy" className="underline hover:text-[#77d14d] transition-colors">
-                        {tr.form.privacyPolicy}
-                      </a>
-                    </p>
                   </motion.form>
                 )}
               </AnimatePresence>

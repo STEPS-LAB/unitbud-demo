@@ -1,14 +1,16 @@
 "use client";
 
+import type { ChangeEvent, ReactNode } from "react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import type { LucideIcon } from "lucide-react";
 import { Phone, User, MessageSquare, Loader2, CheckCircle2 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLocale, getLocale } from "@/hooks/useLocale";
-import { formatPhone, isValidPhone } from "@/lib/utils";
+import { cn, formatPhone, isValidPhone } from "@/lib/utils";
 
 const schema = z.object({
   name: z
@@ -20,8 +22,45 @@ const schema = z.object({
 });
 type FormData = z.infer<typeof schema>;
 
+/** Без власного outline: глобальний :focus-visible малював би другу рамку всередині рядка з іконкою */
+const fieldInnerClass =
+  "no-outline w-full min-h-0 rounded-none border-0 bg-transparent px-3 py-3.5 text-[0.9375rem] text-[#131311] shadow-none outline-none placeholder:text-[#8e8e88] focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0";
+
+function FieldIconWrap({
+  icon: Icon,
+  multiline,
+  children,
+  error,
+}: {
+  icon: LucideIcon;
+  multiline?: boolean;
+  children: ReactNode;
+  error?: boolean;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex overflow-hidden rounded-[8px] border transition-[border-color,box-shadow]",
+        error
+          ? "border-[#cc4444] bg-[#fff8f8] shadow-[0_0_0_3px_rgba(204,68,68,0.1)]"
+          : "border-[#dfdfdb] bg-[#f6f6f4] focus-within:border-[#77d14d] focus-within:shadow-[0_0_0_3px_rgba(119,209,77,0.12)]",
+      )}
+    >
+      <div
+        className={cn(
+          "flex w-[3.25rem] shrink-0 items-center justify-center text-[#6b6b66]",
+          multiline ? "items-start pt-3.5" : "",
+        )}
+      >
+        <Icon size={16} strokeWidth={1.75} aria-hidden />
+      </div>
+      <div className="min-w-0 flex-1">{children}</div>
+    </div>
+  );
+}
+
 export function ConsultationSection() {
-  const { locale, tr } = useLocale();
+  const { tr } = useLocale();
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -31,7 +70,7 @@ export function ConsultationSection() {
 
   const phoneValue = watch("phone", "");
 
-  const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhoneInput = (e: ChangeEvent<HTMLInputElement>) => {
     setValue("phone", formatPhone(e.target.value), { shouldValidate: true });
   };
 
@@ -43,108 +82,133 @@ export function ConsultationSection() {
     setSuccess(true);
   };
 
+  const nameRegister = register("name", {
+    setValueAs: (v: unknown) => (typeof v === "string" ? v.replace(/\d/g, "") : v),
+  });
+
   return (
-    <section id="contacts" className="section-padding bg-[#f9f9f8]">
-      <div className="container-narrow">
+    <section id="contacts" className="section-padding relative overflow-hidden">
+      {/* Background image — add file to public/bgcons.webp */}
+      <div
+        className="absolute inset-0 z-0 scale-105 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/bgcons.webp')" }}
+        aria-hidden
+      />
+      {/* Чорне тонування: біла картка форми контрастніша, фото лише приглушене */}
+      <div
+        className="absolute inset-0 z-[1] bg-gradient-to-b from-black/42 via-black/48 to-black/54"
+        aria-hidden
+      />
+
+      <div className="container-narrow relative z-10">
         <SectionHeader
           title={tr.sections.consultation}
           subtitle={tr.sections.consultationSub}
           centered
-          titleClassName="font-black"
+          responsiveAlign
+          variant="onDark"
+          titleClassName="font-black [text-shadow:0_1px_2px_rgba(0,0,0,0.35),0_8px_32px_rgba(0,0,0,0.2)]"
           showTitleMarker
         />
 
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="bg-white border border-[#e8e8e5] rounded-[8px] p-8 md:p-12 max-w-lg mx-auto"
-          style={{ boxShadow: "0 4px 32px rgba(0,0,0,0.07)" }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto max-w-lg"
         >
-          {success ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="flex flex-col items-center text-center py-6"
-            >
-              <CheckCircle2 size={56} className="text-[#77d14d] mb-4" />
-              <h3
-                className="text-xl font-400 text-[#131311] mb-2"
-                style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+          <div
+            className="relative border border-[#e2e2de] bg-white p-8 shadow-[0_24px_64px_rgba(0,0,0,0.28)] md:p-11"
+            style={{ borderRadius: "var(--radius-site)" }}
+          >
+            {success ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="flex flex-col items-center py-4 text-center"
               >
-                {tr.form.success}
-              </h3>
-              <p className="text-sm text-[#7c7c78]">{tr.form.successSub}</p>
-              <button
-                onClick={() => { reset(); setSuccess(false); }}
-                className="mt-6 btn-outline text-sm"
-              >
-                {tr.form.submitAnother}
-              </button>
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
-              <div>
-                <div className="relative">
-                  <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#a8a8a3] pointer-events-none" />
-                  <input
-                    {...register("name")}
-                    type="text"
-                    placeholder={tr.form.name}
-                    className={["input-field pl-12", errors.name ? "error" : ""].join(" ")}
-                  />
+                <CheckCircle2 size={52} className="mb-4 text-[#77d14d]" />
+                <h3
+                  className="mb-2 text-xl font-normal text-[#131311]"
+                  style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                >
+                  {tr.form.success}
+                </h3>
+                <p className="max-w-sm text-sm text-[#7c7c78]">{tr.form.successSub}</p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    reset();
+                    setSuccess(false);
+                  }}
+                  className="btn-outline mt-8 text-sm"
+                >
+                  {tr.form.submitAnother}
+                </button>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+                <div>
+                  <FieldIconWrap icon={User} error={!!errors.name}>
+                    <input
+                      {...nameRegister}
+                      type="text"
+                      autoComplete="name"
+                      placeholder={tr.form.name}
+                      onKeyDown={(e) => {
+                        if (e.key.length === 1 && /\d/.test(e.key) && !e.ctrlKey && !e.metaKey) {
+                          e.preventDefault();
+                        }
+                      }}
+                      className={fieldInnerClass}
+                    />
+                  </FieldIconWrap>
+                  {errors.name && <p className="mt-1.5 text-[12px] text-[#cc4444]">{errors.name.message}</p>}
                 </div>
-                {errors.name && <p className="mt-1.5 text-[12px] text-[#cc4444]">{errors.name.message}</p>}
-              </div>
 
-              <div>
-                <div className="relative">
-                  <Phone size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#a8a8a3] pointer-events-none" />
-                  <input
-                    value={phoneValue}
-                    onChange={handlePhoneInput}
-                    type="tel"
-                    placeholder="+38 (0__) ___-__-__"
-                    className={["input-field pl-12", errors.phone ? "error" : ""].join(" ")}
-                    inputMode="numeric"
-                  />
+                <div>
+                  <FieldIconWrap icon={Phone} error={!!errors.phone}>
+                    <input
+                      value={phoneValue}
+                      onChange={handlePhoneInput}
+                      type="tel"
+                      autoComplete="tel"
+                      placeholder="+38 (0__) ___-__-__"
+                      inputMode="numeric"
+                      className={fieldInnerClass}
+                    />
+                  </FieldIconWrap>
+                  {errors.phone && <p className="mt-1.5 text-[12px] text-[#cc4444]">{errors.phone.message}</p>}
                 </div>
-                {errors.phone && <p className="mt-1.5 text-[12px] text-[#cc4444]">{errors.phone.message}</p>}
-              </div>
 
-              <div>
-                <div className="relative">
-                  <MessageSquare size={15} className="absolute left-3.5 top-3.5 text-[#a8a8a3] pointer-events-none" />
-                  <textarea
-                    {...register("comment")}
-                    placeholder={tr.form.comment}
-                    rows={3}
-                    className="input-field pl-12 resize-none"
-                  />
+                <div>
+                  <FieldIconWrap icon={MessageSquare} multiline>
+                    <textarea
+                      {...register("comment")}
+                      placeholder={tr.form.comment}
+                      rows={3}
+                      className={cn(fieldInnerClass, "min-h-[6.5rem] resize-none")}
+                    />
+                  </FieldIconWrap>
                 </div>
-              </div>
 
-              <button
-                type="submit"
-                disabled={submitting}
-                className="btn-primary btn-text-graphite w-full justify-center py-4 disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                {submitting ? (
-                  <><Loader2 size={15} className="animate-spin" /> {tr.form.sending}</>
-                ) : (
-                  tr.form.submit
-                )}
-              </button>
-
-              <p className="text-center text-[11px] text-[#a8a8a3]">
-                {tr.form.privacyLead}{" "}
-                <a href="/privacy" className="underline hover:text-[#77d14d] transition-colors">
-                  {tr.form.privacyPolicy}
-                </a>
-              </p>
-            </form>
-          )}
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="btn-primary btn-text-graphite no-outline w-full justify-center py-4 disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {submitting ? (
+                    <>
+                      <Loader2 size={15} className="animate-spin" /> {tr.form.sending}
+                    </>
+                  ) : (
+                    tr.form.submit
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
         </motion.div>
       </div>
     </section>

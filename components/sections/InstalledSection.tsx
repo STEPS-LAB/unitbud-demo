@@ -378,7 +378,7 @@ export function InstalledSection() {
         <div className="mt-12 flex justify-center">
           <Link
             href="/catalog"
-            className="cta-press no-outline group inline-flex items-center gap-2 rounded-[8px] border-none bg-[#77d14d] px-6 py-3 text-sm font-semibold text-[#3a3a38] shadow-[0_10px_24px_rgba(119,209,77,0.35)] transition hover:bg-[#62b23f] hover:text-[#2a2a28] hover:shadow-[0_12px_28px_rgba(98,178,63,0.4)]"
+            className="cta-press no-outline group inline-flex items-center gap-2 rounded-[8px] border-none bg-[#77d14d] px-6 py-3 text-sm font-semibold text-[#3a3a38] shadow-[0_10px_24px_rgba(119,209,77,0.35)] transition hover:bg-[#3a3a38] hover:text-white hover:shadow-[0_12px_28px_rgba(36,36,34,0.38)]"
           >
             <span>{tr.common.allProjects}</span>
             <ArrowRight size={16} className="transition-transform md:group-hover:translate-x-1" />

@@ -115,7 +115,7 @@ export function Footer() {
             </p>
             <a
               href="/#contacts"
-              className="inline-block bg-[#77d14d] hover:bg-[#4e8f31] text-[#3a3a38] hover:text-[#2a2a28] text-sm font-600 px-5 py-2.5 rounded-[4px] transition-colors duration-200"
+              className="inline-block bg-[#77d14d] text-[#3a3a38] hover:bg-[#3a3a38] hover:text-white text-sm font-600 px-5 py-2.5 rounded-[4px] transition-colors duration-200"
             >
               {tr.footerText.ctaButton}
             </a>

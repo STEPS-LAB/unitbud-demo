@@ -291,7 +291,7 @@ export function CalculatorSection() {
             <button
               type="button"
               onClick={() => setModalOpen(true)}
-              className={`btn-primary btn-text-graphite no-outline mt-auto w-full justify-center py-4 text-sm outline-none ${CALC_BTN_TRANSITION} hover:shadow-[0_10px_32px_rgba(119,209,77,0.22)] focus-visible:outline-none focus-visible:ring-0 active:scale-[0.99]`}
+              className={`btn-primary btn-text-graphite no-outline mt-auto w-full justify-center py-4 text-sm outline-none ${CALC_BTN_TRANSITION} hover:shadow-[0_10px_32px_rgba(36,36,34,0.28)] focus-visible:outline-none focus-visible:ring-0 active:scale-[0.99]`}
             >
               {locale === "en" ? "Get consultation" : "Отримати консультацію"}
             </button>

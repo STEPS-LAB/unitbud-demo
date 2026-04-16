@@ -162,7 +162,9 @@ main {
   font-weight: 600 !important;
 }
 .btn-primary.btn-text-graphite:hover {
-  color: #2a2a28 !important;
+  background: #3a3a38 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 22px rgba(36, 36, 34, 0.32);
 }
 
 .btn-outline {
