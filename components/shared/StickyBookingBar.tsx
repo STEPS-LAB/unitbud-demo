@@ -22,7 +22,7 @@ export function StickyBookingBar() {
         </a>
         <button
           onClick={() => setOpen(true)}
-          className="btn-primary flex-[2] py-3 text-sm"
+          className="btn-primary btn-text-graphite flex-[2] py-3 text-sm"
         >
           {tr.common.consultation}
         </button>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Bath, BedDouble, Maximize2 } from "lucide-react";
 import { House } from "@/types";
-import { formatPrice } from "@/lib/utils";
+import { formatUsd } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
 
 interface Props {
@@ -89,7 +89,7 @@ export function PopularHouseCard({ house, priority = false }: Props) {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-[11px] uppercase tracking-widest text-[#a8a8a3]">{house.priceFrom ? tr.common.from : ""}</p>
-            <p className="mt-0.5 text-[22px] font-600 tracking-tight text-[#131311]">{formatPrice(house.price)}</p>
+            <p className="mt-0.5 text-[22px] font-600 tracking-tight text-[#131311]">{formatUsd(house.price)}</p>
           </div>
 
           <Link

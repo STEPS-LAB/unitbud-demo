@@ -240,7 +240,7 @@ export function HeroSection() {
         <button
           type="button"
           onClick={() => setModalOpen(true)}
-          className="btn-primary"
+          className="btn-primary btn-text-graphite text-sm px-5 py-2.5"
         >
           {tr.hero.cta2}
         </button>

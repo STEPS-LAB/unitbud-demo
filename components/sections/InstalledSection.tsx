@@ -201,14 +201,14 @@ export function InstalledSection() {
 
                 <div className="mt-6 flex flex-1 flex-col">
                   <h3
-                    className="min-h-16 text-[25px] leading-[1.2] font-500 text-[#131311] tracking-tight"
-                    style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                    className="truncate text-[20px] font-semibold leading-snug tracking-tight text-[#131311]"
+                    style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
                   >
                     {house.name}
                   </h3>
 
                   <div
-                    className="mt-5 border-t border-[#e9e9e4] text-[15px] text-[#62625d]"
+                    className="mt-2 border-t border-[#e9e9e4] text-[15px] text-[#62625d]"
                     style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
                   >
                     <div className="flex items-center justify-between py-4 border-b border-[#ededea]">
@@ -332,14 +332,14 @@ export function InstalledSection() {
 
                   <div className="mt-6 flex flex-1 flex-col">
                     <h3
-                      className="min-h-16 text-[25px] leading-[1.2] font-500 text-[#131311] tracking-tight"
-                      style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                      className="truncate text-[20px] font-semibold leading-snug tracking-tight text-[#131311]"
+                      style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
                     >
                       {house.name}
                     </h3>
 
                     <div
-                      className="mt-5 border-t border-[#e9e9e4] text-[15px] text-[#62625d]"
+                      className="mt-2 border-t border-[#e9e9e4] text-[15px] text-[#62625d]"
                       style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
                     >
                       <div className="flex items-center justify-between py-4 border-b border-[#ededea]">
@@ -378,7 +378,7 @@ export function InstalledSection() {
         <div className="mt-12 flex justify-center">
           <Link
             href="/catalog"
-            className="cta-press no-outline group inline-flex items-center gap-2 rounded-[8px] border-none bg-[#77d14d] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(119,209,77,0.35)] transition hover:bg-[#62b23f] hover:shadow-[0_12px_28px_rgba(98,178,63,0.4)]"
+            className="cta-press no-outline group inline-flex items-center gap-2 rounded-[8px] border-none bg-[#77d14d] px-6 py-3 text-sm font-semibold text-[#3a3a38] shadow-[0_10px_24px_rgba(119,209,77,0.35)] transition hover:bg-[#62b23f] hover:text-[#2a2a28] hover:shadow-[0_12px_28px_rgba(98,178,63,0.4)]"
           >
             <span>{tr.common.allProjects}</span>
             <ArrowRight size={16} className="transition-transform md:group-hover:translate-x-1" />

@@ -13,6 +13,11 @@ export function formatPrice(price: number): string {
   return new Intl.NumberFormat("uk-UA").format(price) + " грн";
 }
 
+/** USD for catalog models / calculator (e.g. «94 608 $»). */
+export function formatUsd(price: number): string {
+  return `${new Intl.NumberFormat("uk-UA").format(price)} $`;
+}
+
 export function formatArea(area: number): string {
   return `${area} м²`;
 }

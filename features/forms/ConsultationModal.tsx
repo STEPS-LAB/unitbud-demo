@@ -223,7 +223,7 @@ export function ConsultationModal({ open, onClose }: Props) {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="btn-primary w-full justify-center text-sm py-3.5 disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="btn-primary btn-text-graphite w-full justify-center text-sm py-3.5 disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                       {submitting ? (
                         <>

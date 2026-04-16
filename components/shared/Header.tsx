@@ -122,7 +122,7 @@ export function Header() {
             {/* CTA */}
             <button
               onClick={() => setModalOpen(true)}
-              className="btn-primary text-sm px-5 py-2.5"
+              className="btn-primary btn-text-graphite text-sm px-5 py-2.5"
             >
               {locale === "uk" ? "Консультація" : "Consultation"}
             </button>
@@ -141,6 +141,16 @@ export function Header() {
               aria-label="Toggle language"
             >
               {locale === "uk" ? "EN" : "UA"}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setMobileOpen(false);
+                setModalOpen(true);
+              }}
+              className="btn-primary btn-text-graphite shrink-0 text-xs px-3 py-2"
+            >
+              {locale === "uk" ? "Консультація" : "Consultation"}
             </button>
             <button
               onClick={() => setMobileOpen((v) => !v)}

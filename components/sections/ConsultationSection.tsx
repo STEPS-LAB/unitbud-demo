@@ -128,7 +128,7 @@ export function ConsultationSection() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="btn-primary w-full justify-center py-4 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="btn-primary btn-text-graphite w-full justify-center py-4 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {submitting ? (
                   <><Loader2 size={15} className="animate-spin" /> {tr.form.sending}</>

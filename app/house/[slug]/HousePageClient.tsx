@@ -245,7 +245,7 @@ export function HousePageClient({ house }: Props) {
                   {/* CTA */}
                   <button
                     onClick={() => setModalOpen(true)}
-                    className="btn-primary w-full justify-center py-4 mb-3"
+                    className="btn-primary btn-text-graphite w-full justify-center py-4 mb-3"
                   >
                     {tr.housePage.getConsultation}
                   </button>
