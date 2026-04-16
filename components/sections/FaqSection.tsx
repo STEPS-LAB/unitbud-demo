@@ -6,7 +6,11 @@ import { Plus, Minus } from "lucide-react";
 import { faqs } from "@/data/faq";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLocale } from "@/hooks/useLocale";
-import { ConsultationModal } from "@/features/forms/ConsultationModal";
+import dynamic from "next/dynamic";
+
+const ConsultationModal = dynamic(
+  () => import("@/features/forms/ConsultationModal").then((m) => m.ConsultationModal),
+);
 
 export function FaqSection() {
   const { locale, tr } = useLocale();

@@ -1,11 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState, type MouseEventHandler, type TouchEventHandler } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ConsultationModal } from "@/features/forms/ConsultationModal";
 import { useLocale } from "@/hooks/useLocale";
+
+const ConsultationModal = dynamic(
+  () => import("@/features/forms/ConsultationModal").then((m) => m.ConsultationModal),
+);
 
 const HERO_SLIDES = [
   {
@@ -157,28 +161,44 @@ export function HeroSection() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           style={{ width: `${HERO_SLIDES.length * 100}vw` }}
         >
-          {HERO_SLIDES.map((slide, index) => (
-            <div key={slide.image} className="relative h-full w-screen shrink-0">
-              <Image
-                src={slide.mobileImage}
-                alt={`Hero slide ${index + 1}`}
-                fill
-                priority={index === 0}
-                sizes="100vw"
-                className="md:hidden object-cover object-center"
-              />
-              <Image
-                src={slide.image}
-                alt={`Hero slide ${index + 1}`}
-                fill
-                priority={index === 0}
-                sizes="100vw"
-                className={`hidden md:block ${
-                  index === 0 ? "object-cover object-[center_42%] md:object-center" : "object-cover object-center"
-                }`}
-              />
-            </div>
-          ))}
+          {HERO_SLIDES.map((slide, index) => {
+            const isVisible = index === activeSlide;
+            const isAdjacent =
+              index === (activeSlide + 1) % HERO_SLIDES.length ||
+              index === (activeSlide - 1 + HERO_SLIDES.length) % HERO_SLIDES.length;
+            const shouldLoad = index === 0 || isVisible || isAdjacent;
+
+            return (
+              <div key={slide.image} className="relative h-full w-screen shrink-0">
+                {shouldLoad && (
+                  <>
+                    <Image
+                      src={slide.mobileImage}
+                      alt={`Hero slide ${index + 1}`}
+                      fill
+                      priority={index === 0}
+                      sizes="100vw"
+                      className="md:hidden object-cover object-center"
+                      placeholder="blur"
+                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMjIyMjIwIi8+PC9zdmc+"
+                    />
+                    <Image
+                      src={slide.image}
+                      alt={`Hero slide ${index + 1}`}
+                      fill
+                      priority={index === 0}
+                      sizes="100vw"
+                      className={`hidden md:block ${
+                        index === 0 ? "object-cover object-[center_42%] md:object-center" : "object-cover object-center"
+                      }`}
+                      placeholder="blur"
+                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMjIyMjIwIi8+PC9zdmc+"
+                    />
+                  </>
+                )}
+              </div>
+            );
+          })}
         </motion.div>
         {/* Gradient overlay */}
         <div

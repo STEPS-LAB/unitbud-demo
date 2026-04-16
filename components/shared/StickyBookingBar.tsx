@@ -2,7 +2,11 @@
 
 import { useState, type CSSProperties } from "react";
 import { motion } from "framer-motion";
-import { ConsultationModal } from "@/features/forms/ConsultationModal";
+import dynamic from "next/dynamic";
+
+const ConsultationModal = dynamic(
+  () => import("@/features/forms/ConsultationModal").then((m) => m.ConsultationModal),
+);
 import { useLocale } from "@/hooks/useLocale";
 import { cn } from "@/lib/utils";
 import { CHROME_SLIDE_DURATION, CHROME_SLIDE_EASE } from "@/lib/slideChrome";

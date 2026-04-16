@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useCallback, type UIEventHandler, type MouseEvent, type KeyboardEvent } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -159,13 +160,13 @@ export function InstalledSection() {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.35, ease: "easeInOut" }}
                           >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
+                            <Image
                               src={images[currentIdx]}
                               alt={`${houseDisplayName(house, locale)} — ${currentIdx + 1}/${images.length}`}
-                              className="h-full w-full object-cover"
-                              loading="eager"
-                              fetchPriority={i < 3 ? "high" : "auto"}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 50vw"
+                              className="object-cover"
+                              loading="lazy"
                             />
                           </motion.div>
                         </AnimatePresence>
@@ -290,13 +291,13 @@ export function InstalledSection() {
                               exit={{ opacity: 0 }}
                               transition={{ duration: 0.35, ease: "easeInOut" }}
                             >
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img
+                              <Image
                                 src={images[currentIdx]}
                                 alt={`${houseDisplayName(house, locale)} — ${currentIdx + 1}/${images.length}`}
-                                className="h-full w-full object-cover"
-                                loading="eager"
-                                fetchPriority={i < 3 ? "high" : "auto"}
+                                fill
+                                sizes="(max-width: 1280px) 50vw, 33vw"
+                                className="object-cover"
+                                loading="lazy"
                               />
                             </motion.div>
                           </AnimatePresence>

@@ -8,7 +8,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { useScrolled } from "@/hooks/useScrolled";
 import { useLocale } from "@/hooks/useLocale";
-import { ConsultationModal } from "@/features/forms/ConsultationModal";
+import dynamic from "next/dynamic";
+
+const ConsultationModal = dynamic(
+  () => import("@/features/forms/ConsultationModal").then((m) => m.ConsultationModal),
+);
 
 const navLinks = [
   { href: "/catalog", labelUk: "Модельний ряд", labelEn: "Models" },

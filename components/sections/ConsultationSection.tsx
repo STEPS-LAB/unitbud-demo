@@ -2,6 +2,7 @@
 
 import type { ChangeEvent, ReactNode } from "react";
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -91,12 +92,17 @@ export function ConsultationSection() {
 
   return (
     <section id="contacts" className="section-padding relative overflow-hidden">
-      {/* Background image — add file to public/bgcons.webp */}
-      <div
-        className="absolute inset-0 z-0 scale-105 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/bgcons.webp')" }}
-        aria-hidden
-      />
+      <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden>
+        <Image
+          src="/bgcons.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover scale-105"
+          loading="lazy"
+          quality={75}
+        />
+      </div>
       {/* Чорне тонування: біла картка форми контрастніша, фото лише приглушене */}
       <div
         className="absolute inset-0 z-[1] bg-gradient-to-b from-black/42 via-black/48 to-black/54"

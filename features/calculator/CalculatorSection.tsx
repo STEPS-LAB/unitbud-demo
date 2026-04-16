@@ -5,7 +5,11 @@ import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLocale } from "@/hooks/useLocale";
 import { formatUsd } from "@/lib/utils";
-import { ConsultationModal } from "@/features/forms/ConsultationModal";
+import dynamic from "next/dynamic";
+
+const ConsultationModal = dynamic(
+  () => import("@/features/forms/ConsultationModal").then((m) => m.ConsultationModal),
+);
 
 type Material = "frame" | "gasoblock" | "sip";
 type Completion = "comfort" | "premium" | "lux";

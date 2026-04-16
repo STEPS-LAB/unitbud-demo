@@ -39,7 +39,7 @@ export function PopularSection() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
-              <PopularHouseCard house={house} priority={i === 0} />
+              <PopularHouseCard house={house} />
             </motion.div>
           ))}
         </div>
