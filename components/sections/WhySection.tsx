@@ -12,6 +12,33 @@ import {
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLocale } from "@/hooks/useLocale";
 
+/** Same motion curve / duration as process timeline cards (`ProcessDesktopRow`). */
+const processCardEase = [0.22, 1, 0.36, 1] as const;
+const processCardDuration = 0.65;
+const processCardViewport = { once: true, margin: "-80px" } as const;
+
+const whyGridVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.14,
+      delayChildren: 0.06,
+    },
+  },
+};
+
+const whyCardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: processCardDuration,
+      ease: processCardEase,
+    },
+  },
+};
+
 export function WhySection() {
   const { locale, tr } = useLocale();
   const reasons = locale === "en"
@@ -90,14 +117,17 @@ export function WhySection() {
           showTitleMarker
         />
 
-        <div className="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          className="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3"
+          variants={whyGridVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={processCardViewport}
+        >
           {reasons.map((r, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              variants={whyCardVariants}
               className="group rounded-2xl border border-[#dfdfda] bg-white p-6 md:p-7 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
             >
               <div className="flex items-center gap-4">
@@ -114,7 +144,7 @@ export function WhySection() {
               <p className="mt-4 text-[16px] text-[#555552] leading-relaxed">{r.desc}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
