@@ -30,7 +30,7 @@ const translations = {
     sections: {
       installed: "Встановлені будинки",
       installedSub: "Реалізовані проєкти по всій Україні",
-      popular: "Популярні моделі",
+      popular: "Популярні моделі будинків",
       popularSub: "Найзатребуваніші проєкти нашого каталогу",
       why: "Чому обирають Unitbud",
       whySub: "Понад 10 років будуємо будинки мрії",
@@ -165,7 +165,7 @@ const translations = {
     sections: {
       installed: "Completed Projects",
       installedSub: "Realized projects across Ukraine",
-      popular: "Popular Models",
+      popular: "Popular House Models",
       popularSub: "Most in-demand projects from our catalog",
       why: "Why Choose Unitbud",
       whySub: "Over 10 years building dream homes",
