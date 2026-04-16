@@ -158,31 +158,49 @@ export function AiWidget({ overlayStyle, slideFromBottom, slideOpen = false }: P
     return () => window.removeEventListener("keydown", onKey);
   }, [isOpen]);
 
-  /** Блок фонового скролу сторінки (особливо iOS), поки відкрито модалку чату. */
+  /** Блок фонового скролу лише на вузьких екранах (узгоджено з Tailwind `lg` = 1024px). На десктопі сторінка лишається інтерактивною. */
   useLayoutEffect(() => {
     if (!isOpen) return;
 
+    const mq = window.matchMedia("(max-width: 1023px)");
     const html = document.documentElement;
     const body = document.body;
-    const scrollY = window.scrollY;
 
-    const prevHtmlOverflow = html.style.overflow;
-    const prevBodyOverflow = body.style.overflow;
-    const prevBodyPosition = body.style.position;
-    const prevBodyTop = body.style.top;
-    const prevBodyLeft = body.style.left;
-    const prevBodyRight = body.style.right;
-    const prevBodyWidth = body.style.width;
+    let scrollY = 0;
+    let locked = false;
+    let prevHtmlOverflow = "";
+    let prevBodyOverflow = "";
+    let prevBodyPosition = "";
+    let prevBodyTop = "";
+    let prevBodyLeft = "";
+    let prevBodyRight = "";
+    let prevBodyWidth = "";
 
-    html.style.overflow = "hidden";
-    body.style.overflow = "hidden";
-    body.style.position = "fixed";
-    body.style.top = `-${scrollY}px`;
-    body.style.left = "0";
-    body.style.right = "0";
-    body.style.width = "100%";
+    const lock = () => {
+      if (locked || !mq.matches) return;
+      locked = true;
+      scrollY = window.scrollY;
 
-    return () => {
+      prevHtmlOverflow = html.style.overflow;
+      prevBodyOverflow = body.style.overflow;
+      prevBodyPosition = body.style.position;
+      prevBodyTop = body.style.top;
+      prevBodyLeft = body.style.left;
+      prevBodyRight = body.style.right;
+      prevBodyWidth = body.style.width;
+
+      html.style.overflow = "hidden";
+      body.style.overflow = "hidden";
+      body.style.position = "fixed";
+      body.style.top = `-${scrollY}px`;
+      body.style.left = "0";
+      body.style.right = "0";
+      body.style.width = "100%";
+    };
+
+    const unlock = () => {
+      if (!locked) return;
+      locked = false;
       html.style.overflow = prevHtmlOverflow;
       body.style.overflow = prevBodyOverflow;
       body.style.position = prevBodyPosition;
@@ -191,6 +209,18 @@ export function AiWidget({ overlayStyle, slideFromBottom, slideOpen = false }: P
       body.style.right = prevBodyRight;
       body.style.width = prevBodyWidth;
       window.scrollTo(0, scrollY);
+    };
+
+    lock();
+
+    const onMq = () => {
+      if (mq.matches) lock();
+      else unlock();
+    };
+    mq.addEventListener("change", onMq);
+    return () => {
+      mq.removeEventListener("change", onMq);
+      unlock();
     };
   }, [isOpen]);
 
@@ -355,7 +385,7 @@ export function AiWidget({ overlayStyle, slideFromBottom, slideOpen = false }: P
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 lg:items-end lg:justify-end lg:p-6"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 lg:pointer-events-none lg:items-end lg:justify-end lg:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -363,7 +393,7 @@ export function AiWidget({ overlayStyle, slideFromBottom, slideOpen = false }: P
         >
           <motion.div
             role="presentation"
-            className="absolute inset-0 bg-[#0a0a09]/55 backdrop-blur-md lg:bg-[#0a0a09]/35 lg:backdrop-blur-sm"
+            className="absolute inset-0 bg-[#0a0a09]/55 backdrop-blur-md max-lg:cursor-pointer lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -380,7 +410,7 @@ export function AiWidget({ overlayStyle, slideFromBottom, slideOpen = false }: P
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className={cn(
               "relative z-10 flex max-h-[min(34rem,88dvh)] w-full max-w-md flex-col overflow-hidden rounded-[12px] bg-white",
-              "lg:max-h-[min(32rem,calc(100dvh-5rem))] lg:w-[min(100%,24rem)]",
+              "lg:pointer-events-auto lg:max-h-[min(32rem,calc(100dvh-5rem))] lg:w-[min(100%,24rem)]",
             )}
             style={{ boxShadow: "0 24px 64px rgba(0,0,0,0.2)" }}
             onClick={(e) => e.stopPropagation()}
