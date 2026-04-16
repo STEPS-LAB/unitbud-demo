@@ -12,6 +12,8 @@ export interface House {
   images: string[];
   thumbnail: string;
   category: "compact" | "comfort" | "premium" | "elite";
+  /** Ряд каталогу: житлові / комерційні / лазні — для фільтрів на /catalog */
+  catalogSegment: "residential" | "commercial" | "sauna";
   material: "frame" | "brick" | "gasoblock" | "sip";
   style: string;
   styleEn?: string;

@@ -12,9 +12,7 @@ import { ConsultationModal } from "@/features/forms/ConsultationModal";
 
 const navLinks = [
   { href: "/catalog", labelUk: "Модельний ряд", labelEn: "Models" },
-  { href: "/business", labelUk: "Проекти для бізнесу", labelEn: "Business projects" },
-  { href: "/baths", labelUk: "Лазні", labelEn: "Bathhouses" },
-  { href: "/#installed", labelUk: "Реалізовані проєкти", labelEn: "Completed projects" },
+  { href: "/#installed", labelUk: "Кейси", labelEn: "Cases" },
   { href: "/about", labelUk: "Про нас ▾", labelEn: "About ▾" },
   { href: "/info", labelUk: "Інфоцентр ▾", labelEn: "Info ▾" },
   { href: "/useful", labelUk: "Корисно знати", labelEn: "Useful" },
@@ -29,8 +27,15 @@ export function Header() {
   const [modalOpen, setModalOpen] = useState(false);
   const { locale, toggle } = useLocale();
   const pathname = usePathname();
-  const logoSrc = scrolled || mobileOpen ? "/logo-dark.svg" : "/logo.svg";
-  const frosted = scrolled || mobileOpen;
+  const isHome = pathname === "/";
+  const solidHeader = !isHome || scrolled || mobileOpen;
+  const logoSrc = solidHeader ? "/logo-dark.svg" : "/logo.svg";
+  const frosted = solidHeader;
+  const headerSurface = !isHome
+    ? "border-[#e8e8e5] bg-white shadow-[0_2px_20px_rgba(19,19,17,0.06)]"
+    : frosted
+      ? "border-[#e8e8e5]/80 bg-white/65"
+      : "border-transparent bg-transparent";
 
   // Lock body scroll when mobile menu open
   useEffect(() => {
@@ -53,14 +58,12 @@ export function Header() {
     <>
       <header
         className={[
-          "fixed top-0 inset-x-0 z-50 h-[88px] border-b border-transparent transition-[background-color,border-color,backdrop-filter,-webkit-backdrop-filter] duration-300 ease-out will-change-[background-color,border-color,backdrop-filter]",
-          frosted
-            ? "border-[#e8e8e5]/80 bg-white/65"
-            : "bg-transparent",
+          "fixed top-0 inset-x-0 z-50 h-[88px] border-b transition-[background-color,border-color,box-shadow,backdrop-filter,-webkit-backdrop-filter] duration-300 ease-out will-change-[background-color,border-color,backdrop-filter]",
+          headerSurface,
         ].join(" ")}
         style={{
-          backdropFilter: frosted ? "blur(18px) saturate(180%)" : "blur(0px) saturate(100%)",
-          WebkitBackdropFilter: frosted ? "blur(18px) saturate(180%)" : "blur(0px) saturate(100%)",
+          backdropFilter: !isHome ? "none" : frosted ? "blur(18px) saturate(180%)" : "blur(0px) saturate(100%)",
+          WebkitBackdropFilter: !isHome ? "none" : frosted ? "blur(18px) saturate(180%)" : "blur(0px) saturate(100%)",
         }}
       >
         <div className="container-wide h-full flex items-center justify-between">
@@ -84,7 +87,7 @@ export function Header() {
                 href={link.href}
                 className={[
                   "flex min-h-[42px] items-center justify-center text-center text-sm leading-tight font-400 transition-colors hover:text-[#77d14d]",
-                  scrolled ? "text-[#3a3a38]" : "text-white/90",
+                  solidHeader ? "text-[#3a3a38]" : "text-white/90",
                 ].join(" ")}
               >
                 {locale === "uk" ? link.labelUk : link.labelEn}
@@ -99,7 +102,7 @@ export function Header() {
               onClick={toggle}
               className={[
                 "text-[11px] font-600 uppercase tracking-widest border rounded-[3px] px-2 py-1 transition-colors",
-                scrolled
+                solidHeader
                   ? "border-[#555552] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]"
                   : "border-white/40 text-white/70 hover:border-white hover:text-white",
               ].join(" ")}
@@ -123,7 +126,7 @@ export function Header() {
               onClick={toggle}
               className={[
                 "text-[11px] font-600 uppercase tracking-widest border rounded-[3px] px-2 py-1 transition-colors",
-                scrolled || mobileOpen
+                solidHeader
                   ? "border-[#555552] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]"
                   : "border-white/40 text-white/80 hover:border-white hover:text-white",
               ].join(" ")}
@@ -135,7 +138,7 @@ export function Header() {
               onClick={() => setMobileOpen((v) => !v)}
               className={[
                 "p-2 rounded-[4px] transition-colors outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0",
-                scrolled || mobileOpen ? "text-[#131311]" : "text-white",
+                solidHeader ? "text-[#131311]" : "text-white",
               ].join(" ")}
               aria-label="Toggle menu"
             >

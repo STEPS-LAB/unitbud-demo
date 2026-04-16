@@ -9,8 +9,6 @@ import { cn } from "@/lib/utils";
 const FOOTER_NAV = [
   { href: "/", labelKey: "navHome" as const },
   { href: "/catalog", labelKey: "navModels" as const },
-  { href: "/business", labelKey: "navBusiness" as const },
-  { href: "/baths", labelKey: "navBaths" as const },
   { href: "/#installed", labelKey: "navInstalled" as const },
   { href: "/about", labelKey: "navAbout" as const },
   { href: "/info", labelKey: "navInfo" as const },

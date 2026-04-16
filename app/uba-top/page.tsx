@@ -86,14 +86,14 @@ export default function UbaTopPage() {
                 Плануєте модульний будинок?
               </h3>
               <p className="mt-3 text-[#555552]">
-                Перейдіть у каталог моделей або перегляньте комерційні рішення для бізнесу.
+                Перейдіть у каталог моделей — житлові, комерційні та лазні рішення в одному місці.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link href="/catalog" className="btn-primary">
                   Перейти в каталог
                 </Link>
-                <Link href="/business" className="btn-outline">
-                  Проєкти для бізнесу
+                <Link href="/#calculator" className="btn-outline">
+                  Калькулятор вартості
                 </Link>
               </div>
             </div>

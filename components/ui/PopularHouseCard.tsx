@@ -10,14 +10,17 @@ import { useLocale } from "@/hooks/useLocale";
 interface Props {
   house: House;
   priority?: boolean;
+  /** Наприклад на /catalog — підпис типу «Житлові» замість серії моделі */
+  badgeLabel?: string;
 }
 
-export function PopularHouseCard({ house, priority = false }: Props) {
+export function PopularHouseCard({ house, priority = false, badgeLabel }: Props) {
   const { locale, tr } = useLocale();
   const displayName = locale === "en" ? house.nameEn ?? house.name : house.name;
   const isFirstPopularCard = house.id === "1";
   const categoryLabel =
-    isFirstPopularCard
+    badgeLabel ??
+    (isFirstPopularCard
       ? tr.catalogPage.catPremium
       : house.category === "compact"
       ? tr.catalogPage.catComfort
@@ -25,7 +28,7 @@ export function PopularHouseCard({ house, priority = false }: Props) {
         ? tr.catalogPage.catComfort
         : house.category === "premium"
           ? tr.catalogPage.catPremium
-          : tr.catalogPage.catElite;
+          : tr.catalogPage.catElite);
 
   return (
     <article

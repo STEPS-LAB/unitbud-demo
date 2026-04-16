@@ -54,7 +54,7 @@ const HERO_SLIDES = [
       uk: "Детальніше",
       en: "Details",
     },
-    href: "/business",
+    href: "/catalog",
   },
 ];
 
