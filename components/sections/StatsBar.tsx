@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { useLocale } from "@/hooks/useLocale";
 
 const stats = [
-  { value: "200+", keyUk: "houses", keyEn: "houses" },
-  { value: "10+", keyUk: "years", keyEn: "years" },
-  { value: "90", keyUk: "days", keyEn: "days" },
-  { value: "10", keyUk: "warranty", keyEn: "warranty", suffix: " років" },
+  { valueUk: "200+", valueEn: "200+", keyUk: "houses", keyEn: "houses" },
+  { valueUk: "10+", valueEn: "10+", keyUk: "years", keyEn: "years" },
+  { valueUk: "3 місяці", valueEn: "3 months", keyUk: "days", keyEn: "days" },
+  { valueUk: "10", valueEn: "10", keyUk: "warranty", keyEn: "warranty", suffixUk: " років", suffixEn: " years" },
 ];
 
 export function StatsBar() {
@@ -30,8 +30,8 @@ export function StatsBar() {
                 className="text-4xl md:text-5xl font-300 text-white tracking-tight"
                 style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
               >
-                {stat.value}
-                {stat.suffix && locale === "uk" ? stat.suffix : ""}
+                {locale === "uk" ? stat.valueUk : stat.valueEn}
+                {locale === "uk" ? (stat.suffixUk ?? "") : (stat.suffixEn ?? "")}
               </p>
               <p className="mt-1.5 text-[12px] text-white/45 uppercase tracking-[0.12em] font-500">
                 {tr.stats[stat.keyUk as keyof typeof tr.stats]}

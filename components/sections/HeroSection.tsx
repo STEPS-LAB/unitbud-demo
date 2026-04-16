@@ -4,38 +4,61 @@ import { useEffect, useRef, useState, type MouseEventHandler, type TouchEventHan
 import Image from "next/image";
 import Link from "next/link";
 import { ConsultationModal } from "@/features/forms/ConsultationModal";
+import { useLocale } from "@/hooks/useLocale";
 
 const HERO_SLIDES = [
   {
     image: "/images/hero/hero2.webp",
     mobileImage: "/images/hero/hero-mobile2.webp",
-    title: "КАРКАСНО-МОДУЛЬНІ БУДИНКИ ДЛЯ ЖИТТЯ ТА БІЗНЕСУ",
-    buttonLabel: "Залишити заявку",
+    title: {
+      uk: "КАРКАСНО-МОДУЛЬНІ БУДИНКИ ДЛЯ ЖИТТЯ ТА БІЗНЕСУ",
+      en: "FRAME-MODULAR HOUSES FOR LIVING AND BUSINESS",
+    },
+    buttonLabel: {
+      uk: "Залишити заявку",
+      en: "Submit request",
+    },
     action: "consultation",
   },
   {
     image: "/images/hero/hero3.webp",
     mobileImage: "/images/hero/hero-mobile3.webp",
-    title: "Модульні будинки для цілорічного проживання",
-    buttonLabel: "Детальніше",
+    title: {
+      uk: "Модульні будинки для цілорічного проживання",
+      en: "Modular homes for year-round living",
+    },
+    buttonLabel: {
+      uk: "Детальніше",
+      en: "Details",
+    },
     href: "/catalog",
   },
   {
     image: "/images/hero/hero1.webp",
     mobileImage: "/images/hero/hero-mobile1.webp?v=2",
-    buttonLabel: "Детальніше",
+    buttonLabel: {
+      uk: "Детальніше",
+      en: "Details",
+    },
     href: "/uba-top",
   },
   {
     image: "/images/hero/hero4.webp",
     mobileImage: "/images/hero/hero-mobile4.webp",
-    title: "Готові рішення для бізнесу",
-    buttonLabel: "Детальніше",
+    title: {
+      uk: "Готові рішення для бізнесу",
+      en: "Ready-made solutions for business",
+    },
+    buttonLabel: {
+      uk: "Детальніше",
+      en: "Details",
+    },
     href: "/business",
   },
 ];
 
 export function HeroSection() {
+  const { locale, tr } = useLocale();
   const [activeSlide, setActiveSlide] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const touchStartXRef = useRef<number | null>(null);
@@ -177,13 +200,13 @@ export function HeroSection() {
             className="max-w-4xl text-3xl font-black uppercase leading-[1.08] tracking-[0.03em] text-white sm:text-4xl md:text-5xl"
             style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
           >
-            {currentSlide.title}
+            {currentSlide.title?.[locale]}
           </h2>
         ) : null}
 
         <div
           className={`${currentSlide.title ? "mt-8" : ""} ${
-            activeSlide === 2 ? "translate-y-52 md:translate-y-0" : ""
+            activeSlide === 2 ? "translate-y-52 md:translate-y-48" : ""
           }`}
         >
           <div className="flex flex-col items-center">
@@ -194,7 +217,7 @@ export function HeroSection() {
                 className="inline-flex min-w-[220px] items-center justify-center rounded-[8px] border-[3px] border-white bg-white/8 px-10 py-4 text-xl font-black uppercase tracking-[0.08em] text-white shadow-[0_10px_32px_rgba(0,0,0,0.2)] transition hover:bg-white/35 hover:backdrop-blur-md"
                 style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
               >
-                {currentSlide.buttonLabel}
+                {currentSlide.buttonLabel[locale]}
               </button>
             ) : (
               <Link
@@ -202,7 +225,7 @@ export function HeroSection() {
                 className="inline-flex min-w-[220px] items-center justify-center rounded-[8px] border-[3px] border-white bg-white/8 px-10 py-4 text-xl font-black uppercase tracking-[0.08em] text-white shadow-[0_10px_32px_rgba(0,0,0,0.2)] transition hover:bg-white/35 hover:backdrop-blur-md"
                 style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
               >
-                {currentSlide.buttonLabel}
+                {currentSlide.buttonLabel[locale]}
               </Link>
             )}
           </div>
@@ -216,7 +239,7 @@ export function HeroSection() {
           className="inline-flex min-w-[220px] items-center justify-center rounded-[8px] border-[3px] border-emerald-300 bg-emerald-600/25 px-10 py-4 text-xl font-black uppercase tracking-[0.08em] text-white shadow-[0_10px_32px_rgba(0,0,0,0.2)] transition hover:bg-emerald-600/35"
           style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
         >
-          Отримати консультацію
+          {tr.hero.cta2}
         </button>
       </div>
 
@@ -226,7 +249,7 @@ export function HeroSection() {
             key={slide.image}
             type="button"
             onClick={() => setActiveSlide(index)}
-            aria-label={`Перейти до слайду ${index + 1}`}
+            aria-label={locale === "uk" ? `Перейти до слайду ${index + 1}` : `Go to slide ${index + 1}`}
             className={`h-2.5 rounded-full border border-white/70 transition-all duration-300 ${
               activeSlide === index ? "w-8 bg-white" : "w-2.5 bg-white/30 hover:bg-white/70"
             }`}
