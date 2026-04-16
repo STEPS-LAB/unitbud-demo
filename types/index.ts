@@ -31,13 +31,13 @@ export interface House {
 export interface Review {
   id: string;
   name: string;
-  location: string;
+  location?: string;
   locationEn?: string;
   avatar: string;
   rating: number;
   text: string;
   textEn?: string;
-  houseModel: string;
+  houseModel?: string;
   date: string;
   dateEn?: string;
 }
