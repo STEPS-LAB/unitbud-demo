@@ -86,6 +86,23 @@ const translations = {
       ukraine: "Україна",
       askAnything: "Запитайте що завгодно",
     },
+    aiChat: {
+      welcome:
+        "Привіт! Я демо-помічник Unitbud.\nРозповім про каталог, терміни, гарантію та консультацію. Що вас цікавить?",
+      title: "AI-помічник",
+      online: "Онлайн · демо-режим",
+      placeholder: "Напишіть питання…",
+      send: "Надіслати",
+      openLabel: "Відкрити чат з AI-помічником",
+      fabLine: "ЗАПИТАТИ AI",
+      disclaimer: "Демо-чат · відповіді за ключовими словами",
+      suggestions: [
+        "Скільки коштує будинок?",
+        "Терміни будівництва",
+        "Як отримати консультацію?",
+        "Що таке каркасна технологія?",
+      ],
+    },
     catalogPage: {
       title: "Наші будинки",
       modelsInCatalog: "моделей у каталозі",
@@ -245,6 +262,23 @@ const translations = {
       completion: "Completion",
       ukraine: "Ukraine",
       askAnything: "Ask anything",
+    },
+    aiChat: {
+      welcome:
+        "Hi! I'm Unitbud's demo assistant.\nAsk about our catalog, timelines, warranty, or consultations. What would you like to know?",
+      title: "AI assistant",
+      online: "Online · demo mode",
+      placeholder: "Type your question…",
+      send: "Send",
+      openLabel: "Open AI assistant chat",
+      fabLine: "ASK AI",
+      disclaimer: "Demo chat · keyword-based replies",
+      suggestions: [
+        "How much does a house cost?",
+        "Build timelines",
+        "How do I get a consultation?",
+        "What is frame construction?",
+      ],
     },
     catalogPage: {
       title: "Our houses",
