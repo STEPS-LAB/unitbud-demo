@@ -20,9 +20,10 @@ export function FaqSection() {
           {/* Left */}
           <div>
             <SectionHeader
-              label="FAQ"
               title={tr.sections.faq}
               subtitle={tr.sections.faqSub}
+              titleClassName="font-black"
+              showTitleMarker
             />
             <p className="text-[14px] text-[#7c7c78] leading-relaxed">
               {locale === "en"

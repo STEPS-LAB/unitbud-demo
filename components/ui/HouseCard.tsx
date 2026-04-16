@@ -26,9 +26,8 @@ export function HouseCard({ house, priority = false }: Props) {
 
   return (
     <motion.div
-      whileHover={{ y: -4 }}
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className="group bg-white border border-[#e8e8e5] rounded-[6px] overflow-hidden"
+      className="group bg-white border border-[#e8e8e5] rounded-[6px] overflow-hidden transition-transform md:hover:-translate-y-[1%] md:will-change-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
       style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.05)" }}
     >
       {/* Image */}

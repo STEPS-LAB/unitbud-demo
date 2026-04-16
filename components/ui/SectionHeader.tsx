@@ -7,9 +7,19 @@ interface Props {
   subtitle?: string;
   centered?: boolean;
   className?: string;
+  titleClassName?: string;
+  showTitleMarker?: boolean;
 }
 
-export function SectionHeader({ label, title, subtitle, centered = false, className }: Props) {
+export function SectionHeader({
+  label,
+  title,
+  subtitle,
+  centered = false,
+  className,
+  titleClassName,
+  showTitleMarker = false,
+}: Props) {
   return (
     <div className={cn("mb-12 md:mb-16", centered && "text-center", className)}>
       {label && (
@@ -18,16 +28,25 @@ export function SectionHeader({ label, title, subtitle, centered = false, classN
         </RevealOnScroll>
       )}
       <RevealOnScroll delay={0.05}>
-        <h2
-          className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight leading-tight mt-3"
-          style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
-        >
-          {title}
-        </h2>
+        <div className={cn("mt-3 flex items-center gap-4", centered && "justify-center")}>
+          {showTitleMarker ? <span className="h-10 w-2 bg-[#77d14d]" aria-hidden="true" /> : null}
+          <h2
+            className={cn("text-3xl font-light leading-tight tracking-tight md:text-4xl lg:text-5xl", titleClassName)}
+            style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+          >
+            {title}
+          </h2>
+        </div>
       </RevealOnScroll>
       {subtitle && (
         <RevealOnScroll delay={0.1}>
-          <p className="mt-4 text-base md:text-lg text-[#555552] max-w-2xl" style={centered ? { margin: "1rem auto 0" } : {}}>
+          <p
+            className={cn(
+              "mt-4 max-w-2xl text-base text-[#555552] md:text-lg",
+              showTitleMarker && !centered && "ml-6",
+            )}
+            style={centered ? { margin: "1rem auto 0" } : {}}
+          >
             {subtitle}
           </p>
         </RevealOnScroll>

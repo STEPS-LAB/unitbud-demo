@@ -14,9 +14,10 @@ export function ReviewsSection() {
     <section id="reviews" className="section-padding bg-[#131311]">
       <div className="container-wide">
         <SectionHeader
-          label={locale === "en" ? "Reviews" : "Відгуки"}
           title={tr.sections.reviews}
           subtitle={tr.sections.reviewsSub}
+          titleClassName="font-black"
+          showTitleMarker
           className="[&_h2]:text-white [&_.section-label]:text-[#95dc6a] [&_p]:text-white/50"
         />
 

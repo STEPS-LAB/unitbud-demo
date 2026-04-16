@@ -29,9 +29,10 @@ export function ProcessSection() {
     <section id="process" className="section-padding bg-white">
       <div className="container-wide">
         <SectionHeader
-          label={locale === "en" ? "Process" : "Процес"}
           title={tr.sections.process}
           subtitle={tr.sections.processSub}
+          titleClassName="font-black"
+          showTitleMarker
         />
 
         {/* Desktop: vertical timeline */}

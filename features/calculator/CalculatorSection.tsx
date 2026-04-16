@@ -78,12 +78,12 @@ export function CalculatorSection() {
   }) => (
     <div>
       <div className="flex justify-between items-baseline mb-3">
-        <label className="text-sm font-500 text-[#3a3a38]">{label}</label>
-        <span className="text-lg font-300 text-[#131311]" style={{ fontFamily: "Montserrat, Inter, sans-serif" }}>
-          {value} <span className="text-sm text-[#a8a8a3]">{unit}</span>
+        <label className="text-sm font-500 text-white/70">{label}</label>
+        <span className="text-lg font-300 text-white" style={{ fontFamily: "Montserrat, Inter, sans-serif" }}>
+          {value} <span className="text-sm text-white/45">{unit}</span>
         </span>
       </div>
-      <div className="relative h-1.5 bg-[#e8e8e5] rounded-full">
+      <div className="relative h-1.5 bg-white/15 rounded-full">
         <div
           className="absolute h-1.5 bg-[#77d14d] rounded-full"
           style={{ width: `${((value - min) / (max - min)) * 100}%` }}
@@ -99,7 +99,7 @@ export function CalculatorSection() {
           style={{ zIndex: 2 }}
         />
       </div>
-      <div className="flex justify-between mt-1.5 text-[11px] text-[#a8a8a3]">
+      <div className="flex justify-between mt-1.5 text-[11px] text-white/35">
         <span>{min} {unit}</span>
         <span>{max} {unit}</span>
       </div>
@@ -120,7 +120,7 @@ export function CalculatorSection() {
     onChange: (v: T) => void;
   }) => (
     <div>
-      <label className="text-sm font-500 text-[#3a3a38] block mb-3">{label}</label>
+      <label className="text-sm font-500 text-white/70 block mb-3">{label}</label>
       <div className="flex gap-2 flex-wrap">
         {options.map((opt) => (
           <button
@@ -130,7 +130,7 @@ export function CalculatorSection() {
               "px-4 py-2 text-[13px] font-500 rounded-[4px] border transition-all duration-200",
               value === opt
                 ? "bg-[#77d14d] border-[#77d14d] text-white"
-                : "bg-white border-[#e8e8e5] text-[#555552] hover:border-[#77d14d] hover:text-[#77d14d]",
+                : "bg-transparent border-white/15 text-white/70 hover:border-[#77d14d] hover:text-[#77d14d]",
             ].join(" ")}
           >
             {labels[opt]}
@@ -144,19 +144,20 @@ export function CalculatorSection() {
     <section id="calculator" className="section-padding bg-[#f9f9f8]">
       <div className="container-wide">
         <SectionHeader
-          label={locale === "en" ? "Calculator" : "Калькулятор"}
           title={tr.sections.calculator}
           subtitle={tr.sections.calculatorSub}
+          titleClassName="font-black"
+          showTitleMarker
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-stretch">
           {/* Controls */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-white border border-[#e8e8e5] rounded-[6px] p-7 space-y-8"
+            className="bg-[#131311] border border-white/10 rounded-[6px] p-7 space-y-8 h-full"
           >
             <SliderRow
               label={locale === "en" ? "House area" : "Площа будинку"}
@@ -170,8 +171,8 @@ export function CalculatorSection() {
 
             <div>
               <div className="flex justify-between items-baseline mb-3">
-                <label className="text-sm font-500 text-[#3a3a38]">{locale === "en" ? "Number of floors" : "Кількість поверхів"}</label>
-                <span className="text-lg font-300 text-[#131311]" style={{ fontFamily: "Montserrat, Inter, sans-serif" }}>
+                <label className="text-sm font-500 text-white/70">{locale === "en" ? "Number of floors" : "Кількість поверхів"}</label>
+                <span className="text-lg font-300 text-white" style={{ fontFamily: "Montserrat, Inter, sans-serif" }}>
                   {floors}
                 </span>
               </div>
@@ -184,7 +185,7 @@ export function CalculatorSection() {
                       "flex-1 py-3 text-sm font-500 rounded-[4px] border transition-all duration-200",
                       floors === f
                         ? "bg-[#77d14d] border-[#77d14d] text-white"
-                        : "bg-white border-[#e8e8e5] text-[#555552] hover:border-[#77d14d]",
+                        : "bg-transparent border-white/15 text-white/70 hover:border-[#77d14d]",
                     ].join(" ")}
                   >
                     {f} {f === 1 ? tr.common.floor : tr.common.floors}
@@ -216,9 +217,9 @@ export function CalculatorSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:w-80 bg-[#131311] rounded-[6px] p-7 text-white sticky top-24"
+            className="lg:w-80 bg-white border border-[#e8e8e5] rounded-[6px] p-7 text-[#131311] h-full flex flex-col"
           >
-            <p className="text-[11px] font-600 uppercase tracking-[0.14em] text-white/45 mb-2">
+            <p className="text-[11px] font-600 uppercase tracking-[0.14em] text-[#555552] mb-2">
               {locale === "en" ? "Estimated cost" : "Орієнтовна вартість"}
             </p>
             <motion.p
@@ -226,12 +227,12 @@ export function CalculatorSection() {
               initial={{ scale: 0.96, opacity: 0.7 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="text-3xl font-300 text-white tracking-tight mb-1"
+              className="text-3xl font-300 text-[#131311] tracking-tight mb-1"
               style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
             >
               {formatPrice(estimate)}
             </motion.p>
-            <p className="text-[12px] text-white/35 mb-7">
+            <p className="text-[12px] text-[#7c7c78] mb-7">
               {locale === "en"
                 ? "* Approximate estimate. Final price is provided after consultation."
                 : "* Орієнтовний розрахунок. Точна вартість після консультації."}
@@ -245,17 +246,17 @@ export function CalculatorSection() {
                 { label: tr.common.completion, value: completionLabels[completion] },
               ].map((row) => (
                 <div key={row.label} className="flex justify-between text-[13px]">
-                  <span className="text-white/45">{row.label}</span>
-                  <span className="text-white/80">{row.value}</span>
+                  <span className="text-[#7c7c78]">{row.label}</span>
+                  <span className="text-[#131311]">{row.value}</span>
                 </div>
               ))}
             </div>
 
-            <div className="h-px bg-white/10 mb-7" />
+            <div className="h-px bg-[#e8e8e5] mb-7" />
 
             <button
               onClick={() => setModalOpen(true)}
-              className="w-full bg-[#77d14d] hover:bg-[#4e8f31] text-white text-sm font-500 py-3.5 rounded-[4px] transition-colors duration-200"
+              className="mt-auto w-full bg-[#77d14d] hover:bg-[#4e8f31] text-white text-sm font-500 py-3.5 rounded-[4px] transition-colors duration-200"
             >
               {locale === "en" ? "Get exact estimate" : "Отримати точний розрахунок"}
             </button>

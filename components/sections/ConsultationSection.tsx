@@ -47,11 +47,11 @@ export function ConsultationSection() {
     <section id="contacts" className="section-padding bg-[#f9f9f8]">
       <div className="container-narrow">
         <SectionHeader
-          label="Консультація"
-          label={locale === "en" ? "Consultation" : "Консультація"}
           title={tr.sections.consultation}
           subtitle={tr.sections.consultationSub}
           centered
+          titleClassName="font-black"
+          showTitleMarker
         />
 
         <motion.div
@@ -92,7 +92,7 @@ export function ConsultationSection() {
                     {...register("name")}
                     type="text"
                     placeholder={tr.form.name}
-                    className={["input-field pl-10", errors.name ? "error" : ""].join(" ")}
+                    className={["input-field pl-12", errors.name ? "error" : ""].join(" ")}
                   />
                 </div>
                 {errors.name && <p className="mt-1.5 text-[12px] text-[#cc4444]">{errors.name.message}</p>}
@@ -106,7 +106,7 @@ export function ConsultationSection() {
                     onChange={handlePhoneInput}
                     type="tel"
                     placeholder="+38 (0__) ___-__-__"
-                    className={["input-field pl-10", errors.phone ? "error" : ""].join(" ")}
+                    className={["input-field pl-12", errors.phone ? "error" : ""].join(" ")}
                     inputMode="numeric"
                   />
                 </div>
@@ -120,7 +120,7 @@ export function ConsultationSection() {
                     {...register("comment")}
                     placeholder={tr.form.comment}
                     rows={3}
-                    className="input-field pl-10 resize-none"
+                    className="input-field pl-12 resize-none"
                   />
                 </div>
               </div>

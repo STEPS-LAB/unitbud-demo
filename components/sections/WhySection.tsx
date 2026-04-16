@@ -60,10 +60,11 @@ export function WhySection() {
     <section id="why" className="section-padding bg-[#f9f9f8]">
       <div className="container-wide">
         <SectionHeader
-          label={locale === "en" ? "Benefits" : "Переваги"}
           title={tr.sections.why}
           subtitle={tr.sections.whySub}
           centered
+          titleClassName="font-black"
+          showTitleMarker
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">

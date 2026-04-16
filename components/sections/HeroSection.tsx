@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type MouseEventHandler, type TouchEventHandler } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ConsultationModal } from "@/features/forms/ConsultationModal";
 import { useLocale } from "@/hooks/useLocale";
 
@@ -149,32 +150,35 @@ export function HeroSection() {
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        {HERO_SLIDES.map((slide, index) => (
-          <div key={slide.image}>
-            <Image
-              src={slide.mobileImage}
-              alt={`Hero slide ${index + 1}`}
-              fill
-              priority={index === 0}
-              sizes="100vw"
-              className={`md:hidden object-cover object-center transition-opacity duration-1000 ${
-                activeSlide === index ? "opacity-100" : "opacity-0"
-              }`}
-            />
-            <Image
-              src={slide.image}
-              alt={`Hero slide ${index + 1}`}
-              fill
-              priority={index === 0}
-              sizes="100vw"
-              className={`hidden md:block ${
-                index === 0 ? "object-cover object-[center_42%] md:object-center" : "object-cover object-center"
-              } transition-opacity duration-1000 ${
-                activeSlide === index ? "opacity-100" : "opacity-0"
-              }`}
-            />
-          </div>
-        ))}
+        <motion.div
+          className="absolute inset-0 flex"
+          animate={{ x: `-${activeSlide * 100}vw` }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          style={{ width: `${HERO_SLIDES.length * 100}vw` }}
+        >
+          {HERO_SLIDES.map((slide, index) => (
+            <div key={slide.image} className="relative h-full w-screen shrink-0">
+              <Image
+                src={slide.mobileImage}
+                alt={`Hero slide ${index + 1}`}
+                fill
+                priority={index === 0}
+                sizes="100vw"
+                className="md:hidden object-cover object-center"
+              />
+              <Image
+                src={slide.image}
+                alt={`Hero slide ${index + 1}`}
+                fill
+                priority={index === 0}
+                sizes="100vw"
+                className={`hidden md:block ${
+                  index === 0 ? "object-cover object-[center_42%] md:object-center" : "object-cover object-center"
+                }`}
+              />
+            </div>
+          ))}
+        </motion.div>
         {/* Gradient overlay */}
         <div
           className="absolute inset-0"
@@ -214,7 +218,7 @@ export function HeroSection() {
               <button
                 type="button"
                 onClick={() => setModalOpen(true)}
-                className="inline-flex min-w-[220px] items-center justify-center rounded-[8px] border-[3px] border-white bg-white/8 px-10 py-4 text-xl font-black uppercase tracking-[0.08em] text-white shadow-[0_10px_32px_rgba(0,0,0,0.2)] transition hover:bg-white/35 hover:backdrop-blur-md"
+                className="cta-press inline-flex min-w-[220px] items-center justify-center rounded-[8px] border-[3px] border-white bg-white/8 px-10 py-4 text-xl font-black uppercase tracking-[0.08em] text-white shadow-[0_10px_32px_rgba(0,0,0,0.2)] transition hover:bg-white/35 hover:backdrop-blur-md"
                 style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
               >
                 {currentSlide.buttonLabel[locale]}
@@ -222,7 +226,7 @@ export function HeroSection() {
             ) : (
               <Link
                 href={currentSlide.href ?? "/"}
-                className="inline-flex min-w-[220px] items-center justify-center rounded-[8px] border-[3px] border-white bg-white/8 px-10 py-4 text-xl font-black uppercase tracking-[0.08em] text-white shadow-[0_10px_32px_rgba(0,0,0,0.2)] transition hover:bg-white/35 hover:backdrop-blur-md"
+                className="cta-press inline-flex min-w-[220px] items-center justify-center rounded-[8px] border-[3px] border-white bg-white/8 px-10 py-4 text-xl font-black uppercase tracking-[0.08em] text-white shadow-[0_10px_32px_rgba(0,0,0,0.2)] transition hover:bg-white/35 hover:backdrop-blur-md"
                 style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
               >
                 {currentSlide.buttonLabel[locale]}
@@ -236,8 +240,7 @@ export function HeroSection() {
         <button
           type="button"
           onClick={() => setModalOpen(true)}
-          className="inline-flex min-w-[220px] items-center justify-center rounded-[8px] border-[3px] border-emerald-300 bg-emerald-600/25 px-10 py-4 text-xl font-black uppercase tracking-[0.08em] text-white shadow-[0_10px_32px_rgba(0,0,0,0.2)] transition hover:bg-emerald-600/35"
-          style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+          className="btn-primary"
         >
           {tr.hero.cta2}
         </button>

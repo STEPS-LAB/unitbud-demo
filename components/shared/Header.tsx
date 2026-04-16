@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type MouseEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { useScrolled } from "@/hooks/useScrolled";
@@ -10,10 +11,13 @@ import { useLocale } from "@/hooks/useLocale";
 import { ConsultationModal } from "@/features/forms/ConsultationModal";
 
 const navLinks = [
-  { href: "/catalog", labelUk: "Каталог", labelEn: "Catalog" },
-  { href: "/#installed", labelUk: "Проєкти", labelEn: "Projects" },
-  { href: "/#process", labelUk: "Як будуємо", labelEn: "Process" },
-  { href: "/#calculator", labelUk: "Калькулятор", labelEn: "Calculator" },
+  { href: "/catalog", labelUk: "Модельний ряд", labelEn: "Models" },
+  { href: "/business", labelUk: "Проекти для бізнесу", labelEn: "Business projects" },
+  { href: "/baths", labelUk: "Лазні", labelEn: "Bathhouses" },
+  { href: "/#installed", labelUk: "Реалізовані проєкти", labelEn: "Completed projects" },
+  { href: "/about", labelUk: "Про нас ▾", labelEn: "About ▾" },
+  { href: "/info", labelUk: "Інфоцентр ▾", labelEn: "Info ▾" },
+  { href: "/useful", labelUk: "Корисно знати", labelEn: "Useful" },
   { href: "/#contacts", labelUk: "Контакти", labelEn: "Contacts" },
 ];
 
@@ -24,6 +28,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const { locale, toggle } = useLocale();
+  const pathname = usePathname();
   const logoSrc = scrolled || mobileOpen ? "/logo-dark.svg" : "/logo.svg";
   const frosted = scrolled || mobileOpen;
 
@@ -32,6 +37,17 @@ export function Header() {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
+
+  const handleLogoClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    setMobileOpen(false);
+
+    if (pathname !== "/") {
+      return;
+    }
+
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <>
@@ -49,7 +65,7 @@ export function Header() {
       >
         <div className="container-wide h-full flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center group" onClick={() => setMobileOpen(false)}>
+          <Link href="/" className="flex items-center group" onClick={handleLogoClick}>
             <Image
               src={logoSrc}
               alt="Unitbud logo"

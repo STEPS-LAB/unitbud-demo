@@ -15,9 +15,10 @@ export function PopularSection() {
       <div className="container-wide">
         <div className="flex items-end justify-between mb-12 md:mb-16 flex-wrap gap-4">
           <SectionHeader
-            label={tr.nav.catalog}
             title={tr.sections.popular}
             subtitle={tr.sections.popularSub}
+            titleClassName="font-black"
+            showTitleMarker
             className="mb-0"
           />
           <Link

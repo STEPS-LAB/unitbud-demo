@@ -42,6 +42,27 @@
   box-sizing: border-box;
 }
 
+:root {
+  --radius-site: 8px;
+}
+
+/* Unified corner radius across the site (except pills/circles) */
+.rounded,
+.rounded-none,
+.rounded-sm,
+.rounded-md,
+.rounded-lg,
+.rounded-xl,
+.rounded-2xl,
+.rounded-3xl,
+.rounded-\[4px\],
+.rounded-\[6px\],
+.rounded-\[8px\],
+.rounded-\[10px\],
+.rounded-\[16px\] {
+  border-radius: var(--radius-site) !important;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -75,6 +96,9 @@ main {
 :focus-visible {
   outline: 2px solid #77d14d;
   outline-offset: 2px;
+}
+.no-outline:focus-visible {
+  outline: none;
 }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -118,7 +142,7 @@ main {
   font-size: 0.875rem;
   letter-spacing: 0.02em;
   padding: 0.875rem 2rem;
-  border-radius: 4px;
+  border-radius: var(--radius-site);
   border: none;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
@@ -143,7 +167,7 @@ main {
   font-size: 0.875rem;
   letter-spacing: 0.02em;
   padding: 0.875rem 2rem;
-  border-radius: 4px;
+  border-radius: var(--radius-site);
   border: 1px solid #d4d4d0;
   cursor: pointer;
   transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
@@ -154,12 +178,33 @@ main {
 .btn-outline:hover { border-color: #77d14d; color: #77d14d; }
 .btn-outline:active { transform: scale(0.98); }
 
+/* ── Press feedback ─────────────────────────────────────── */
+button {
+  transition: transform 0.15s ease;
+}
+button:active {
+  transform: scale(0.98);
+}
+a.btn-primary:active,
+a.btn-outline:active,
+a[class*="btn-"]:active {
+  transform: scale(0.98);
+}
+
+/* CTA press feedback for non-btn elements */
+.cta-press {
+  transition: transform 0.15s ease;
+}
+.cta-press:active {
+  transform: scale(0.98);
+}
+
 /* ── Input ──────────────────────────────────────────────── */
 .input-field {
   width: 100%;
   background: #f9f9f8;
   border: 1px solid #e8e8e5;
-  border-radius: 4px;
+  border-radius: var(--radius-site);
   padding: 0.875rem 1rem;
   font-size: 0.9375rem;
   color: #131311;
@@ -184,7 +229,7 @@ main {
   background: linear-gradient(90deg, #f2f2f0 25%, #e8e8e5 50%, #f2f2f0 75%);
   background-size: 200% 100%;
   animation: skeleton-wave 1.6s ease-in-out infinite;
-  border-radius: 4px;
+  border-radius: var(--radius-site);
 }
 @keyframes skeleton-wave {
   0% { background-position: -200% 0; }
@@ -205,7 +250,7 @@ main {
 .card-premium {
   background: #ffffff;
   border: 1px solid #e8e8e5;
-  border-radius: 6px;
+  border-radius: var(--radius-site);
   box-shadow: 0 2px 16px rgba(0,0,0,0.06);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }

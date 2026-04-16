@@ -8,7 +8,6 @@ import { WhySection } from "@/components/sections/WhySection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { CalculatorSection } from "@/features/calculator/CalculatorSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
-import { MapSection } from "@/features/map/MapSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { ConsultationSection } from "@/components/sections/ConsultationSection";
 
@@ -25,7 +24,6 @@ export default function HomePage() {
         <ProcessSection />
         <CalculatorSection />
         <ReviewsSection />
-        <MapSection />
         <FaqSection />
         <ConsultationSection />
       </main>
