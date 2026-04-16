@@ -77,13 +77,13 @@ export function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:grid flex-1 grid-cols-8 items-stretch gap-2 xl:gap-3 mx-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={[
-                  "text-sm font-400 transition-colors hover:text-[#77d14d]",
+                  "flex min-h-[42px] items-center justify-center text-center text-sm leading-tight font-400 transition-colors hover:text-[#77d14d]",
                   scrolled ? "text-[#3a3a38]" : "text-white/90",
                 ].join(" ")}
               >
@@ -93,7 +93,7 @@ export function Header() {
           </nav>
 
           {/* Desktop Right */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex shrink-0 items-center gap-4">
             {/* Phone */}
             <a
               href="tel:+380800000000"
