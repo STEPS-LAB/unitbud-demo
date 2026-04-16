@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import {
-  ShieldCheck,
-  Clock,
-  Eye,
-  Hammer,
+  DraftingCompass,
+  House,
+  UserRoundCheck,
   Trophy,
-  HeartHandshake,
+  Gem,
+  Medal,
 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLocale } from "@/hooks/useLocale";
@@ -16,33 +16,57 @@ export function WhySection() {
   const { locale, tr } = useLocale();
   const reasons = locale === "en"
     ? [
-        { icon: ShieldCheck, title: "10-year warranty", desc: "Full warranty for structural elements. Our in-house quality control team monitors every stage." },
-        { icon: Clock, title: "Contracted timelines", desc: "We fix deadlines in the contract and strictly follow them. Delay risk is on us." },
-        { icon: Eye, title: "Full transparency", desc: "Daily photo reports, a client dashboard, and video calls with the site manager anytime." },
-        { icon: Hammer, title: "In-house team", desc: "All work is done by our own crews. No subcontractors, only a proven team." },
-        { icon: Trophy, title: "200+ completed projects", desc: "Over 10 years of experience and 200+ happy families across Ukraine." },
-        { icon: HeartHandshake, title: "Post-handover support", desc: "We stay with you after key handover. Service support is available throughout warranty period." },
+        {
+          icon: Medal,
+          title: "TOP-3 modular house maker",
+          desc: "Unitbud is ranked among the leading modular house manufacturers in Ukraine according to UBA.TOP.",
+        },
+        {
+          icon: DraftingCompass,
+          title: "Free project design",
+          desc: "You do not overpay for a new architectural project or edits. The final cost is agreed and fixed before contract signing.",
+        },
+        {
+          icon: House,
+          title: "Durable frame",
+          desc: "We use a structural system designed for decades of comfortable living, with an enhanced quality control on every stage.",
+        },
+        {
+          icon: UserRoundCheck,
+          title: "Individual approach",
+          desc: "Every house reflects your lifestyle: we adapt planning and design choices to your family needs and priorities.",
+        },
+        {
+          icon: Trophy,
+          title: "200+ completed projects",
+          desc: "More than 10 years of expertise and over 200 homes delivered across Ukraine prove our reliability.",
+        },
+        {
+          icon: Gem,
+          title: "Premium materials",
+          desc: "For interior and exterior finishing, we choose not only durable but tactilely aesthetic materials - from spruce wood accents to premium hardware.",
+        },
       ]
     : [
         {
-          icon: ShieldCheck,
-          title: "Гарантія 10 років",
-          desc: "Повна гарантія на конструктивні елементи. Власний відділ контролю якості на кожному етапі будівництва.",
+          icon: Medal,
+          title: "ТОП-3 Виробник модульних будинків",
+          desc: "Unitbud у рейтингу провідних виробників модульних будинків України за версією UBA.TOP",
         },
         {
-          icon: Clock,
-          title: "Терміни з договором",
-          desc: "Фіксуємо терміни в договорі та суворо їх дотримуємось. Затримка — наша відповідальність.",
+          icon: DraftingCompass,
+          title: "Безкоштовний проєкт",
+          desc: "Ви не платите додатково за розробку нового архітектурного проєкту та внесення змін. Вартість будинку фіксується перед підписанням договору.",
         },
         {
-          icon: Eye,
-          title: "Повна прозорість",
-          desc: "Щоденні фотозвіти, онлайн-кабінет клієнта та відеодзвінки з прорабом у будь-який момент.",
+          icon: House,
+          title: "Довговічний каркас",
+          desc: "Конструктив будинку розрахований на десятки років служби. На кожному етапі діє посилений контроль якості виконання.",
         },
         {
-          icon: Hammer,
-          title: "Власна бригада",
-          desc: "Всі роботи виконуємо власними силами. Жодних субпідрядників — тільки перевірена команда.",
+          icon: UserRoundCheck,
+          title: "Індивідуальний підхід",
+          desc: "Кожен будинок адаптуємо під ваш стиль життя: планування, матеріали та оздоблення підбираємо під ваші потреби.",
         },
         {
           icon: Trophy,
@@ -50,24 +74,23 @@ export function WhySection() {
           desc: "Понад 10 років досвіду та понад 200 щасливих сімей по всій Україні — наш найкращий доказ.",
         },
         {
-          icon: HeartHandshake,
-          title: "Підтримка після здачі",
-          desc: "Не зникаємо після здачі ключів. Сервісна служба на зв'язку впродовж всього гарантійного терміну.",
+          icon: Gem,
+          title: "Преміальні матеріали",
+          desc: "Обираємо для оздоблення будинку не лише стійкі, а й тактильно-естетичні матеріали. Від використання деревини смереки на стінах до преміальної фурнітури",
         },
       ];
 
   return (
-    <section id="why" className="section-padding bg-[#f9f9f8]">
+    <section id="why" className="section-padding bg-[#1b1b19]">
       <div className="container-wide">
         <SectionHeader
           title={tr.sections.why}
-          subtitle={tr.sections.whySub}
           centered
-          titleClassName="font-black"
+          titleClassName="font-black text-white"
           showTitleMarker
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+        <div className="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3">
           {reasons.map((r, i) => (
             <motion.div
               key={i}
@@ -75,18 +98,20 @@ export function WhySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="bg-white border border-[#e8e8e5] rounded-[6px] p-6 md:p-7 hover:shadow-md transition-shadow duration-300"
+              className="group rounded-2xl border border-[#dfdfda] bg-white p-6 md:p-7 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
             >
-              <div className="w-10 h-10 rounded-[4px] bg-[#f4f6f0] flex items-center justify-center mb-5">
-                <r.icon size={20} className="text-[#77d14d]" strokeWidth={1.5} />
+              <div className="flex items-center gap-4">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#131311] shadow-[0_10px_24px_rgba(19,19,17,0.32)] ring-1 ring-white/10">
+                  <r.icon size={29} className="text-[#8bf160]" strokeWidth={2} />
+                </div>
+                <h3
+                  className="text-[24px] leading-tight font-black tracking-tight text-[#131311] md:text-[30px]"
+                  style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                >
+                  {r.title}
+                </h3>
               </div>
-              <h3
-                className="text-base font-500 text-[#131311] mb-2 tracking-tight"
-                style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
-              >
-                {r.title}
-              </h3>
-              <p className="text-[14px] text-[#555552] leading-relaxed">{r.desc}</p>
+              <p className="mt-4 text-[16px] text-[#555552] leading-relaxed">{r.desc}</p>
             </motion.div>
           ))}
         </div>

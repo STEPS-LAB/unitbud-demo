@@ -12,7 +12,7 @@ export function PopularSection() {
   const { tr } = useLocale();
 
   return (
-    <section id="popular" className="section-padding bg-[#f7f7f5]">
+    <section id="popular" className="section-padding bg-white">
       <div className="container-wide">
         <div className="mb-12 flex flex-wrap items-start justify-between gap-4 md:mb-16">
           <SectionHeader
