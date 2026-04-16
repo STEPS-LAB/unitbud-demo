@@ -5,6 +5,7 @@ import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
 import { StickyBookingBar } from "@/components/shared/StickyBookingBar";
 import { AiWidget } from "@/components/shared/AiWidget";
+import { MOBILE_STICKY_MAIN_PAD } from "@/lib/mobileSticky";
 
 export const metadata: Metadata = {
   title: "Unitbud у рейтингу UBA.TOP",
@@ -39,7 +40,7 @@ export default function UbaTopPage() {
   return (
     <>
       <Header />
-      <main className="pt-24">
+      <main className={`pt-24 ${MOBILE_STICKY_MAIN_PAD}`}>
         <section className="section-padding border-b border-[#e8e8e5]">
           <div className="container-narrow">
             <p className="section-label">Новина</p>

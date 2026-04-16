@@ -10,12 +10,14 @@ import { CalculatorSection } from "@/features/calculator/CalculatorSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { ConsultationSection } from "@/components/sections/ConsultationSection";
+import { HomeStickyChrome } from "@/components/shared/HomeStickyChrome";
+import { MOBILE_STICKY_MAIN_PAD } from "@/lib/mobileSticky";
 
 export default function HomePage() {
   return (
     <>
       <Header />
-      <main>
+      <main className={MOBILE_STICKY_MAIN_PAD}>
         <HeroSection />
         <StatsBar />
         <InstalledSection />
@@ -28,6 +30,7 @@ export default function HomePage() {
         <ConsultationSection />
       </main>
       <Footer />
+      <HomeStickyChrome />
     </>
   );
 }

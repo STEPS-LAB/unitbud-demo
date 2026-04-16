@@ -139,6 +139,7 @@ export function HeroSection() {
 
   return (
     <section
+      id="hero"
       className="relative h-screen min-h-[600px] max-h-[1000px] flex items-center overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}

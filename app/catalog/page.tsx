@@ -5,6 +5,7 @@ import { StickyBookingBar } from "@/components/shared/StickyBookingBar";
 import { AiWidget } from "@/components/shared/AiWidget";
 import { ConsultationSection } from "@/components/sections/ConsultationSection";
 import { CatalogClient } from "./CatalogClient";
+import { MOBILE_STICKY_MAIN_PAD } from "@/lib/mobileSticky";
 
 export const metadata: Metadata = {
   title: "House Catalog",
@@ -16,7 +17,7 @@ export default function CatalogPage() {
   return (
     <>
       <Header />
-      <main className="pt-[88px]">
+      <main className={`pt-[88px] ${MOBILE_STICKY_MAIN_PAD}`}>
         <CatalogClient />
         <ConsultationSection />
       </main>

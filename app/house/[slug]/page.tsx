@@ -6,6 +6,7 @@ import { StickyBookingBar } from "@/components/shared/StickyBookingBar";
 import { AiWidget } from "@/components/shared/AiWidget";
 import { HousePageClient } from "./HousePageClient";
 import { getHouseBySlug, houses } from "@/data/houses";
+import { MOBILE_STICKY_MAIN_PAD } from "@/lib/mobileSticky";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -39,7 +40,7 @@ export default async function HousePage({ params }: Props) {
   return (
     <>
       <Header />
-      <main className="pt-20">
+      <main className={`pt-20 ${MOBILE_STICKY_MAIN_PAD}`}>
         <HousePageClient house={house} />
       </main>
       <Footer />

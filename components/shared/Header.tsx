@@ -66,9 +66,9 @@ export function Header() {
           WebkitBackdropFilter: !isHome ? "none" : frosted ? "blur(18px) saturate(180%)" : "blur(0px) saturate(100%)",
         }}
       >
-        <div className="container-wide h-full flex items-center justify-between">
+        <div className="container-wide flex h-full min-w-0 items-center justify-between gap-3 lg:gap-5">
           {/* Logo */}
-          <Link href="/" className="flex items-center group" onClick={handleLogoClick}>
+          <Link href="/" className="group flex shrink-0 items-center" onClick={handleLogoClick}>
             <Image
               src={logoSrc}
               alt="Unitbud logo"
@@ -79,14 +79,14 @@ export function Header() {
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:grid flex-1 grid-cols-8 items-stretch gap-2 xl:gap-3 mx-8">
+          {/* Desktop Nav — рівні колонки на всю ширину між логотипом і правим блоком */}
+          <nav className="mx-2 hidden min-w-0 flex-1 grid-cols-6 items-stretch gap-1 sm:gap-2 lg:grid xl:mx-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={[
-                  "flex min-h-[42px] items-center justify-center text-center text-sm leading-tight font-400 transition-colors hover:text-[#77d14d]",
+                  "flex min-h-[42px] w-full min-w-0 items-center justify-center px-1 text-center text-sm font-400 leading-tight transition-colors hover:text-[#77d14d]",
                   solidHeader ? "text-[#3a3a38]" : "text-white/90",
                 ].join(" ")}
               >

@@ -1,32 +1,60 @@
 "use client";
 
-import { useState } from "react";
-import { Phone } from "lucide-react";
+import { useState, type CSSProperties } from "react";
+import { motion } from "framer-motion";
 import { ConsultationModal } from "@/features/forms/ConsultationModal";
 import { useLocale } from "@/hooks/useLocale";
+import { cn } from "@/lib/utils";
+import { CHROME_SLIDE_DURATION, CHROME_SLIDE_EASE } from "@/lib/slideChrome";
 
-export function StickyBookingBar() {
+const BAR_PANEL_CLASS =
+  "lg:hidden fixed bottom-0 inset-x-0 z-30 flex border-t border-[#e8e8e5] bg-white px-4 py-3";
+
+type Props = {
+  /** Інші сторінки: без sticky-bar, якщо задано — керування opacity ззовні. */
+  overlayStyle?: CSSProperties;
+  /** Головна: виїзд знизу за slideOpen (без sticky-bar / overlayStyle). */
+  slideFromBottom?: boolean;
+  slideOpen?: boolean;
+};
+
+export function StickyBookingBar({ overlayStyle, slideFromBottom, slideOpen = false }: Props) {
   const { tr } = useLocale();
   const [open, setOpen] = useState(false);
 
+  const button = (
+    <button
+      type="button"
+      onClick={() => setOpen(true)}
+      className="btn-primary btn-text-graphite w-full py-3 text-sm"
+    >
+      {tr.common.consultation}
+    </button>
+  );
+
   return (
     <>
-      {/* Mobile only */}
-      <div className="lg:hidden sticky-bar fixed bottom-0 inset-x-0 z-30 bg-white border-t border-[#e8e8e5] px-4 py-3 flex gap-3">
-        <a
-          href="tel:+380800000000"
-          className="flex items-center justify-center gap-2 flex-1 border border-[#e8e8e5] rounded-[4px] py-3 text-sm font-500 text-[#3a3a38] hover:border-[#77d14d] transition-colors"
+      {slideFromBottom ? (
+        <motion.div
+          className={cn(BAR_PANEL_CLASS, "will-change-transform")}
+          initial={false}
+          animate={{
+            y: slideOpen ? 0 : "100%",
+            opacity: slideOpen ? 1 : 0,
+          }}
+          transition={{ duration: CHROME_SLIDE_DURATION, ease: CHROME_SLIDE_EASE }}
+          style={{ pointerEvents: slideOpen ? "auto" : "none" }}
         >
-          <Phone size={14} className="text-[#77d14d]" />
-          {tr.common.call}
-        </a>
-        <button
-          onClick={() => setOpen(true)}
-          className="btn-primary btn-text-graphite flex-[2] py-3 text-sm"
+          {button}
+        </motion.div>
+      ) : (
+        <div
+          className={cn(BAR_PANEL_CLASS, overlayStyle == null && "sticky-bar")}
+          style={overlayStyle}
         >
-          {tr.common.consultation}
-        </button>
-      </div>
+          {button}
+        </div>
+      )}
 
       <ConsultationModal open={open} onClose={() => setOpen(false)} />
     </>
