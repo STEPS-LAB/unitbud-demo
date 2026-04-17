@@ -1,3 +1,14 @@
+/** Підкатегорії житлового ряду на /catalog (радіо «Житлові моделі») */
+export type ResidentialModelLine =
+  | "barnhouse"
+  | "narrow_plot"
+  | "summer_modular"
+  | "mini"
+  | "mobile"
+  | "modular"
+  | "modular_hightech"
+  | "modular_scandinavian";
+
 export interface House {
   id: string;
   slug: string;
@@ -14,6 +25,8 @@ export interface House {
   category: "compact" | "comfort" | "premium" | "elite";
   /** Ряд каталогу: житлові / комерційні / лазні — для фільтрів на /catalog */
   catalogSegment: "residential" | "commercial" | "sauna";
+  /** Лінія в каталозі «Житлові моделі»; заповнюється лише для catalogSegment === "residential" */
+  residentialLine?: ResidentialModelLine;
   material: "frame" | "brick" | "gasoblock" | "sip";
   style: string;
   styleEn?: string;

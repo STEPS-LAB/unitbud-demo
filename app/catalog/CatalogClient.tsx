@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { houses } from "@/data/houses";
 import { PopularHouseCard } from "@/components/ui/PopularHouseCard";
-import { House } from "@/types";
+import { House, type ResidentialModelLine } from "@/types";
+import type { Translations } from "@/hooks/useLocale";
 import { useLocale } from "@/hooks/useLocale";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +16,38 @@ type SortKey = "price-asc" | "price-desc" | "area-asc" | "area-desc";
 const AREA_MIN = 20;
 const AREA_MAX = 140;
 const AREA_STEP = 5;
+
+const RESIDENTIAL_LINES: ResidentialModelLine[] = [
+  "barnhouse",
+  "narrow_plot",
+  "summer_modular",
+  "mini",
+  "mobile",
+  "modular",
+  "modular_hightech",
+  "modular_scandinavian",
+];
+
+function residentialLineLabel(cp: Translations["catalogPage"], line: ResidentialModelLine): string {
+  switch (line) {
+    case "barnhouse":
+      return cp.residentialLineBarnhouse;
+    case "narrow_plot":
+      return cp.residentialLineNarrowPlot;
+    case "summer_modular":
+      return cp.residentialLineSummerModular;
+    case "mini":
+      return cp.residentialLineMini;
+    case "mobile":
+      return cp.residentialLineMobile;
+    case "modular":
+      return cp.residentialLineModular;
+    case "modular_hightech":
+      return cp.residentialLineModularHightech;
+    case "modular_scandinavian":
+      return cp.residentialLineModularScandinavian;
+  }
+}
 
 function AreaSliderRow({
   label,
@@ -70,6 +103,8 @@ export function CatalogClient() {
   const [areaMax, setAreaMax] = useState(AREA_MAX);
   const [sortOpen, setSortOpen] = useState(false);
   const sortWrapRef = useRef<HTMLDivElement>(null);
+  const [residentialLine, setResidentialLine] = useState<ResidentialModelLine>("modular");
+  const [residentialLinesOpen, setResidentialLinesOpen] = useState(true);
 
   const segments: { key: CatalogSegment; label: string }[] = [
     { key: "residential", label: tr.sections.calcResidential },
@@ -107,9 +142,11 @@ export function CatalogClient() {
   }, [sortOpen]);
 
   const filtered = useMemo(() => {
-    let list = houses.filter(
-      (h) => h.catalogSegment === segment && h.area >= areaMin && h.area <= areaMax,
-    );
+    let list = houses.filter((h) => {
+      if (h.catalogSegment !== segment || h.area < areaMin || h.area > areaMax) return false;
+      if (segment === "residential" && h.residentialLine !== residentialLine) return false;
+      return true;
+    });
     list = [...list].sort((a, b) => {
       if (sort === "price-asc") return a.price - b.price;
       if (sort === "price-desc") return b.price - a.price;
@@ -118,7 +155,7 @@ export function CatalogClient() {
       return 0;
     });
     return list;
-  }, [segment, sort, areaMin, areaMax]);
+  }, [segment, sort, areaMin, areaMax, residentialLine]);
 
   const tabActive =
     "bg-[#77d14d] border-[#77d14d] text-white shadow-none hover:bg-[#6bc945] hover:border-[#6bc945]";
@@ -214,6 +251,107 @@ export function CatalogClient() {
               </AnimatePresence>
             </div>
           </div>
+
+          {segment === "residential" && (
+            <div className="overflow-hidden rounded-[8px] border border-[#e8e8e5] bg-white shadow-[0_4px_22px_rgba(19,19,17,0.05)]">
+              <button
+                type="button"
+                onClick={() => setResidentialLinesOpen((o) => !o)}
+                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-[#fafaf9] md:px-6 md:py-5"
+                aria-expanded={residentialLinesOpen}
+                aria-controls="catalog-residential-lines"
+                id="catalog-residential-lines-heading"
+                aria-label={`${tr.catalogPage.residentialModelsTitle} — ${residentialLinesOpen ? tr.catalogPage.residentialModelsCollapse : tr.catalogPage.residentialModelsExpand}`}
+              >
+                <span
+                  className="text-[11px] font-600 uppercase tracking-[0.2em] text-[#131311]"
+                  style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                >
+                  {tr.catalogPage.residentialModelsTitle}
+                </span>
+                <ChevronDown
+                  size={18}
+                  className={cn(
+                    "shrink-0 text-[#7c7c78] transition-transform duration-300 ease-out",
+                    residentialLinesOpen && "rotate-180",
+                  )}
+                  aria-hidden
+                />
+              </button>
+
+              <AnimatePresence initial={false}>
+                {residentialLinesOpen && (
+                  <motion.div
+                    id="catalog-residential-lines"
+                    role="region"
+                    aria-labelledby="catalog-residential-lines-heading"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden border-t border-[#ebebe8]"
+                  >
+                    <div className="px-5 pb-5 pt-1 md:px-6 md:pb-6">
+                      <fieldset className="min-w-0 border-0 p-0 m-0">
+                        <legend className="sr-only">{tr.catalogPage.residentialModelsTitle}</legend>
+                        <div className="grid grid-cols-1 gap-x-10 gap-y-0.5 md:grid-cols-3">
+                          {RESIDENTIAL_LINES.map((line) => {
+                            const id = `res-line-${line}`;
+                            const selected = residentialLine === line;
+                            return (
+                              <label
+                                key={line}
+                                htmlFor={id}
+                                className={cn(
+                                  "flex cursor-pointer items-start gap-3 rounded-[6px] px-1 py-3 transition-colors md:py-3.5",
+                                  "-mx-1 hover:bg-[#fafaf9]/90",
+                                )}
+                              >
+                                <input
+                                  id={id}
+                                  type="radio"
+                                  name="residential-model-line"
+                                  value={line}
+                                  checked={selected}
+                                  onChange={() => setResidentialLine(line)}
+                                  className="sr-only"
+                                />
+                                <span
+                                  className={cn(
+                                    "relative mt-[3px] flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border-2 bg-white transition-[border-color,box-shadow] duration-200",
+                                    selected
+                                      ? "border-[#77d14d] shadow-[0_0_0_3px_rgba(119,209,77,0.12)]"
+                                      : "border-[#d8d8d4]",
+                                  )}
+                                  aria-hidden
+                                >
+                                  <span
+                                    className={cn(
+                                      "h-2 w-2 rounded-full bg-[#77d14d] transition-transform duration-200",
+                                      selected ? "scale-100" : "scale-0",
+                                    )}
+                                  />
+                                </span>
+                                <span
+                                  className={cn(
+                                    "min-w-0 flex-1 text-[14px] font-400 leading-snug tracking-tight transition-colors duration-200 sm:text-[15px]",
+                                    selected ? "text-[#131311]" : "text-[#6b6b67]",
+                                  )}
+                                  style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                                >
+                                  {residentialLineLabel(tr.catalogPage, line)}
+                                </span>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      </fieldset>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )}
 
           <div className="relative overflow-hidden rounded-[8px] border border-[#77d14d]/28 bg-[linear-gradient(168deg,#1c1b18_0%,#12110f_48%,#0a0a09_100%)] p-6 shadow-[0_28px_80px_rgba(10,10,9,0.18),inset_0_1px_0_rgba(255,255,255,0.06)] md:p-8">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(119,209,77,0.12),transparent)]" />
