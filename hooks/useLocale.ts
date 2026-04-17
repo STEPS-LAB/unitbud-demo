@@ -142,6 +142,19 @@ const translations = {
       getConsultation: "Отримати консультацію",
       frame: "Каркасна",
     },
+    aboutPage: {
+      title: "ПРО НАС",
+      chip1: "Житомир · виробництво",
+      chip2: "Під ключ",
+      chip3: "10+ років досвіду",
+      teamTitle: "НАША КОМАНДА",
+      productionTitle: "НАШЕ ВИРОБНИЦТВО",
+      productionSub:
+        "Ми раді Вас бачити на нашому виробничому майданчику в м. Житомир у будь-який зручний для Вас час.",
+      statExperience: "Досвід",
+      statExperienceYears: "років",
+      statHouses: "Спроектовані будинки",
+    },
     footerText: {
       brandDesc: "Каркасно-модульні будинки для життя та бізнесу",
       address:
@@ -326,6 +339,19 @@ const translations = {
       included: "* including installation and finishing",
       getConsultation: "Get consultation",
       frame: "Frame",
+    },
+    aboutPage: {
+      title: "ABOUT US",
+      chip1: "Zhytomyr · manufacturing",
+      chip2: "Turnkey delivery",
+      chip3: "10+ years of expertise",
+      teamTitle: "OUR TEAM",
+      productionTitle: "OUR PRODUCTION",
+      productionSub:
+        "We will be glad to welcome you to our production site in Zhytomyr at any time that suits you.",
+      statExperience: "Experience",
+      statExperienceYears: "years",
+      statHouses: "Designed homes",
     },
     footerText: {
       brandDesc: "Frame-modular homes for living and business",

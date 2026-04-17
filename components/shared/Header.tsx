@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { useScrolled } from "@/hooks/useScrolled";
 import { useLocale } from "@/hooks/useLocale";
+import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 
 const ConsultationModal = dynamic(
@@ -15,11 +16,11 @@ const ConsultationModal = dynamic(
 );
 
 const navLinks = [
+  { href: "/", labelUk: "Головна", labelEn: "Home" },
   { href: "/catalog", labelUk: "Модельний ряд", labelEn: "Models" },
   { href: "/#installed", labelUk: "Кейси", labelEn: "Cases" },
-  { href: "/about", labelUk: "Про нас ▾", labelEn: "About ▾" },
-  { href: "/info", labelUk: "Інфоцентр ▾", labelEn: "Info ▾" },
-  { href: "/useful", labelUk: "Корисно знати", labelEn: "Useful" },
+  { href: "/about", labelUk: "Про нас", labelEn: "About" },
+  { href: "/info", labelUk: "Інфоцентр", labelEn: "Info" },
   { href: "/#contacts", labelUk: "Контакти", labelEn: "Contacts" },
 ];
 
@@ -58,6 +59,14 @@ export function Header() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleNavLinkClick = (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    setMobileOpen(false);
+    if (href === "/" && pathname === "/") {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <header
@@ -83,20 +92,28 @@ export function Header() {
             />
           </Link>
 
-          {/* Desktop Nav — рівні колонки на всю ширину між логотипом і правим блоком */}
-          <nav className="mx-2 hidden min-w-0 flex-1 grid-cols-6 items-stretch gap-1 sm:gap-2 lg:grid xl:mx-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={[
-                  "flex min-h-[42px] w-full min-w-0 items-center justify-center px-1 text-center text-sm font-400 leading-tight transition-colors hover:text-[#77d14d]",
-                  solidHeader ? "text-[#3a3a38]" : "text-white/90",
-                ].join(" ")}
-              >
-                {locale === "uk" ? link.labelUk : link.labelEn}
-              </Link>
-            ))}
+          {/* Desktop Nav — компактні інтервали між пунктами, група по центру */}
+          <nav className="ml-4 hidden min-w-0 flex-1 flex-wrap items-center justify-center gap-x-3 gap-y-1.5 md:ml-8 md:gap-x-4 lg:flex lg:gap-x-5 xl:ml-10">
+            {navLinks.map((link) => {
+              const navLabel = locale === "uk" ? link.labelUk : link.labelEn;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleNavLinkClick(link.href)}
+                  className={cn(
+                    "relative inline-flex min-h-[44px] min-w-0 shrink-0 items-center justify-center rounded-lg px-2.5 py-1.5 text-center text-[15px] font-medium leading-snug tracking-tight antialiased md:px-3 md:py-2 md:text-base",
+                    "outline-none transition-[color,background-color,box-shadow] duration-200 ease-out",
+                    "focus-visible:ring-2 focus-visible:ring-[#77d14d]/45 focus-visible:ring-offset-0",
+                    solidHeader
+                      ? "text-[#4a4a46] hover:bg-[#77d14d]/[0.09] hover:text-[#4a7c23] hover:shadow-[inset_0_0_0_1px_rgba(119,209,77,0.14)]"
+                      : "text-white/[0.9] hover:bg-white/[0.1] hover:text-white hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.14)]",
+                  )}
+                >
+                  {navLabel}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop Right */}
@@ -174,7 +191,7 @@ export function Header() {
                 >
                   <Link
                     href={link.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={handleNavLinkClick(link.href)}
                     className="block text-3xl font-300 text-[#131311] tracking-tight py-3 border-b border-[#f2f2f0] hover:text-[#77d14d] transition-colors"
                     style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
                   >
