@@ -22,7 +22,7 @@ export function FaqSection() {
   return (
     <section id="faq" className="section-padding bg-white">
       <div className="container-wide">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_2fr] lg:grid-rows-[auto_auto] lg:gap-20 lg:items-start">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_2fr] lg:grid-rows-[auto_auto] lg:gap-x-20 lg:gap-y-0 lg:items-start">
           {/* Title block: first on mobile, top-left on desktop */}
           <div className="order-1 lg:col-start-1 lg:row-start-1">
             <SectionHeader
@@ -30,6 +30,7 @@ export function FaqSection() {
               subtitle={tr.sections.faqSub}
               titleClassName="font-black"
               showTitleMarker
+              className="lg:mb-0"
             />
           </div>
 

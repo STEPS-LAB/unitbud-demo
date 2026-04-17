@@ -5,6 +5,9 @@ import { Footer } from "@/components/shared/Footer";
 import { CatalogClient } from "./CatalogClient";
 import { MOBILE_STICKY_MAIN_PAD } from "@/lib/mobileSticky";
 
+const FaqSection = dynamic(() =>
+  import("@/components/sections/FaqSection").then((m) => m.FaqSection),
+);
 const ConsultationSection = dynamic(() =>
   import("@/components/sections/ConsultationSection").then((m) => m.ConsultationSection),
 );
@@ -27,6 +30,7 @@ export default function CatalogPage() {
       <Header />
       <main className={`pt-[88px] ${MOBILE_STICKY_MAIN_PAD}`}>
         <CatalogClient />
+        <FaqSection />
         <ConsultationSection />
       </main>
       <Footer />
