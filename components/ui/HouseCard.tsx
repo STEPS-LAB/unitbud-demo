@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { BedDouble, Bath, Maximize2, ArrowRight } from "lucide-react";
 import { House } from "@/types";
-import { formatAreaSqm, formatPrice } from "@/lib/utils";
+import { formatAreaSqm, formatUsd } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
 
 interface Props {
@@ -99,11 +99,11 @@ export function HouseCard({ house, priority = false }: Props) {
               {house.priceFrom ? tr.common.from : ""}
             </p>
             <p className="text-xl font-500 text-[#131311] tracking-tight">
-              {formatPrice(house.price, locale)}
+              {formatUsd(house.price, locale)}
             </p>
           </div>
           <Link
-            href={`/house/${house.slug}`}
+            href="/mb75"
             className="flex items-center gap-1.5 text-[13px] font-500 text-[#77d14d] hover:text-[#4e8f31] transition-colors group/arrow"
           >
             {tr.common.details}

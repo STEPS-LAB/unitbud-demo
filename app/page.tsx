@@ -49,7 +49,7 @@ export default function HomePage() {
         <FaqSection />
         <ConsultationSection />
       </main>
-      <Footer />
+      <Footer className={MOBILE_STICKY_MAIN_PAD} />
       <HomeStickyChrome />
     </>
   );

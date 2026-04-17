@@ -64,7 +64,12 @@ function SocialViber({ className }: { className?: string }) {
   );
 }
 
-export function Footer() {
+type FooterProps = {
+  /** Напр. `MOBILE_STICKY_MAIN_PAD`, коли під футером фіксована мобільна панель. */
+  className?: string;
+};
+
+export function Footer({ className }: FooterProps) {
   const { tr } = useLocale();
   const ft = tr.footerText;
   const legal = [
@@ -102,7 +107,12 @@ export function Footer() {
   const navCol2 = FOOTER_NAV.slice(mid);
 
   return (
-    <footer className="relative overflow-hidden bg-neutral-950 text-white/65 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+    <footer
+      className={cn(
+        "relative overflow-hidden bg-neutral-950 text-white/65 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
+        className,
+      )}
+    >
       <div
         className="pointer-events-none absolute inset-0 opacity-100"
         style={{

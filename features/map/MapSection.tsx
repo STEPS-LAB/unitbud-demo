@@ -8,7 +8,7 @@ import { MapPin, X, ArrowRight } from "lucide-react";
 import { mapPoints } from "@/data/map-points";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLocale } from "@/hooks/useLocale";
-import { formatAreaSqm, formatPrice } from "@/lib/utils";
+import { formatAreaSqm, formatUsd } from "@/lib/utils";
 import { MapPoint } from "@/types";
 
 // Pseudo map with relative positioning
@@ -132,9 +132,9 @@ export function MapSection() {
                     {locale === "en" ? active.cityEn ?? active.city : active.city} · {formatAreaSqm(active.area, locale)}
                   </p>
                   <div className="flex items-center justify-between">
-                    <p className="text-base font-500 text-[#131311]">{formatPrice(active.price, locale)}</p>
+                    <p className="text-base font-500 text-[#131311]">{formatUsd(active.price, locale)}</p>
                     <Link
-                      href={`/house/${active.slug}`}
+                      href="/mb75"
                       className="flex items-center gap-1 text-[13px] font-500 text-[#77d14d] hover:text-[#4e8f31] transition-colors"
                     >
                       {tr.common.details} <ArrowRight size={13} />

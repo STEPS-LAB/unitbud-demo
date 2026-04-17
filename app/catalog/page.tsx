@@ -33,7 +33,7 @@ export default function CatalogPage() {
         <FaqSection />
         <ConsultationSection />
       </main>
-      <Footer />
+      <Footer className={MOBILE_STICKY_MAIN_PAD} />
       <StickyBookingBar />
       <AiWidget />
     </>

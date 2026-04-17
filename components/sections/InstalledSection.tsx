@@ -23,14 +23,14 @@ export function InstalledSection() {
   const [activeCard, setActiveCard] = useState(0);
   const [cardImageIndex, setCardImageIndex] = useState<Record<string, number>>({});
 
-  const handleCardClick = (slug: string) => {
-    router.push(`/house/${slug}`);
+  const handleCardClick = () => {
+    router.push("/mb75");
   };
 
-  const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>, slug: string) => {
+  const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      router.push(`/house/${slug}`);
+      router.push("/mb75");
     }
   };
 
@@ -140,8 +140,8 @@ export function InstalledSection() {
               <div
                 role="link"
                 tabIndex={0}
-                onClick={() => handleCardClick(house.slug)}
-                onKeyDown={(e) => handleCardKeyDown(e, house.slug)}
+                onClick={() => handleCardClick()}
+                onKeyDown={(e) => handleCardKeyDown(e)}
                 className="group flex h-full cursor-pointer flex-col rounded-[16px] border border-[#dfdfda] bg-[#ffffff] p-4 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
               >
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[10px]">
@@ -236,7 +236,7 @@ export function InstalledSection() {
 
                   <div className="mt-auto pt-7">
                     <Link
-                      href={`/house/${house.slug}`}
+                      href="/mb75"
                       onClick={(e) => e.stopPropagation()}
                       className="cta-press inline-flex w-full items-center justify-center rounded-[8px] bg-[#131311] px-4 py-2 text-sm font-semibold uppercase tracking-[0.04em] text-white shadow-[0_10px_24px_rgba(19,19,17,0.28)] transition hover:bg-[#2a2a28]"
                       style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
@@ -271,8 +271,8 @@ export function InstalledSection() {
                 <div
                   role="link"
                   tabIndex={0}
-                  onClick={() => handleCardClick(house.slug)}
-                  onKeyDown={(e) => handleCardKeyDown(e, house.slug)}
+                  onClick={() => handleCardClick()}
+                  onKeyDown={(e) => handleCardKeyDown(e)}
                   className="group flex h-full cursor-pointer flex-col rounded-[16px] border border-[#dfdfda] bg-[#ffffff] p-5 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden rounded-[10px]">
@@ -367,7 +367,7 @@ export function InstalledSection() {
 
                     <div className="mt-auto pt-7">
                       <Link
-                        href={`/house/${house.slug}`}
+                        href="/mb75"
                         onClick={(e) => e.stopPropagation()}
                         className="cta-press inline-flex w-full items-center justify-center rounded-[8px] bg-[#131311] px-4 py-2 text-sm font-semibold uppercase tracking-[0.04em] text-white shadow-[0_10px_24px_rgba(19,19,17,0.28)] transition hover:bg-[#2a2a28]"
                         style={{ fontFamily: "Montserrat, Inter, sans-serif" }}

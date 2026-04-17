@@ -101,7 +101,7 @@ export default function UbaTopPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer className={MOBILE_STICKY_MAIN_PAD} />
       <StickyBookingBar />
       <AiWidget />
     </>

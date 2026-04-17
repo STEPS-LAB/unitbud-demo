@@ -91,7 +91,15 @@ export function ConsultationSection() {
   });
 
   return (
-    <section id="contacts" className="section-padding relative overflow-hidden">
+    <section
+      id="contacts"
+      className={cn(
+        "relative overflow-hidden pt-[clamp(4rem,8vw,7rem)]",
+        // простір під формою до нижнього краю секції (узгоджено з lib/mobileSticky.ts — 5.5rem + safe-area)
+        "pb-[clamp(3.5rem,9vw,7rem)]",
+        "max-lg:pb-[calc(clamp(3.5rem,9vw,7rem)+5.5rem+env(safe-area-inset-bottom,0px))] max-lg:-mb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] lg:mb-0",
+      )}
+    >
       <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden>
         <Image
           src="/bgcons.webp"

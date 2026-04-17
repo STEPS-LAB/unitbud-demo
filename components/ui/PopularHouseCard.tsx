@@ -34,7 +34,7 @@ export function PopularHouseCard({ house, priority = false, badgeLabel }: Props)
     <article
       className="group relative overflow-hidden rounded-2xl border border-[#dfdfda] bg-[#f2f2f0] shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
     >
-      <Link href={`/house/${house.slug}`} className="absolute inset-0 z-10" aria-label={`${displayName} ${tr.common.details}`} />
+      <Link href="/mb75" className="absolute inset-0 z-10" aria-label={`${displayName} ${tr.common.details}`} />
 
       <div className="relative aspect-[16/10] bg-[#f2f2f0]">
         <Image
@@ -97,7 +97,7 @@ export function PopularHouseCard({ house, priority = false, badgeLabel }: Props)
           </div>
 
           <Link
-            href={`/house/${house.slug}`}
+            href="/mb75"
             className="group/details relative z-20 inline-flex items-center gap-2 rounded-[8px] bg-[#131311] px-4 py-2 text-[13px] font-600 text-white transition-colors hover:bg-[#1f1f1d] active:scale-[0.98]"
           >
             {tr.common.details}
