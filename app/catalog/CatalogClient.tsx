@@ -64,7 +64,7 @@ function AreaSliderRow({
 
   return (
     <div>
-      <div className="mb-3 flex items-baseline justify-between gap-3">
+      <div className="mb-[0.675rem] flex items-baseline justify-between gap-3">
         <span className="text-[11px] font-600 uppercase tracking-[0.16em] text-[#8fdf6a]/90">{label}</span>
         <span
           className="text-xl font-300 tabular-nums tracking-tight text-white"
@@ -74,7 +74,7 @@ function AreaSliderRow({
           <span className="ml-1.5 text-sm font-400 text-white/40">{locale === "en" ? "m²" : "м²"}</span>
         </span>
       </div>
-      <div className="relative py-1">
+      <div className="relative py-[0.225rem]">
         <div className="pointer-events-none absolute left-0 right-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-white/[0.08]" />
         <div
           className="pointer-events-none absolute left-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-[#77d14d]"
@@ -353,9 +353,9 @@ export function CatalogClient() {
             </div>
           )}
 
-          <div className="relative overflow-hidden rounded-[8px] border border-[#77d14d]/28 bg-[linear-gradient(168deg,#1c1b18_0%,#12110f_48%,#0a0a09_100%)] p-6 shadow-[0_28px_80px_rgba(10,10,9,0.18),inset_0_1px_0_rgba(255,255,255,0.06)] md:p-8">
+          <div className="relative overflow-hidden rounded-[8px] border border-[#77d14d]/28 bg-[linear-gradient(168deg,#1c1b18_0%,#12110f_48%,#0a0a09_100%)] p-[1.35rem] shadow-[0_28px_80px_rgba(10,10,9,0.18),inset_0_1px_0_rgba(255,255,255,0.06)] md:p-[1.8rem]">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(119,209,77,0.12),transparent)]" />
-            <div className="relative grid gap-10 md:grid-cols-2 md:gap-12">
+            <div className="relative grid gap-[2.25rem] md:grid-cols-2 md:gap-[2.7rem]">
               <AreaSliderRow
                 label={tr.catalogPage.areaFrom}
                 value={areaMin}
@@ -369,7 +369,7 @@ export function CatalogClient() {
                 onChange={setAreaMaxSafe}
               />
             </div>
-            <div className="relative mt-4 flex justify-between text-[11px] text-white/30">
+            <div className="relative mt-[0.9rem] flex justify-between text-[11px] text-white/30">
               <span>
                 {AREA_MIN} {locale === "en" ? "m²" : "м²"}
               </span>
