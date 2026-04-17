@@ -1,13 +1,5 @@
-/** Підкатегорії житлового ряду на /catalog (радіо «Житлові моделі») */
-export type ResidentialModelLine =
-  | "barnhouse"
-  | "narrow_plot"
-  | "summer_modular"
-  | "mini"
-  | "mobile"
-  | "modular"
-  | "modular_hightech"
-  | "modular_scandinavian";
+/** Підкатегорії житлового ряду на /catalog (3 лінії + «Усі» у UI) */
+export type ResidentialModelLine = "mb102" | "mb92" | "house92";
 
 export interface House {
   id: string;

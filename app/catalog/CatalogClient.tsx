@@ -10,42 +10,27 @@ import type { Translations } from "@/hooks/useLocale";
 import { useLocale } from "@/hooks/useLocale";
 import { cn } from "@/lib/utils";
 
+type ResidentialLineFilter = ResidentialModelLine | "all";
 type CatalogSegment = House["catalogSegment"];
+type CatalogSegmentTab = CatalogSegment | "all";
 type SortKey = "price-asc" | "price-desc" | "area-asc" | "area-desc";
 
 const AREA_MIN = 20;
 const AREA_MAX = 140;
 const AREA_STEP = 5;
 
-const RESIDENTIAL_LINES: ResidentialModelLine[] = [
-  "barnhouse",
-  "narrow_plot",
-  "summer_modular",
-  "mini",
-  "mobile",
-  "modular",
-  "modular_hightech",
-  "modular_scandinavian",
-];
+/** Порядок: Всі → дачні → хай-тек → скандинавські */
+const RESIDENTIAL_LINE_FILTERS: ResidentialLineFilter[] = ["all", "house92", "mb102", "mb92"];
 
-function residentialLineLabel(cp: Translations["catalogPage"], line: ResidentialModelLine): string {
+function residentialFilterLabel(cp: Translations["catalogPage"], line: ResidentialLineFilter): string {
+  if (line === "all") return cp.catAll;
   switch (line) {
-    case "barnhouse":
-      return cp.residentialLineBarnhouse;
-    case "narrow_plot":
-      return cp.residentialLineNarrowPlot;
-    case "summer_modular":
-      return cp.residentialLineSummerModular;
-    case "mini":
-      return cp.residentialLineMini;
-    case "mobile":
-      return cp.residentialLineMobile;
-    case "modular":
-      return cp.residentialLineModular;
-    case "modular_hightech":
-      return cp.residentialLineModularHightech;
-    case "modular_scandinavian":
-      return cp.residentialLineModularScandinavian;
+    case "mb102":
+      return cp.residentialFilterMb102;
+    case "mb92":
+      return cp.residentialFilterMb92;
+    case "house92":
+      return cp.residentialFilterHouse92;
   }
 }
 
@@ -97,16 +82,17 @@ function AreaSliderRow({
 
 export function CatalogClient() {
   const { tr, locale } = useLocale();
-  const [segment, setSegment] = useState<CatalogSegment>("residential");
+  const [segment, setSegment] = useState<CatalogSegmentTab>("residential");
   const [sort, setSort] = useState<SortKey>("price-asc");
   const [areaMin, setAreaMin] = useState(AREA_MIN);
   const [areaMax, setAreaMax] = useState(AREA_MAX);
   const [sortOpen, setSortOpen] = useState(false);
   const sortWrapRef = useRef<HTMLDivElement>(null);
-  const [residentialLine, setResidentialLine] = useState<ResidentialModelLine>("modular");
+  const [residentialFilter, setResidentialFilter] = useState<ResidentialLineFilter>("all");
   const [residentialLinesOpen, setResidentialLinesOpen] = useState(true);
 
-  const segments: { key: CatalogSegment; label: string }[] = [
+  const segmentTabs: { key: CatalogSegmentTab; label: string }[] = [
+    { key: "all", label: tr.catalogPage.catAll },
     { key: "residential", label: tr.sections.calcResidential },
     { key: "commercial", label: tr.sections.calcCommercial },
     { key: "sauna", label: tr.sections.calcSauna },
@@ -143,8 +129,16 @@ export function CatalogClient() {
 
   const filtered = useMemo(() => {
     let list = houses.filter((h) => {
-      if (h.catalogSegment !== segment || h.area < areaMin || h.area > areaMax) return false;
-      if (segment === "residential" && h.residentialLine !== residentialLine) return false;
+      if (h.area < areaMin || h.area > areaMax) return false;
+      if (segment === "all") return true;
+      if (h.catalogSegment !== segment) return false;
+      if (
+        segment === "residential" &&
+        residentialFilter !== "all" &&
+        h.residentialLine !== residentialFilter
+      ) {
+        return false;
+      }
       return true;
     });
     list = [...list].sort((a, b) => {
@@ -155,7 +149,7 @@ export function CatalogClient() {
       return 0;
     });
     return list;
-  }, [segment, sort, areaMin, areaMax, residentialLine]);
+  }, [segment, sort, areaMin, areaMax, residentialFilter]);
 
   const tabActive =
     "bg-[#77d14d] border-[#77d14d] text-white shadow-none hover:bg-[#6bc945] hover:border-[#6bc945]";
@@ -181,7 +175,7 @@ export function CatalogClient() {
         <div className="mb-10 space-y-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between">
             <div className="flex flex-wrap gap-2">
-              {segments.map((s) => (
+              {segmentTabs.map((s) => (
                 <button
                   key={s.key}
                   type="button"
@@ -294,10 +288,10 @@ export function CatalogClient() {
                     <div className="px-5 pb-5 pt-1 md:px-6 md:pb-6">
                       <fieldset className="min-w-0 border-0 p-0 m-0">
                         <legend className="sr-only">{tr.catalogPage.residentialModelsTitle}</legend>
-                        <div className="grid grid-cols-1 gap-x-10 gap-y-0.5 md:grid-cols-3">
-                          {RESIDENTIAL_LINES.map((line) => {
+                        <div className="grid grid-cols-1 gap-x-10 gap-y-0.5 sm:grid-cols-2 lg:grid-cols-4">
+                          {RESIDENTIAL_LINE_FILTERS.map((line) => {
                             const id = `res-line-${line}`;
-                            const selected = residentialLine === line;
+                            const selected = residentialFilter === line;
                             return (
                               <label
                                 key={line}
@@ -313,7 +307,7 @@ export function CatalogClient() {
                                   name="residential-model-line"
                                   value={line}
                                   checked={selected}
-                                  onChange={() => setResidentialLine(line)}
+                                  onChange={() => setResidentialFilter(line)}
                                   className="sr-only"
                                 />
                                 <span
@@ -339,7 +333,7 @@ export function CatalogClient() {
                                   )}
                                   style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
                                 >
-                                  {residentialLineLabel(tr.catalogPage, line)}
+                                  {residentialFilterLabel(tr.catalogPage, line)}
                                 </span>
                               </label>
                             );

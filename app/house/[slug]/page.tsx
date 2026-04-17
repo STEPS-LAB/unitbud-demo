@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!house) return { title: "House not found" };
 
   return {
-    title: `${house.name} — ${house.area} м²`,
+    title: house.name,
     description: house.description,
     openGraph: {
       title: house.name,

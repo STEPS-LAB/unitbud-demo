@@ -234,6 +234,23 @@ export function CalculatorSection() {
                 onChange={setMaterial}
               />
             </div>
+
+            <div className="relative mt-8 border-t border-white/10 pt-7 lg:hidden">
+              <p className="text-[11px] font-600 uppercase tracking-[0.18em] text-[#8fdf6a]/90">
+                {locale === "en" ? "Estimated investment" : "Орієнтовна вартість"}
+              </p>
+              <motion.p
+                key={estimate}
+                initial={{ scale: 0.97, opacity: 0.75 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.28 }}
+                className="mt-2 text-3xl font-300 tabular-nums tracking-tight text-white"
+                style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+              >
+                {formatUsd(estimate, locale)}
+              </motion.p>
+              <p className="mt-2.5 text-[11px] leading-snug text-white/45">{tr.sections.calcFromCalculatorNote}</p>
+            </div>
           </motion.div>
 
           {/* Результат — ширша колонка */}
@@ -260,6 +277,8 @@ export function CalculatorSection() {
             >
               {formatUsd(estimate, locale)}
             </motion.p>
+
+            <p className="mt-2 max-w-md text-[11px] leading-snug text-[#a8a8a3]">{tr.sections.calcFromCalculatorNote}</p>
 
             <p className="mt-3 max-w-md text-[13px] leading-relaxed text-[#6f6f6a] transition-colors duration-300 ease-out">
               {locale === "en"
