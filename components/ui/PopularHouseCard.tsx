@@ -32,7 +32,7 @@ export function PopularHouseCard({ house, priority = false, badgeLabel }: Props)
 
   return (
     <article
-      className="group relative overflow-hidden rounded-2xl border border-[#dfdfda] bg-[#f2f2f0] shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
+      className="group relative overflow-hidden rounded-2xl border border-[#dfdfda] bg-[#f2f2f0] shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition md:hover:-translate-y-[1%] md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
     >
       <Link href="/mb75" className="absolute inset-0 z-10" aria-label={`${displayName} ${tr.common.details}`} />
 
@@ -43,7 +43,7 @@ export function PopularHouseCard({ house, priority = false, badgeLabel }: Props)
           fill
           priority={priority}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 ease-[0.22,1,0.36,1] group-hover:scale-[1.04]"
+          className="object-cover transition-transform duration-700 ease-[0.22,1,0.36,1] md:group-hover:scale-[1.04]"
           placeholder="blur"
           blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjJmMmYwIi8+PC9zdmc+"
         />

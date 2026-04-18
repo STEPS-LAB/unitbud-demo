@@ -28,7 +28,7 @@ export function InfoFaqSection() {
   const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id));
 
   return (
-    <section id="faq" className="section-padding relative scroll-mt-[156px] bg-[#f5f5f3]">
+    <section id="faq" className="section-padding relative scroll-mt-[152px] md:scroll-mt-[156px] bg-[#f5f5f3]">
       <div className="container-wide">
         <SectionHeader
           title={tr.sections.faq}
@@ -38,7 +38,7 @@ export function InfoFaqSection() {
           className="mb-8 md:mb-10"
         />
 
-        <div className="mb-8 flex flex-wrap gap-2">
+        <div className="mb-6 flex flex-wrap gap-2 sm:mb-8">
           <button
             type="button"
             onClick={() => {
@@ -46,11 +46,11 @@ export function InfoFaqSection() {
               setOpenId(null);
             }}
             className={cn(
-              "no-outline rounded-full border px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.12em]",
+              "no-outline flex min-h-[44px] items-center justify-center rounded-full border px-5 text-[12px] font-semibold uppercase tracking-[0.12em]",
               INFO_PILL_TRANSITION,
               tab === "houses"
                 ? "border-[#77d14d] bg-[#77d14d] text-[#3a3a38] shadow-[0_6px_20px_rgba(119,209,77,0.3)]"
-                : "border-[#e0e0dc] bg-white text-[#555552] hover:border-[#77d14d]/50",
+                : "border-[#e0e0dc] bg-white text-[#555552] md:hover:border-[#77d14d]/50",
             )}
           >
             {p.faqTabHouses}
@@ -62,18 +62,18 @@ export function InfoFaqSection() {
               setOpenId(null);
             }}
             className={cn(
-              "no-outline rounded-full border px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.12em]",
+              "no-outline flex min-h-[44px] items-center justify-center rounded-full border px-5 text-[12px] font-semibold uppercase tracking-[0.12em]",
               INFO_PILL_TRANSITION,
               tab === "saunas"
                 ? "border-[#77d14d] bg-[#77d14d] text-[#3a3a38] shadow-[0_6px_20px_rgba(119,209,77,0.3)]"
-                : "border-[#e0e0dc] bg-white text-[#555552] hover:border-[#77d14d]/50",
+                : "border-[#e0e0dc] bg-white text-[#555552] md:hover:border-[#77d14d]/50",
             )}
           >
             {p.faqTabSaunas}
           </button>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_2fr] lg:items-start">
+        <div className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-[1fr_2fr] lg:items-start">
           <div className="order-2 lg:order-1">
             <p className="text-[14px] leading-relaxed text-[#7c7c78]">{p.faqCtaLead}</p>
             <button
@@ -102,12 +102,12 @@ export function InfoFaqSection() {
                 <button
                   type="button"
                   onClick={() => toggle(faq.id)}
-                  className="group flex w-full items-center justify-between gap-4 py-5 text-left transition-colors duration-500 ease-[0.22,1,0.36,1]"
+                  className="group flex w-full min-h-[52px] items-center justify-between gap-3 py-4 text-left transition-colors duration-500 ease-[0.22,1,0.36,1] sm:gap-4 sm:py-5 md:min-h-0"
                 >
-                  <span className="text-[15px] font-semibold text-[#131311] transition-colors duration-500 ease-[0.22,1,0.36,1] group-hover:text-[#77d14d]">
+                  <span className="min-w-0 flex-1 pr-2 text-left text-[15px] font-semibold text-[#131311] transition-colors duration-500 ease-[0.22,1,0.36,1] md:group-hover:text-[#77d14d]">
                     {locale === "en" ? faq.questionEn ?? faq.question : faq.question}
                   </span>
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#e8e8e5] text-[#77d14d] transition-[border-color,background-color] duration-500 ease-[0.22,1,0.36,1] group-hover:border-[#77d14d]/40">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#e8e8e5] text-[#77d14d] transition-[border-color,background-color] duration-500 ease-[0.22,1,0.36,1] md:group-hover:border-[#77d14d]/40">
                     {openId === faq.id ? <Minus size={14} strokeWidth={2} /> : <Plus size={14} />}
                   </div>
                 </button>

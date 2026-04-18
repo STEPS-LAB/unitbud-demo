@@ -28,7 +28,7 @@ export function ModularAdvantagesSection() {
   const c = getInfoContent(locale).advantages;
 
   return (
-    <section id="advantages" className="section-padding relative scroll-mt-[156px] overflow-hidden bg-[#1b1b19]">
+    <section id="advantages" className="section-padding relative scroll-mt-[152px] md:scroll-mt-[156px] overflow-hidden bg-[#1b1b19]">
       <div
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{
@@ -41,17 +41,18 @@ export function ModularAdvantagesSection() {
           title={c.title}
           subtitle={c.subtitle}
           centered
-          titleClassName="font-black text-white uppercase tracking-[0.02em]"
+          variant="onDark"
+          titleClassName="font-black text-white uppercase tracking-[0.02em] text-balance"
           showTitleMarker
           className="[&_.h-10]:bg-[#77d14d]"
         />
 
         <motion.div
-          className="mx-auto mt-4 grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-3"
+          className="mx-auto mt-4 grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6"
           variants={gridVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: "-12px" }}
         >
           {c.cards.map((card, i) => {
             const Icon = icons[i] ?? PencilRuler;
@@ -60,15 +61,15 @@ export function ModularAdvantagesSection() {
                 key={card.title}
                 variants={cardVariants}
                 className={cn(
-                  "flex flex-col rounded-2xl border border-[#2a2a28] bg-[#232320] p-6 text-center hover:border-[#77d14d]/35 md:p-7",
+                  "flex flex-col rounded-2xl border border-[#2a2a28] bg-[#232320] p-5 text-center sm:p-6 md:p-7 md:hover:border-[#77d14d]/35",
                   INFO_CARD_HOVER_DARK,
                 )}
               >
-                <div className="mx-auto flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#131311] shadow-[0_10px_24px_rgba(0,0,0,0.45)] ring-1 ring-white/10 transition-[box-shadow,ring-color] duration-500 ease-[0.22,1,0.36,1] group-hover:ring-[#77d14d]/30">
+                <div className="mx-auto flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#131311] shadow-[0_10px_24px_rgba(0,0,0,0.45)] ring-1 ring-white/10 transition-[box-shadow,ring-color] duration-500 ease-[0.22,1,0.36,1] md:group-hover:ring-[#77d14d]/30">
                   <Icon size={28} className="text-[#8bf160]" strokeWidth={2} aria-hidden />
                 </div>
                 <h3
-                  className="mt-5 text-lg font-black leading-snug tracking-tight text-white md:text-xl"
+                  className="mt-5 text-base font-black leading-snug tracking-tight text-white text-balance sm:text-lg md:text-xl"
                   style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
                 >
                   {card.title}

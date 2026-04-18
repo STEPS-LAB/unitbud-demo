@@ -161,11 +161,6 @@ const translations = {
       heroTitle: "ІНФОЦЕНТР",
       heroIntro:
         "Оплата, доставка, монтаж, переваги модульного будівництва та відповіді на ключові питання — усе в одному місці, структуровано та прозоро.",
-      chipPay: "Оплата",
-      chipDelivery: "Доставка",
-      chipInstall: "Монтаж",
-      chipSauna: "Лазні",
-      chipFaq: "FAQ",
       navPayment: "Оплата",
       navDelivery: "Доставка",
       navTransport: "Транспорт",
@@ -385,11 +380,6 @@ const translations = {
       heroTitle: "INFO CENTER",
       heroIntro:
         "Payment, delivery, installation, modular construction benefits, and key FAQs — structured and transparent in one place.",
-      chipPay: "Payment",
-      chipDelivery: "Delivery",
-      chipInstall: "Install",
-      chipSauna: "Saunas",
-      chipFaq: "FAQ",
       navPayment: "Payment",
       navDelivery: "Delivery",
       navTransport: "Transport",

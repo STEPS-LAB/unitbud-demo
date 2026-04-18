@@ -15,7 +15,7 @@ export function PaymentSection() {
   const c = getInfoContent(locale).payment;
 
   return (
-    <section id="payment" className="section-padding relative scroll-mt-[156px] overflow-hidden bg-white">
+    <section id="payment" className="section-padding relative scroll-mt-[152px] md:scroll-mt-[156px] overflow-hidden bg-white">
       <InfoSectionDecor />
       <div className="container-wide relative">
         <SectionHeader
@@ -26,7 +26,7 @@ export function PaymentSection() {
           className="mb-10 md:mb-14"
         />
 
-        <div className="relative grid grid-cols-1 gap-6 sm:gap-7 lg:grid-cols-3 lg:gap-8">
+        <div className="relative grid grid-cols-1 gap-5 sm:gap-7 lg:grid-cols-3 lg:gap-8">
           <div className="pointer-events-none absolute left-[8%] right-[8%] top-[52px] hidden h-0.5 bg-gradient-to-r from-[#d9f0cf] via-[#77d14d]/80 to-[#d9f0cf] lg:block" aria-hidden />
 
           {c.steps.map((step, i) => (
@@ -34,10 +34,10 @@ export function PaymentSection() {
               key={`payment-${i}-${step.title}`}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, margin: "-8px" }}
               transition={{ delay: i * 0.08, duration: 0.6, ease: cardEase }}
               className={cn(
-                "relative flex flex-col border border-[#e6e6e2] bg-white p-6 md:p-8",
+                "relative flex flex-col border border-[#e6e6e2] bg-white p-5 sm:p-6 md:p-8",
                 INFO_CARD_HOVER_LIGHT,
               )}
               style={{ borderRadius: "var(--radius-site, 12px)" }}
@@ -51,7 +51,7 @@ export function PaymentSection() {
                 </span>
               </div>
               <h3
-                className="text-xl font-bold tracking-tight text-[#131311] md:text-2xl"
+                className="text-lg font-bold tracking-tight text-[#131311] text-balance sm:text-xl md:text-2xl"
                 style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
               >
                 {step.title}

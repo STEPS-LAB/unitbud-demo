@@ -18,17 +18,17 @@ export function WhatIsModularSection() {
       : "Заводська точність і архітектурний задум — менше сюрпризів на ділянці, більше часу на життя.";
 
   return (
-    <section id="about-modular" className="section-padding relative scroll-mt-[156px] overflow-hidden bg-white">
+    <section id="about-modular" className="section-padding relative scroll-mt-[152px] md:scroll-mt-[156px] overflow-hidden bg-white">
       <InfoSectionDecor />
       <div className="container-wide relative">
         <SectionHeader
           title={c.title}
-          titleClassName="font-black uppercase tracking-[0.02em] text-balance"
+          titleClassName="font-black uppercase tracking-[0.02em] text-balance break-words"
           showTitleMarker
           className="mb-10 md:mb-14"
         />
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)] lg:gap-14 lg:items-start">
+        <div className="grid gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)] lg:gap-14 lg:items-start">
           <div className="relative">
             <div className="pointer-events-none absolute -left-3 top-0 hidden h-full w-px bg-gradient-to-b from-[#77d14d] via-[#77d14d]/40 to-transparent lg:block" aria-hidden />
             <p
@@ -37,7 +37,7 @@ export function WhatIsModularSection() {
             >
               {c.lead}
             </p>
-            <div className="mt-10 space-y-10">
+            <div className="mt-8 space-y-8 sm:mt-10 sm:space-y-10">
               {c.subs.map((sub, i) => (
                 <motion.div
                   key={sub.heading}
@@ -62,7 +62,7 @@ export function WhatIsModularSection() {
           <aside className="relative lg:sticky lg:top-[calc(88px+5.5rem)]">
             <div
               className={cn(
-                "relative overflow-hidden border border-[#e6e6e2] bg-[#fafaf8] p-8 md:p-10",
+                "relative overflow-hidden border border-[#e6e6e2] bg-[#fafaf8] p-6 sm:p-8 md:p-10",
                 INFO_CARD_HOVER_LIGHT,
               )}
               style={{ borderRadius: "var(--radius-site, 12px)" }}

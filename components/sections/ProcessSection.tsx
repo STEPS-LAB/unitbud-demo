@@ -42,7 +42,7 @@ function ProcessDesktopRow({
       <motion.article
         whileHover={{ y: -6, scale: 1.01 }}
         transition={{ duration: 0.25 }}
-        className="group rounded-2xl border border-[#e6eee2] bg-white px-8 py-7 shadow-[0_10px_30px_rgba(19,19,17,0.08)] transition-shadow duration-300 hover:shadow-[0_20px_50px_rgba(19,19,17,0.14)]"
+        className="group rounded-2xl border border-[#e6eee2] bg-white px-8 py-7 shadow-[0_10px_30px_rgba(19,19,17,0.08)] transition-shadow duration-300 md:hover:shadow-[0_20px_50px_rgba(19,19,17,0.14)]"
       >
         <div className="mb-3 flex items-center justify-between gap-4">
           <span className="inline-flex items-center rounded-lg border border-[#d8e9d1] bg-[#f7fcf4] px-3 py-1.5 text-[12px] font-800 text-[#3f6f2b] shadow-[0_6px_16px_rgba(119,209,77,0.14)]">

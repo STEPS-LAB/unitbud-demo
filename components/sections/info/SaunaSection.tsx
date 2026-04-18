@@ -16,24 +16,24 @@ export function SaunaSection() {
   const c = getInfoContent(locale).sauna;
 
   return (
-    <section id="saunas" className="section-padding relative scroll-mt-[156px] overflow-hidden bg-white">
+    <section id="saunas" className="section-padding relative scroll-mt-[152px] md:scroll-mt-[156px] overflow-hidden bg-white">
       <InfoSectionDecor />
       <div className="container-wide relative">
         <SectionHeader
           title={c.title}
-          titleClassName="font-black uppercase tracking-[0.02em] text-balance leading-tight"
+          titleClassName="font-black uppercase tracking-[0.02em] text-balance leading-tight break-words"
           showTitleMarker
           className="mb-8 md:mb-12"
         />
 
         <p
-          className="max-w-3xl text-lg font-light leading-relaxed text-[#131311] md:text-xl"
+          className="max-w-3xl text-base font-light leading-relaxed text-[#131311] sm:text-lg md:text-xl"
           style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
         >
           {c.lead}
         </p>
 
-        <div className="mt-12 space-y-10">
+        <div className="mt-8 space-y-8 sm:mt-12 sm:space-y-10">
           {c.subs.map((sub, i) => (
             <motion.div
               key={sub.heading}
@@ -54,14 +54,14 @@ export function SaunaSection() {
           ))}
         </div>
 
-        <div className="mt-16 border-t border-[#efefec] pt-14">
+        <div className="mt-12 border-t border-[#efefec] pt-10 sm:mt-16 sm:pt-14">
           <SectionHeader
             title={c.advantageTitle}
             titleClassName="font-black uppercase tracking-[0.02em]"
             showTitleMarker
             className="mb-8 md:mb-10"
           />
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
             {c.advantageCards.map((card, i) => {
               const Icon = advIcons[i] ?? Sparkles;
               return (
@@ -72,12 +72,12 @@ export function SaunaSection() {
                   viewport={{ once: true, margin: "-24px" }}
                   transition={{ delay: i * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                   className={cn(
-                    "flex flex-col border border-[#e6e6e2] bg-[#fafaf8] p-6 hover:border-[#77d14d]/40 hover:bg-white",
+                    "flex flex-col border border-[#e6e6e2] bg-[#fafaf8] p-5 sm:p-6 md:hover:border-[#77d14d]/40 md:hover:bg-white",
                     INFO_CARD_HOVER_LIGHT,
                   )}
                   style={{ borderRadius: "var(--radius-site, 12px)" }}
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#131311] text-[#8bf160] shadow-md transition-transform duration-500 ease-[0.22,1,0.36,1] group-hover:scale-105">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#131311] text-[#8bf160] shadow-md transition-transform duration-500 ease-[0.22,1,0.36,1] md:group-hover:scale-105">
                     <Icon size={22} strokeWidth={2} aria-hidden />
                   </div>
                   <h4 className="mt-4 text-lg font-bold text-[#131311]">{card.title}</h4>

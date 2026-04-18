@@ -13,7 +13,7 @@ export function DeliverySection() {
   const c = getInfoContent(locale).delivery;
 
   return (
-    <section id="delivery" className="section-padding relative scroll-mt-[156px] overflow-hidden bg-[#f5f5f3]">
+    <section id="delivery" className="section-padding relative scroll-mt-[152px] md:scroll-mt-[156px] overflow-hidden bg-[#f5f5f3]">
       <InfoSectionDecor />
       <div className="container-wide relative">
         <SectionHeader
@@ -23,7 +23,7 @@ export function DeliverySection() {
           className="mb-10 md:mb-14"
         />
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14 lg:items-start">
+        <div className="grid gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14 lg:items-start">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ export function DeliverySection() {
             viewport={{ once: true, margin: "-30px" }}
             transition={{ delay: 0.06, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className={cn(
-              "relative overflow-hidden border border-[#e6e6e2] bg-white p-6 md:p-8",
+              "relative overflow-hidden border border-[#e6e6e2] bg-white p-5 sm:p-6 md:p-8",
               INFO_CARD_HOVER_LIGHT,
             )}
             style={{ borderRadius: "var(--radius-site, 12px)" }}
@@ -61,10 +61,12 @@ export function DeliverySection() {
               {c.costRows.map((row) => (
                 <li
                   key={row.distance}
-                  className="flex items-center justify-between gap-4 py-4 first:pt-0 transition-colors duration-500 ease-[0.22,1,0.36,1] hover:bg-[#fafaf8]/80"
+                  className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-3.5 first:pt-0 transition-colors duration-500 ease-[0.22,1,0.36,1] sm:py-4 md:hover:bg-[#fafaf8]/80"
                 >
-                  <span className="text-[15px] font-medium text-[#131311]">{row.distance}</span>
-                  <span className="text-right text-[15px] font-semibold tabular-nums text-[#3f6f2b]">{row.price}</span>
+                  <span className="min-w-0 text-[14px] font-medium text-[#131311] sm:text-[15px]">{row.distance}</span>
+                  <span className="text-right text-[14px] font-semibold tabular-nums text-[#3f6f2b] sm:text-[15px]">
+                    {row.price}
+                  </span>
                 </li>
               ))}
             </ul>

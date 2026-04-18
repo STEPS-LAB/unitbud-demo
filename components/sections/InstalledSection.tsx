@@ -142,7 +142,7 @@ export function InstalledSection() {
                 tabIndex={0}
                 onClick={() => handleCardClick()}
                 onKeyDown={(e) => handleCardKeyDown(e)}
-                className="group flex h-full cursor-pointer flex-col rounded-[16px] border border-[#dfdfda] bg-[#ffffff] p-4 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
+                className="group flex h-full cursor-pointer flex-col rounded-[16px] border border-[#dfdfda] bg-[#ffffff] p-4 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition md:hover:-translate-y-[1%] md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
               >
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[10px]">
                   {(() => {
@@ -273,7 +273,7 @@ export function InstalledSection() {
                   tabIndex={0}
                   onClick={() => handleCardClick()}
                   onKeyDown={(e) => handleCardKeyDown(e)}
-                  className="group flex h-full cursor-pointer flex-col rounded-[16px] border border-[#dfdfda] bg-[#ffffff] p-5 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
+                  className="group flex h-full cursor-pointer flex-col rounded-[16px] border border-[#dfdfda] bg-[#ffffff] p-5 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition md:hover:-translate-y-[1%] md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden rounded-[10px]">
                     {(() => {

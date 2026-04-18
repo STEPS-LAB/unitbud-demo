@@ -13,7 +13,7 @@ export function FastHousesSection() {
   const c = getInfoContent(locale).fastHouses;
 
   return (
-    <section id="fast-houses" className="section-padding relative scroll-mt-[156px] overflow-hidden bg-[#f5f5f3]">
+    <section id="fast-houses" className="section-padding relative scroll-mt-[152px] md:scroll-mt-[156px] overflow-hidden bg-[#f5f5f3]">
       <InfoSectionDecor />
       <div className="container-wide relative">
         <SectionHeader
@@ -32,7 +32,7 @@ export function FastHousesSection() {
             {c.lead}
           </p>
 
-          <div className="mt-10 space-y-10">
+          <div className="mt-8 space-y-6 sm:mt-10 sm:space-y-8 md:space-y-10">
             {c.subs.map((sub, i) => (
               <motion.article
                 key={sub.heading}
@@ -40,9 +40,12 @@ export function FastHousesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20px" }}
                 transition={{ delay: i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className={cn("rounded-2xl border border-[#e6e6e2] bg-white p-6 md:p-8", INFO_CARD_HOVER_LIGHT)}
+                className={cn(
+                  "rounded-2xl border border-[#e6e6e2] bg-white p-5 sm:p-6 md:p-8",
+                  INFO_CARD_HOVER_LIGHT,
+                )}
               >
-                <h3 className="text-xl font-bold text-[#131311] md:text-2xl">{sub.heading}</h3>
+                <h3 className="text-lg font-bold text-balance text-[#131311] sm:text-xl md:text-2xl">{sub.heading}</h3>
                 <div className="mt-4 space-y-4">
                   {sub.paragraphs.map((para, j) => (
                     <p key={j} className="text-[15px] font-light leading-relaxed text-[#555552] md:text-[16px]">

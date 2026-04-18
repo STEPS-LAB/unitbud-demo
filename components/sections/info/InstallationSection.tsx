@@ -19,7 +19,7 @@ export function InstallationSection() {
   const c = getInfoContent(locale).installation;
 
   return (
-    <section id="installation" className="section-padding relative scroll-mt-[156px] overflow-hidden bg-[#f5f5f3]">
+    <section id="installation" className="section-padding relative scroll-mt-[152px] md:scroll-mt-[156px] overflow-hidden bg-[#f5f5f3]">
       <InfoSectionDecor />
       <div className="container-wide relative">
         <SectionHeader
@@ -30,7 +30,7 @@ export function InstallationSection() {
           className="mb-10 md:mb-12"
         />
 
-        <div className="mb-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-12 grid gap-4 sm:mb-16 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {c.foundationItems.map((item, i) => (
             <motion.article
               key={item.title}
@@ -39,7 +39,7 @@ export function InstallationSection() {
               viewport={{ once: true, margin: "-20px" }}
               transition={{ delay: i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className={cn(
-                "relative overflow-hidden border border-[#e6e6e2] bg-white p-6",
+                "relative overflow-hidden border border-[#e6e6e2] bg-white p-5 sm:p-6",
                 INFO_CARD_HOVER_LIGHT,
               )}
               style={{ borderRadius: "var(--radius-site, 12px)" }}
@@ -69,7 +69,7 @@ export function InstallationSection() {
               const card = (
                 <motion.article
                   className={cn(
-                    "rounded-2xl border border-[#e6eee2] bg-white px-7 py-6",
+                    "rounded-2xl border border-[#e6eee2] bg-white px-5 py-5 sm:px-7 sm:py-6",
                     INFO_CARD_HOVER_LIGHT,
                   )}
                 >
@@ -78,8 +78,10 @@ export function InstallationSection() {
                       {locale === "en" ? "Step" : "Крок"} {index + 1}
                     </span>
                   </div>
-                  <h3 className="mb-2 text-2xl font-extrabold tracking-tight text-[#131311]">{step.title}</h3>
-                  <p className="text-[16px] leading-relaxed text-[#3a3a38]">{step.body}</p>
+                  <h3 className="mb-2 text-xl font-extrabold tracking-tight text-balance text-[#131311] md:text-2xl">
+                    {step.title}
+                  </h3>
+                  <p className="text-[15px] leading-relaxed text-[#3a3a38] md:text-[16px]">{step.body}</p>
                 </motion.article>
               );
               return (
@@ -128,7 +130,7 @@ export function InstallationSection() {
                   </div>
                   <motion.article
                     className={cn(
-                      "min-w-0 flex-1 rounded-2xl border border-[#e6eee2] bg-white px-4 py-4",
+                      "min-w-0 flex-1 rounded-2xl border border-[#e6eee2] bg-white px-3.5 py-3.5 sm:px-4 sm:py-4",
                       INFO_CARD_HOVER_LIGHT,
                     )}
                   >
