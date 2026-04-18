@@ -26,6 +26,10 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://unitbud.com"),
+  icons: {
+    icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
+    shortcut: "/logo.svg",
+  },
   title: {
     default: "Unitbud — Преміальне каркасне будівництво будинків під ключ",
     template: "%s | Unitbud",
