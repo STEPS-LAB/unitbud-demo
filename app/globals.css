@@ -297,6 +297,18 @@ a[class*="btn-"]:active {
   .stats-reveal { animation: none; }
 }
 
+/* ── Installed card image crossfade (replaces framer-motion AnimatePresence) ── */
+@keyframes card-fade-kf {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.card-fade-in {
+  animation: card-fade-kf 0.32s ease-in-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-fade-in { animation: none; }
+}
+
 /* ── Mobile menu overlay animations (CSS-only, no framer-motion) ── */
 @keyframes mobile-menu-in {
   from { opacity: 0; transform: translateY(-10px) scale(0.995); }

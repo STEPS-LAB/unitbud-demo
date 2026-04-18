@@ -137,7 +137,7 @@ export function InfoFaqSection() {
         </div>
       </div>
 
-      <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      {modalOpen && <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />}
     </section>
   );
 }

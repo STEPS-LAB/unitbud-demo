@@ -202,7 +202,7 @@ export function Header() {
         </div>
       )}
 
-      <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      {modalOpen && <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />}
     </>
   );
 }

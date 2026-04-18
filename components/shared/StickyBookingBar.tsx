@@ -60,7 +60,7 @@ export function StickyBookingBar({ overlayStyle, slideFromBottom, slideOpen = fa
         </div>
       )}
 
-      <ConsultationModal open={open} onClose={() => setOpen(false)} />
+      {open && <ConsultationModal open={open} onClose={() => setOpen(false)} />}
     </>
   );
 }

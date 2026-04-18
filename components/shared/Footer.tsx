@@ -44,10 +44,7 @@ type FooterProps = {
 export function Footer({ className }: FooterProps) {
   const { tr } = useLocale();
   const ft = tr.footerText;
-  const legal = [
-    { href: "/privacy", label: ft.privacy },
-    { href: "/terms", label: ft.terms },
-  ];
+  const legalLabels = [ft.privacy, ft.terms];
 
   const social = [
     {
@@ -190,7 +187,7 @@ export function Footer({ className }: FooterProps) {
             © {new Date().getFullYear()} Unitbud. {ft.allRights}{" "}
             {tr.footer.dev}{" "}
             <a
-              href="https://stepslab.com"
+              href="https://stepslab.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
               className="font-500 text-[#77d14d] transition-colors hover:text-[#95dc6a]"
@@ -199,14 +196,13 @@ export function Footer({ className }: FooterProps) {
             </a>
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:justify-end">
-            {legal.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
+            {legalLabels.map((label) => (
+              <span
+                key={label}
                 className="text-xs text-white/55 transition-colors hover:text-white"
               >
-                {l.label}
-              </Link>
+                {label}
+              </span>
             ))}
           </div>
         </div>

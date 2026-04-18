@@ -4,7 +4,6 @@ import { useRef, useState, useCallback, type UIEventHandler, type MouseEvent, ty
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { installedHouses } from "@/data/houses";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -132,7 +131,7 @@ export function InstalledSection() {
               className="flex gap-6 overflow-x-auto px-5 pt-3 pb-12 scroll-pl-5 md:px-12 md:pt-6 md:pb-14 md:scroll-pl-12 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
           {installedHouses.map((house, i) => (
-            <motion.div
+            <div
               key={house.id}
               data-installed-card
               className="w-full shrink-0 snap-start"
@@ -151,25 +150,20 @@ export function InstalledSection() {
                     const hasMultiple = images.length > 1;
                     return (
                       <>
-                        <AnimatePresence mode="sync" initial={false}>
-                          <motion.div
-                            key={`${house.id}-${currentIdx}`}
-                            className="absolute inset-0"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.35, ease: "easeInOut" }}
-                          >
-                            <Image
-                              src={images[currentIdx]}
-                              alt={`${houseDisplayName(house, locale)} — ${currentIdx + 1}/${images.length}`}
-                              fill
-                              sizes="(max-width: 768px) 100vw, 50vw"
-                              className="object-cover"
-                              loading="lazy"
-                            />
-                          </motion.div>
-                        </AnimatePresence>
+                        <div
+                          key={`${house.id}-${currentIdx}`}
+                          className="absolute inset-0 card-fade-in"
+                        >
+                          <Image
+                            src={images[currentIdx]}
+                            alt={`${houseDisplayName(house, locale)} — ${currentIdx + 1}/${images.length}`}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover"
+                            loading="lazy"
+                            quality={68}
+                          />
+                        </div>
 
                         {hasMultiple && (
                           <>
@@ -246,7 +240,7 @@ export function InstalledSection() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
             </div>
           </div>
@@ -267,7 +261,7 @@ export function InstalledSection() {
 
           <div className="hidden md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-6 md:pt-6">
             {installedHouses.map((house, i) => (
-              <motion.div key={`installed-grid-${house.id}`} className="w-full">
+              <div key={`installed-grid-${house.id}`} className="w-full">
                 <div
                   role="link"
                   tabIndex={0}
@@ -282,25 +276,20 @@ export function InstalledSection() {
                       const hasMultiple = images.length > 1;
                       return (
                         <>
-                          <AnimatePresence mode="sync" initial={false}>
-                            <motion.div
-                              key={`${house.id}-grid-${currentIdx}`}
-                              className="absolute inset-0"
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0 }}
-                              transition={{ duration: 0.35, ease: "easeInOut" }}
-                            >
-                              <Image
-                                src={images[currentIdx]}
-                                alt={`${houseDisplayName(house, locale)} — ${currentIdx + 1}/${images.length}`}
-                                fill
-                                sizes="(max-width: 1280px) 50vw, 33vw"
-                                className="object-cover"
-                                loading="lazy"
-                              />
-                            </motion.div>
-                          </AnimatePresence>
+                          <div
+                            key={`${house.id}-grid-${currentIdx}`}
+                            className="absolute inset-0 card-fade-in"
+                          >
+                            <Image
+                              src={images[currentIdx]}
+                              alt={`${houseDisplayName(house, locale)} — ${currentIdx + 1}/${images.length}`}
+                              fill
+                              sizes="(max-width: 1280px) 50vw, 33vw"
+                              className="object-cover"
+                              loading="lazy"
+                              quality={68}
+                            />
+                          </div>
 
                           {hasMultiple && (
                             <>
@@ -377,7 +366,7 @@ export function InstalledSection() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

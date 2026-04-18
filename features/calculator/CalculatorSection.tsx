@@ -322,7 +322,7 @@ export function CalculatorSection() {
         </div>
       </div>
 
-      <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      {modalOpen && <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />}
     </section>
   );
 }

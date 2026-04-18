@@ -2,13 +2,17 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { TouchEvent as ReactTouchEvent } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import type { House } from "@/types";
 import { formatUsd } from "@/lib/utils";
-import { ConsultationModal } from "@/features/forms/ConsultationModal";
+
+const ConsultationModal = dynamic(
+  () => import("@/features/forms/ConsultationModal").then((m) => m.ConsultationModal),
+);
 import { ConsultationSection } from "@/components/sections/ConsultationSection";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
@@ -514,7 +518,7 @@ export function Mb75PageClient({ house }: Props) {
       </section>
       </div>
 
-      <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      {modalOpen && <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />}
 
       <AnimatePresence>
         {lightboxOpen && (

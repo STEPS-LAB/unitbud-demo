@@ -6,13 +6,19 @@ import { DocumentLang } from "@/components/shared/DocumentLang";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-inter",
   display: "swap",
   preload: true,
 });
 
+// Montserrat used only for display headings. `preload: false` keeps it OUT of
+// the critical request chain; text first paints in Inter (preloaded) and
+// swaps to Montserrat when ready (display: swap). Same visual end state,
+// ~50KB and one network chain removed from LCP path.
 const montserrat = Montserrat({
   subsets: ["latin", "cyrillic"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-montserrat",
   display: "swap",
   preload: false,
