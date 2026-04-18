@@ -285,6 +285,46 @@ a[class*="btn-"]:active {
 }
 .sticky-bar { animation: slide-up 0.5s cubic-bezier(0.25,0.46,0.45,0.94) 0.8s both; }
 
+/* ── Lightweight reveal (replaces framer-motion for critical path) ── */
+@keyframes stats-reveal-kf {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.stats-reveal {
+  animation: stats-reveal-kf 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stats-reveal { animation: none; }
+}
+
+/* ── Mobile menu overlay animations (CSS-only, no framer-motion) ── */
+@keyframes mobile-menu-in {
+  from { opacity: 0; transform: translateY(-10px) scale(0.995); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.mobile-menu-overlay {
+  animation: mobile-menu-in 0.46s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes mobile-menu-item-in {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.mobile-menu-item {
+  animation: mobile-menu-item-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes mobile-menu-phone-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.mobile-menu-phone {
+  animation: mobile-menu-phone-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-overlay,
+  .mobile-menu-item,
+  .mobile-menu-phone { animation: none; }
+}
+
 /* ── Map pulse ──────────────────────────────────────────── */
 @keyframes pulse-ring {
   0%   { transform: scale(0.8); opacity: 0.7; }

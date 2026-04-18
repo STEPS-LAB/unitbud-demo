@@ -1,9 +1,12 @@
 import dynamic from "next/dynamic";
 import { Header } from "@/components/shared/Header";
-import { Footer } from "@/components/shared/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { StatsBar } from "@/components/sections/StatsBar";
 import { MOBILE_STICKY_MAIN_PAD } from "@/lib/mobileSticky";
+
+const Footer = dynamic(() =>
+  import("@/components/shared/Footer").then((m) => m.Footer),
+);
 
 const InstalledSection = dynamic(() =>
   import("@/components/sections/InstalledSection").then((m) => m.InstalledSection),

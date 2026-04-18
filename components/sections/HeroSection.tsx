@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, type MouseEventHandler, type TouchEventHan
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { useLocale } from "@/hooks/useLocale";
 
 const ConsultationModal = dynamic(
@@ -155,11 +154,13 @@ export function HeroSection() {
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <motion.div
-          className="absolute inset-0 flex"
-          animate={{ x: `-${activeSlide * 100}vw` }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          style={{ width: `${HERO_SLIDES.length * 100}vw` }}
+        <div
+          className="absolute inset-0 flex will-change-transform"
+          style={{
+            width: `${HERO_SLIDES.length * 100}vw`,
+            transform: `translate3d(-${activeSlide * 100}vw, 0, 0)`,
+            transition: "transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)",
+          }}
         >
           {HERO_SLIDES.map((slide, index) => {
             const isVisible = index === activeSlide;
@@ -177,29 +178,26 @@ export function HeroSection() {
                       alt={`Hero slide ${index + 1}`}
                       fill
                       priority={index === 0}
+                      fetchPriority={index === 0 ? "high" : "auto"}
                       sizes="100vw"
                       className="md:hidden object-cover object-center"
-                      placeholder="blur"
-                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMjIyMjIwIi8+PC9zdmc+"
                     />
                     <Image
                       src={slide.image}
                       alt={`Hero slide ${index + 1}`}
                       fill
-                      priority={index === 0}
+                      loading={index === 0 ? "eager" : "lazy"}
                       sizes="100vw"
                       className={`hidden md:block ${
                         index === 0 ? "object-cover object-[center_42%] md:object-center" : "object-cover object-center"
                       }`}
-                      placeholder="blur"
-                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMjIyMjIwIi8+PC9zdmc+"
                     />
                   </>
                 )}
               </div>
             );
           })}
-        </motion.div>
+        </div>
         {/* Gradient overlay */}
         <div
           className="absolute inset-0"

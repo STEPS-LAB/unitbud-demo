@@ -25,12 +25,21 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "unitbud.com" },
       { protocol: "https", hostname: "plus.unsplash.com" },
     ],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    deviceSizes: [360, 480, 640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,
   },
   compress: true,
   poweredByHeader: false,
+  experimental: {
+    optimizePackageImports: [
+      "lucide-react",
+      "framer-motion",
+      "@hookform/resolvers",
+      "react-hook-form",
+      "zod",
+    ],
+  },
 };
 
 export default nextConfig;

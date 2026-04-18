@@ -4,7 +4,6 @@ import { useState, useEffect, type MouseEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { useScrolled } from "@/hooks/useScrolled";
 import { useLocale } from "@/hooks/useLocale";
@@ -169,52 +168,39 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile Fullscreen Overlay */}
-      <AnimatePresence mode="wait" initial={false}>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10, scale: 0.995 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.995 }}
-            transition={{ duration: 0.46, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-white flex flex-col pt-20 pb-8 px-6 lg:hidden"
-          >
-            {/* Nav links */}
-            <nav className="flex-1 flex flex-col justify-center gap-2">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -8 }}
-                  transition={{ delay: 0.08 + i * 0.055, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      {/* Mobile Fullscreen Overlay (CSS transitions, no framer-motion) */}
+      {mobileOpen && (
+        <div
+          className="mobile-menu-overlay fixed inset-0 z-40 bg-white flex flex-col pt-20 pb-8 px-6 lg:hidden"
+        >
+          <nav className="flex-1 flex flex-col justify-center gap-2">
+            {navLinks.map((link, i) => (
+              <div
+                key={link.href}
+                className="mobile-menu-item"
+                style={{ animationDelay: `${80 + i * 55}ms` }}
+              >
+                <Link
+                  href={link.href}
+                  onClick={handleNavLinkClick(link.href)}
+                  className="block text-3xl font-300 text-[#131311] tracking-tight py-3 border-b border-[#f2f2f0] hover:text-[#77d14d] transition-colors"
+                  style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
                 >
-                  <Link
-                    href={link.href}
-                    onClick={handleNavLinkClick(link.href)}
-                    className="block text-3xl font-300 text-[#131311] tracking-tight py-3 border-b border-[#f2f2f0] hover:text-[#77d14d] transition-colors"
-                    style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
-                  >
-                    {locale === "uk" ? link.labelUk : link.labelEn}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-            <motion.a
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ delay: 0.24, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              href="tel:+380800000000"
-              className="flex items-center gap-3 text-3xl font-300 tracking-tight text-[#131311] hover:text-[#77d14d] transition-colors pt-4 border-t border-[#f2f2f0]"
-              style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
-            >
-              <Phone size={22} className="text-[#77d14d] flex-shrink-0" />
-              0 800 000 000
-            </motion.a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  {locale === "uk" ? link.labelUk : link.labelEn}
+                </Link>
+              </div>
+            ))}
+          </nav>
+          <a
+            href="tel:+380800000000"
+            className="mobile-menu-phone flex items-center gap-3 text-3xl font-300 tracking-tight text-[#131311] hover:text-[#77d14d] transition-colors pt-4 border-t border-[#f2f2f0]"
+            style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+          >
+            <Phone size={22} className="text-[#77d14d] flex-shrink-0" />
+            0 800 000 000
+          </a>
+        </div>
+      )}
 
       <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </>

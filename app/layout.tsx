@@ -6,7 +6,6 @@ import { DocumentLang } from "@/components/shared/DocumentLang";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500", "600"],
   variable: "--font-inter",
   display: "swap",
   preload: true,
@@ -14,10 +13,9 @@ const inter = Inter({
 
 const montserrat = Montserrat({
   subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-montserrat",
   display: "swap",
-  preload: true,
+  preload: false,
 });
 
 export const metadata: Metadata = {
