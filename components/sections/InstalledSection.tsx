@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback, type UIEventHandler, type MouseEvent, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, useCallback, type UIEventHandler, type MouseEvent, type KeyboardEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -19,8 +19,18 @@ export function InstalledSection() {
   const { locale, tr } = useLocale();
   const router = useRouter();
   const sliderRef = useRef<HTMLDivElement>(null);
+  const scrollRafRef = useRef<number | null>(null);
   const [activeCard, setActiveCard] = useState(0);
   const [cardImageIndex, setCardImageIndex] = useState<Record<string, number>>({});
+
+  useEffect(
+    () => () => {
+      if (scrollRafRef.current !== null) {
+        cancelAnimationFrame(scrollRafRef.current);
+      }
+    },
+    [],
+  );
 
   const handleCardClick = () => {
     router.push("/mb75");
@@ -102,16 +112,23 @@ export function InstalledSection() {
   };
 
   const handleSliderScroll: UIEventHandler<HTMLDivElement> = (event) => {
-    const slider = event.currentTarget;
-    const firstCard = slider.querySelector<HTMLElement>("[data-installed-card]");
-    if (!firstCard) {
+    if (scrollRafRef.current !== null) {
       return;
     }
 
-    const { cardWidth, gap, centerOffset } = getSliderMetrics(slider, firstCard);
-    const rawIndex = Math.round((slider.scrollLeft + centerOffset) / (cardWidth + gap));
-    const nextActiveCard = Math.max(0, Math.min(installedHouses.length - 1, rawIndex));
-    setActiveCard(nextActiveCard);
+    const slider = event.currentTarget;
+    scrollRafRef.current = requestAnimationFrame(() => {
+      scrollRafRef.current = null;
+      const firstCard = slider.querySelector<HTMLElement>("[data-installed-card]");
+      if (!firstCard) {
+        return;
+      }
+
+      const { cardWidth, gap, centerOffset } = getSliderMetrics(slider, firstCard);
+      const rawIndex = Math.round((slider.scrollLeft + centerOffset) / (cardWidth + gap));
+      const nextActiveCard = Math.max(0, Math.min(installedHouses.length - 1, rawIndex));
+      setActiveCard(nextActiveCard);
+    });
   };
 
   return (
@@ -158,7 +175,7 @@ export function InstalledSection() {
                             src={images[currentIdx]}
                             alt={`${houseDisplayName(house, locale)} — ${currentIdx + 1}/${images.length}`}
                             fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
+                            sizes="(max-width: 767px) calc(100vw - 48px), 50vw"
                             className="object-cover"
                             loading="lazy"
                             quality={68}

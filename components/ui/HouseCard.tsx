@@ -42,7 +42,8 @@ export function HouseCard({ house, priority = false }: Props) {
             src={house.thumbnail}
             alt={displayName}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 34vw"
+            quality={68}
             className="object-cover"
             priority={priority}
             placeholder="blur"

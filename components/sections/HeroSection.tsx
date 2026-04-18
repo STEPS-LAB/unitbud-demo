@@ -180,6 +180,7 @@ export function HeroSection() {
                       priority={index === 0}
                       fetchPriority={index === 0 ? "high" : "auto"}
                       sizes="100vw"
+                      quality={72}
                       className="md:hidden object-cover object-center"
                     />
                     <Image
@@ -188,6 +189,7 @@ export function HeroSection() {
                       fill
                       loading={index === 0 ? "eager" : "lazy"}
                       sizes="100vw"
+                      quality={72}
                       className={`hidden md:block ${
                         index === 0 ? "object-cover object-[center_42%] md:object-center" : "object-cover object-center"
                       }`}

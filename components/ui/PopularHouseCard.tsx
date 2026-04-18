@@ -42,7 +42,9 @@ export function PopularHouseCard({ house, priority = false, badgeLabel }: Props)
           alt={displayName}
           fill
           priority={priority}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          fetchPriority={priority ? "high" : "auto"}
+          sizes="(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 34vw"
+          quality={68}
           className="object-cover transition-transform duration-700 ease-[0.22,1,0.36,1] md:group-hover:scale-[1.04]"
           placeholder="blur"
           blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjJmMmYwIi8+PC9zdmc+"
