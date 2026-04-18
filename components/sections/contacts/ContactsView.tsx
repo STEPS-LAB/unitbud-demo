@@ -60,7 +60,7 @@ function SocialRow({ href, label, Icon }: { href: string; label: string; Icon: S
     <a
       href={href}
       {...(isAppScheme ? {} : { target: "_blank", rel: "noopener noreferrer" })}
-      className="group flex min-h-[44px] items-center gap-3 py-2 text-[#131311] transition-colors duration-300 hover:text-[#77d14d]"
+      className="group inline-flex w-fit max-w-full min-h-[44px] items-center gap-3 py-2 text-[#131311] transition-colors duration-300 hover:text-[#77d14d]"
     >
       <span
         className={cn(
@@ -169,7 +169,7 @@ export function ContactsView() {
                   </p>
                   <a
                     href="tel:+380671067506"
-                    className="group relative mt-2 block text-xl font-medium tracking-tight text-[#131311] transition-[padding-left,color] duration-300 ease-out hover:pl-9 hover:text-[#77d14d] md:text-2xl"
+                    className="group relative mt-2 inline-block w-fit max-w-full text-xl font-medium tracking-tight text-[#131311] transition-[padding-left,color] duration-300 ease-out hover:pl-9 hover:text-[#77d14d] md:text-2xl"
                   >
                     <Phone
                       className="pointer-events-none absolute left-1 top-1/2 size-6 -translate-y-1/2 text-[#77d14d] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -185,7 +185,7 @@ export function ContactsView() {
                   </p>
                   <a
                     href={`mailto:${ft.emailDisplay}`}
-                    className="group relative mt-2 block text-xl font-medium tracking-tight text-[#131311] transition-[padding-left,color] duration-300 ease-out hover:pl-9 hover:text-[#77d14d] md:text-2xl"
+                    className="group relative mt-2 inline-block w-fit max-w-full text-xl font-medium tracking-tight text-[#131311] transition-[padding-left,color] duration-300 ease-out hover:pl-9 hover:text-[#77d14d] md:text-2xl"
                   >
                     <Mail
                       className="pointer-events-none absolute left-1 top-1/2 size-6 -translate-y-1/2 text-[#77d14d] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -205,8 +205,8 @@ export function ContactsView() {
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#a8a8a3]">
                   {cp.socialNetworksTitle}
                 </p>
-                <div className="relative mt-4 grid gap-x-10 gap-y-1 md:grid-cols-2">
-                  <div className="space-y-0.5">
+                <div className="relative mt-4 grid grid-cols-1 gap-x-10 gap-y-4 sm:gap-y-1 md:grid-cols-2">
+                  <div className="flex flex-col gap-0.5 items-start">
                     {socialLeft.map((s) => (
                       <SocialRow
                         key={s.id}
@@ -216,7 +216,7 @@ export function ContactsView() {
                       />
                     ))}
                   </div>
-                  <div className="space-y-0.5 md:pt-0">
+                  <div className="flex flex-col gap-0.5 items-start md:pt-0">
                     {socialRight.map((s) => (
                       <SocialRow
                         key={s.id}
