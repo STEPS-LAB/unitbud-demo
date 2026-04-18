@@ -21,7 +21,7 @@ const navLinks = [
   { href: "/#installed", labelUk: "Кейси", labelEn: "Cases" },
   { href: "/about", labelUk: "Про нас", labelEn: "About" },
   { href: "/info", labelUk: "Інфоцентр", labelEn: "Info" },
-  { href: "/#contacts", labelUk: "Контакти", labelEn: "Contacts" },
+  { href: "/contacts", labelUk: "Контакти", labelEn: "Contacts" },
 ];
 
 export function Header() {

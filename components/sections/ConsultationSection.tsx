@@ -62,7 +62,12 @@ function FieldIconWrap({
   );
 }
 
-export function ConsultationSection() {
+type ConsultationSectionProps = {
+  /** «Перегляд будинку» на сторінці контактів; за замовчуванням — головна консультація */
+  mode?: "consultation" | "viewing";
+};
+
+export function ConsultationSection({ mode = "consultation" }: ConsultationSectionProps) {
   const { locale, tr } = useLocale();
   const schema = useMemo(() => buildSchema(locale), [locale]);
   const [success, setSuccess] = useState(false);
@@ -89,6 +94,10 @@ export function ConsultationSection() {
   const nameRegister = register("name", {
     setValueAs: (v: unknown) => (typeof v === "string" ? v.replace(/\d/g, "") : v),
   });
+
+  const headingTitle = mode === "viewing" ? tr.sections.viewingBooking : tr.sections.consultation;
+  const headingSub = mode === "viewing" ? tr.sections.viewingBookingSub : tr.sections.consultationSub;
+  const submitLabel = mode === "viewing" ? tr.form.submitViewing : tr.form.submit;
 
   return (
     <section
@@ -119,8 +128,8 @@ export function ConsultationSection() {
 
       <div className="container-narrow relative z-10">
         <SectionHeader
-          title={tr.sections.consultation}
-          subtitle={tr.sections.consultationSub}
+          title={headingTitle}
+          subtitle={headingSub}
           centered
           responsiveAlign
           variant="onDark"
@@ -220,7 +229,7 @@ export function ConsultationSection() {
                       <Loader2 size={15} className="animate-spin" /> {tr.form.sending}
                     </>
                   ) : (
-                    tr.form.submit
+                    submitLabel
                   )}
                 </button>
               </form>
