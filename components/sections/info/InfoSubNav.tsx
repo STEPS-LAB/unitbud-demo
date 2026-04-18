@@ -7,9 +7,7 @@ import { cn } from "@/lib/utils";
 
 const SECTION_IDS = [
   "payment",
-  "delivery",
-  "transport",
-  "installation",
+  "delivery-install",
   "advantages",
   "about-modular",
   "fast-houses",
@@ -25,9 +23,7 @@ export function InfoSubNav() {
 
   const items: { id: (typeof SECTION_IDS)[number]; label: string }[] = [
     { id: "payment", label: p.navPayment },
-    { id: "delivery", label: p.navDelivery },
-    { id: "transport", label: p.navTransport },
-    { id: "installation", label: p.navInstallation },
+    { id: "delivery-install", label: p.navDeliveryInstall },
     { id: "advantages", label: p.navAdvantages },
     { id: "about-modular", label: p.navModular },
     { id: "fast-houses", label: p.navFast },
@@ -103,11 +99,11 @@ export function InfoSubNav() {
                 data-info-pill={id}
                 onClick={() => scrollTo(id)}
                 className={cn(
-                  "no-outline flex min-h-[44px] shrink-0 items-center justify-center rounded-full border px-3.5 text-[11px] font-semibold uppercase tracking-[0.12em] md:min-h-0 md:px-4 md:py-2",
+                  "no-outline flex min-h-[44px] shrink-0 items-center justify-center rounded-full border px-3.5 text-[11px] font-semibold uppercase tracking-[0.12em] shadow-none md:min-h-0 md:px-4 md:py-2",
                   INFO_PILL_TRANSITION,
                   isActive
-                    ? "border-[#77d14d] bg-[#77d14d] text-[#3a3a38] shadow-[0_6px_20px_rgba(119,209,77,0.35)]"
-                    : "border-[#e6e6e2] bg-white text-[#555552] md:hover:border-[#77d14d]/60 md:hover:text-[#131311]",
+                    ? "border-[#77d14d] bg-[#77d14d] text-[#3a3a38] md:hover:shadow-[0_8px_22px_rgba(119,209,77,0.38)]"
+                    : "border-[#e6e6e2] bg-white text-[#555552] md:hover:border-[#77d14d]/60 md:hover:text-[#131311] md:hover:shadow-[0_10px_26px_rgba(19,19,17,0.08)]",
                 )}
               >
                 {label}

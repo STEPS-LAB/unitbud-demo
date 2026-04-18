@@ -13,7 +13,7 @@ export function DeliverySection() {
   const c = getInfoContent(locale).delivery;
 
   return (
-    <section id="delivery" className="section-padding relative scroll-mt-[152px] md:scroll-mt-[156px] overflow-hidden bg-[#f5f5f3]">
+    <div className="section-padding relative overflow-hidden bg-[#f5f5f3]">
       <InfoSectionDecor />
       <div className="container-wide relative">
         <SectionHeader
@@ -73,6 +73,6 @@ export function DeliverySection() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

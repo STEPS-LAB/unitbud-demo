@@ -23,17 +23,21 @@ export function SaunaSection() {
           title={c.title}
           titleClassName="font-black uppercase tracking-[0.02em] text-balance leading-tight break-words"
           showTitleMarker
-          className="mb-8 md:mb-12"
+          className="mb-8 md:mb-10"
         />
 
-        <p
-          className="max-w-3xl text-base font-light leading-relaxed text-[#131311] sm:text-lg md:text-xl"
-          style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
-        >
-          {c.lead}
-        </p>
-
-        <div className="mt-8 space-y-8 sm:mt-12 sm:space-y-10">
+        <div className="max-w-3xl space-y-8 sm:space-y-10">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-20px" }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <h3 className="text-xl font-bold tracking-tight text-balance text-[#131311] md:text-2xl">{c.introQuote}</h3>
+            <div className="mt-4 space-y-4">
+              <p className="text-[15px] font-light leading-[1.75] text-[#555552] md:text-[16px]">{c.lead}</p>
+            </div>
+          </motion.div>
           {c.subs.map((sub, i) => (
             <motion.div
               key={sub.heading}
@@ -55,12 +59,7 @@ export function SaunaSection() {
         </div>
 
         <div className="mt-12 border-t border-[#efefec] pt-10 sm:mt-16 sm:pt-14">
-          <SectionHeader
-            title={c.advantageTitle}
-            titleClassName="font-black uppercase tracking-[0.02em]"
-            showTitleMarker
-            className="mb-8 md:mb-10"
-          />
+          <SectionHeader title={c.advantageTitle} appearance="subsection" className="mb-8 md:mb-10" />
           <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
             {c.advantageCards.map((card, i) => {
               const Icon = advIcons[i] ?? Sparkles;
@@ -72,7 +71,7 @@ export function SaunaSection() {
                   viewport={{ once: true, margin: "-24px" }}
                   transition={{ delay: i * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                   className={cn(
-                    "flex flex-col border border-[#e6e6e2] bg-[#fafaf8] p-5 sm:p-6 md:hover:border-[#77d14d]/40 md:hover:bg-white",
+                    "flex flex-col border border-[#e6e6e2] bg-white p-5 sm:p-6",
                     INFO_CARD_HOVER_LIGHT,
                   )}
                   style={{ borderRadius: "var(--radius-site, 12px)" }}

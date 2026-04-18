@@ -25,19 +25,28 @@ export function WhatIsModularSection() {
           title={c.title}
           titleClassName="font-black uppercase tracking-[0.02em] text-balance break-words"
           showTitleMarker
-          className="mb-10 md:mb-14"
+          className="mb-8 md:mb-10"
         />
 
         <div className="grid gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)] lg:gap-14 lg:items-start">
           <div className="relative">
             <div className="pointer-events-none absolute -left-3 top-0 hidden h-full w-px bg-gradient-to-b from-[#77d14d] via-[#77d14d]/40 to-transparent lg:block" aria-hidden />
-            <p
-              className="text-lg font-light leading-relaxed text-[#131311] md:text-xl"
-              style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
-            >
-              {c.lead}
-            </p>
-            <div className="mt-8 space-y-8 sm:mt-10 sm:space-y-10">
+            <div className="space-y-8 sm:space-y-10">
+              {c.tagline ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-24px" }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <h3 className="text-xl font-bold tracking-tight text-[#131311] md:text-2xl">{c.tagline}</h3>
+                  <div className="mt-4 space-y-4">
+                    <p className="text-[15px] font-light leading-[1.75] text-[#555552] md:text-[16px]">{c.lead}</p>
+                  </div>
+                </motion.div>
+              ) : (
+                <p className="text-[15px] font-light leading-[1.75] text-[#555552] md:text-[16px]">{c.lead}</p>
+              )}
               {c.subs.map((sub, i) => (
                 <motion.div
                   key={sub.heading}

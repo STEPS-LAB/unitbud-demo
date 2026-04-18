@@ -7,7 +7,7 @@ export type FoundationItem = { title: string; body: string };
 export type AssemblyStep = { title: string; body: string };
 export type AdvantageCard = { title: string; body: string };
 export type LongSub = { heading: string; paragraphs: string[] };
-export type LongSection = { title: string; lead: string; subs: LongSub[] };
+export type LongSection = { title: string; tagline?: string; lead: string; subs: LongSub[] };
 
 export type InfoPageStrings = {
   payment: {
@@ -40,7 +40,7 @@ export type InfoPageStrings = {
   };
   whatModular: LongSection;
   fastHouses: LongSection;
-  sauna: LongSection & { advantageTitle: string; advantageCards: AdvantageCard[] };
+  sauna: LongSection & { introQuote: string; advantageTitle: string; advantageCards: AdvantageCard[] };
 };
 
 const uk: InfoPageStrings = {
@@ -171,7 +171,8 @@ const uk: InfoPageStrings = {
     ],
   },
   whatModular: {
-    title: "Модульні будинки: що це і в чому причина популярності?",
+    title: "Модульні будинки",
+    tagline: "Що це і в чому причина популярності?",
     lead:
       "Сучасний ритм життя вимагає передбачуваних термінів і якості. Модульна технологія переносить основну частину робіт у цех — там, де контрольовані процеси, інструменти та клімат.",
     subs: [
@@ -201,7 +202,8 @@ const uk: InfoPageStrings = {
     ],
   },
   fastHouses: {
-    title: "Швидкомонтовані будинки: чому вони затребувані?",
+    title: "Швидкомонтовані будинки",
+    tagline: "Чому вони затребувані?",
     lead:
       "Класичне будівництво часто розтягується через «мокрі» процеси: бетон, клей, штукатурка. Швидкомонтовані технології замінюють довге очікування сушіння на точну збірку готових вузлів.",
     subs: [
@@ -228,7 +230,8 @@ const uk: InfoPageStrings = {
     ],
   },
   sauna: {
-    title: "Сучасна функціональна модульна лазня — безпрограшне рішення",
+    title: "Лазні",
+    introQuote: "Сучасна функціональна модульна лазня — безпрограшне рішення",
     lead:
       "Класична лазня на ділянці — довго і дорого. Модульний формат дає передбачуваний термін, заводську якість і стильний силует без років будівельного хаосу.",
     advantageTitle: "Переваги модульних бань",
@@ -404,7 +407,8 @@ const en: InfoPageStrings = {
     ],
   },
   whatModular: {
-    title: "Modular homes: what they are and why they’re popular",
+    title: "Modular homes",
+    tagline: "What are they and why are they popular?",
     lead:
       "Modern life demands predictable timelines and quality. Modular technology moves most work into the factory — where processes, tools, and climate are controlled.",
     subs: [
@@ -434,7 +438,8 @@ const en: InfoPageStrings = {
     ],
   },
   fastHouses: {
-    title: "Prefabricated houses: why demand is growing",
+    title: "Fast-assembly houses",
+    tagline: "Why are they in demand?",
     lead:
       "Classic construction often drags because of wet trades: concrete, adhesives, plaster. Prefab replaces long drying with precise assembly of ready-made nodes.",
     subs: [
@@ -461,7 +466,8 @@ const en: InfoPageStrings = {
     ],
   },
   sauna: {
-    title: "A modern modular bath / sauna — a winning choice",
+    title: "Saunas",
+    introQuote: "A modern, functional modular sauna is a winning choice.",
     lead:
       "A classic on-site bath takes time and budget. Modular format brings predictable timelines, factory quality, and a clean silhouette without years of construction mess.",
     advantageTitle: "Advantages of modular baths",

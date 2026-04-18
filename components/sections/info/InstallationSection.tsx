@@ -19,15 +19,14 @@ export function InstallationSection() {
   const c = getInfoContent(locale).installation;
 
   return (
-    <section id="installation" className="section-padding relative scroll-mt-[152px] md:scroll-mt-[156px] overflow-hidden bg-[#f5f5f3]">
+    <div className="section-padding relative overflow-hidden bg-[#f5f5f3]">
       <InfoSectionDecor />
       <div className="container-wide relative">
         <SectionHeader
           title={c.foundationTitle}
           subtitle={c.foundationIntro}
-          titleClassName="font-black uppercase tracking-[0.02em]"
-          showTitleMarker
-          className="mb-10 md:mb-12"
+          appearance="subsection"
+          className="mb-8 md:mb-10"
         />
 
         <div className="mb-12 grid gap-4 sm:mb-16 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
@@ -53,12 +52,7 @@ export function InstallationSection() {
           ))}
         </div>
 
-        <SectionHeader
-          title={c.assemblyTitle}
-          titleClassName="font-black uppercase tracking-[0.02em]"
-          showTitleMarker
-          className="mb-10 md:mb-14"
-        />
+        <SectionHeader title={c.assemblyTitle} appearance="subsection" className="mb-8 md:mb-10" />
 
         <div className="hidden md:block relative mt-8">
           <div className="pointer-events-none absolute left-1/2 top-3 bottom-3 w-[2px] -translate-x-1/2 bg-gradient-to-b from-[#d9f0cf] via-[#77d14d] to-[#d9f0cf]" aria-hidden />
@@ -146,6 +140,6 @@ export function InstallationSection() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

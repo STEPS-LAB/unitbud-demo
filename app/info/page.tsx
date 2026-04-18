@@ -39,9 +39,14 @@ export default function InfoPage() {
         <InfoHero />
         <InfoSubNav />
         <PaymentSection />
-        <DeliverySection />
-        <TransportRequirements />
-        <InstallationSection />
+        <section
+          id="delivery-install"
+          className="scroll-mt-[152px] md:scroll-mt-[156px]"
+        >
+          <DeliverySection />
+          <TransportRequirements />
+          <InstallationSection />
+        </section>
         <ModularAdvantagesSection />
         <WhatIsModularSection />
         <FastHousesSection />
