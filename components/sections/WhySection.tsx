@@ -17,28 +17,6 @@ const processCardEase = [0.22, 1, 0.36, 1] as const;
 const processCardDuration = 0.65;
 const processCardViewport = { once: true, margin: "-80px" } as const;
 
-const whyGridVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.14,
-      delayChildren: 0.06,
-    },
-  },
-};
-
-const whyCardVariants = {
-  hidden: { opacity: 0, y: 28 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: processCardDuration,
-      ease: processCardEase,
-    },
-  },
-};
-
 export function WhySection() {
   const { locale, tr } = useLocale();
   const reasons = locale === "en"
@@ -117,17 +95,14 @@ export function WhySection() {
           showTitleMarker
         />
 
-        <motion.div
-          className="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3"
-          variants={whyGridVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={processCardViewport}
-        >
+        <div className="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3">
           {reasons.map((r, i) => (
             <motion.div
               key={i}
-              variants={whyCardVariants}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={processCardViewport}
+              transition={{ delay: i * 0.08, duration: processCardDuration, ease: processCardEase }}
               className="ios-motion-stable group rounded-2xl border border-[#dfdfda] bg-white p-6 md:p-7 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
             >
               <div className="flex items-center gap-4">
@@ -144,7 +119,7 @@ export function WhySection() {
               <p className="mt-4 text-[16px] text-[#555552] leading-relaxed">{r.desc}</p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
