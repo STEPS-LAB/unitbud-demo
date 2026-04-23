@@ -165,6 +165,24 @@ export function CalculatorSection() {
             <div className="relative space-y-9">
               {/* Площа + преміальний повзунок з «крутком» */}
               <div>
+                <div className="mb-4 lg:hidden">
+                  <p className="text-[11px] font-600 uppercase tracking-[0.18em] text-[#8fdf6a]/90">
+                    {locale === "en" ? "Estimated investment" : "Орієнтовна вартість"}
+                  </p>
+                  <motion.p
+                    key={estimate}
+                    initial={{ scale: 0.97, opacity: 0.75 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.28 }}
+                    className="mt-2 text-3xl font-300 tabular-nums tracking-tight text-white"
+                    style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+                  >
+                    {formatUsd(estimate, locale)}
+                  </motion.p>
+                  <p className="mt-2.5 text-[11px] leading-snug text-white/45">{tr.sections.calcFromCalculatorNote}</p>
+                  <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                </div>
+
                 <div className="mb-4 flex items-baseline justify-between gap-3">
                   <label className="text-[11px] font-600 uppercase tracking-[0.16em] text-[#8fdf6a]/90">
                     {locale === "en" ? "House area" : "Площа будинку"}
@@ -233,23 +251,6 @@ export function CalculatorSection() {
                 labels={materialLabels}
                 onChange={setMaterial}
               />
-            </div>
-
-            <div className="relative mt-8 border-t border-white/10 pt-7 lg:hidden">
-              <p className="text-[11px] font-600 uppercase tracking-[0.18em] text-[#8fdf6a]/90">
-                {locale === "en" ? "Estimated investment" : "Орієнтовна вартість"}
-              </p>
-              <motion.p
-                key={estimate}
-                initial={{ scale: 0.97, opacity: 0.75 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.28 }}
-                className="mt-2 text-3xl font-300 tabular-nums tracking-tight text-white"
-                style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
-              >
-                {formatUsd(estimate, locale)}
-              </motion.p>
-              <p className="mt-2.5 text-[11px] leading-snug text-white/45">{tr.sections.calcFromCalculatorNote}</p>
             </div>
           </motion.div>
 
