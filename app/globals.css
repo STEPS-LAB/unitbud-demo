@@ -343,8 +343,11 @@ a[class*="btn-"]:active {
   backface-visibility: hidden;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
   will-change: transform, opacity;
   isolation: isolate;
+  contain: paint;
 }
 
 /* ── Map pulse ──────────────────────────────────────────── */

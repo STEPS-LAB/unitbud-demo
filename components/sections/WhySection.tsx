@@ -103,20 +103,22 @@ export function WhySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={processCardViewport}
               transition={{ delay: i * 0.08, duration: processCardDuration, ease: processCardEase }}
-              className="ios-motion-stable group rounded-2xl border border-[#dfdfda] bg-white p-6 md:p-7 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
+              className="ios-motion-stable"
             >
-              <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#131311] shadow-[0_10px_24px_rgba(19,19,17,0.32)] ring-1 ring-white/10">
-                  <r.icon size={29} className="text-[#8bf160]" strokeWidth={2} />
+              <div className="group rounded-2xl border border-[#dfdfda] bg-white p-6 md:p-7 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#131311] shadow-[0_10px_24px_rgba(19,19,17,0.32)] ring-1 ring-white/10">
+                    <r.icon size={29} className="text-[#8bf160]" strokeWidth={2} />
+                  </div>
+                  <h3
+                    className="text-[24px] leading-tight font-black tracking-tight text-[#131311] md:text-[30px]"
+                    style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                  >
+                    {r.title}
+                  </h3>
                 </div>
-                <h3
-                  className="text-[24px] leading-tight font-black tracking-tight text-[#131311] md:text-[30px]"
-                  style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
-                >
-                  {r.title}
-                </h3>
+                <p className="mt-4 text-[16px] text-[#555552] leading-relaxed">{r.desc}</p>
               </div>
-              <p className="mt-4 text-[16px] text-[#555552] leading-relaxed">{r.desc}</p>
             </motion.div>
           ))}
         </div>
