@@ -39,6 +39,26 @@ const HomeStickyChrome = dynamic(() =>
 export default function HomePage() {
   return (
     <>
+      {/*
+        LCP preload hints — браузер починає тягнути hero-картинку ще під час
+        парсингу HTML, до гідрації JS. Media-атрибути гарантують, що на
+        мобільному тягнеться лише mobile-версія, а на desktop — desktop.
+        React 19 hoist-ить ці <link> у <head>.
+      */}
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero/hero-mobile2.webp"
+        fetchPriority="high"
+        media="(max-width: 767px)"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero/hero2.webp"
+        fetchPriority="high"
+        media="(min-width: 768px)"
+      />
       <Header />
       <main className={MOBILE_STICKY_MAIN_PAD}>
         <HeroSection />

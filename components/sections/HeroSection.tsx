@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, type MouseEventHandler, type TouchEventHandler } from "react";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "@/hooks/useLocale";
 
@@ -61,10 +60,45 @@ const HERO_SLIDES = [
   },
 ];
 
+type HeroSlide = (typeof HERO_SLIDES)[number];
+
+/**
+ * LCP-критичне зображення hero. Рендериться плоским <picture>/<img> щоб:
+ * - Уникнути подвійного завантаження (mobile + desktop) — на mobile браузер обирає один <source>.
+ * - Обминути /_next/image для першого слайду (економимо cold-start latency Image Optimization Pipeline).
+ * - Браузер отримує готовий WebP напряму з public/ з fetchpriority=high.
+ */
+function HeroSlideImage({
+  slide,
+  isFirst,
+  objectClass = "object-center",
+}: {
+  slide: HeroSlide;
+  isFirst: boolean;
+  objectClass?: string;
+}) {
+  return (
+    <picture>
+      <source media="(min-width: 768px)" srcSet={slide.image} />
+      <img
+        src={slide.mobileImage}
+        alt=""
+        fetchPriority={isFirst ? "high" : "auto"}
+        loading={isFirst ? "eager" : "lazy"}
+        decoding="async"
+        draggable={false}
+        className={`absolute inset-0 h-full w-full object-cover ${objectClass}`}
+      />
+    </picture>
+  );
+}
+
 export function HeroSection() {
   const { locale, tr } = useLocale();
   const [activeSlide, setActiveSlide] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  // Сусідні слайди вантажимо лише ПІСЛЯ LCP — щоб не конкурувати за мережу з LCP-картинкою.
+  const [restReady, setRestReady] = useState(false);
   const touchStartXRef = useRef<number | null>(null);
   const touchEndXRef = useRef<number | null>(null);
 
@@ -76,11 +110,26 @@ export function HeroSection() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (restReady) return;
+    const w = window as unknown as { requestIdleCallback?: (cb: () => void) => number };
+    const schedule = (cb: () => void) => {
+      if (typeof w.requestIdleCallback === "function") {
+        w.requestIdleCallback(cb);
+      } else {
+        window.setTimeout(cb, 1500);
+      }
+    };
+    schedule(() => setRestReady(true));
+  }, [restReady]);
+
   const handleNextSlide = () => {
+    setRestReady(true);
     setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
   };
 
   const handlePrevSlide = () => {
+    setRestReady(true);
     setActiveSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
   };
 
@@ -163,38 +212,20 @@ export function HeroSection() {
           }}
         >
           {HERO_SLIDES.map((slide, index) => {
-            const isVisible = index === activeSlide;
-            const isAdjacent =
-              index === (activeSlide + 1) % HERO_SLIDES.length ||
-              index === (activeSlide - 1 + HERO_SLIDES.length) % HERO_SLIDES.length;
-            const shouldLoad = index === 0 || isVisible || isAdjacent;
+            const isFirst = index === 0;
+            // Першим рендеримо лише slide 0 — LCP. Решта — після idle або першої взаємодії.
+            const shouldLoad = isFirst || restReady || index === activeSlide;
 
             return (
               <div key={slide.image} className="relative h-full w-screen shrink-0">
                 {shouldLoad && (
-                  <>
-                    <Image
-                      src={slide.mobileImage}
-                      alt={`Hero slide ${index + 1}`}
-                      fill
-                      priority={index === 0}
-                      fetchPriority={index === 0 ? "high" : "auto"}
-                      sizes="100vw"
-                      quality={72}
-                      className="md:hidden object-cover object-center"
-                    />
-                    <Image
-                      src={slide.image}
-                      alt={`Hero slide ${index + 1}`}
-                      fill
-                      loading={index === 0 ? "eager" : "lazy"}
-                      sizes="100vw"
-                      quality={72}
-                      className={`hidden md:block ${
-                        index === 0 ? "object-cover object-[center_42%] md:object-center" : "object-cover object-center"
-                      }`}
-                    />
-                  </>
+                  <HeroSlideImage
+                    slide={slide}
+                    isFirst={isFirst}
+                    objectClass={
+                      isFirst ? "object-[center_42%] md:object-center" : "object-center"
+                    }
+                  />
                 )}
               </div>
             );
@@ -272,7 +303,10 @@ export function HeroSection() {
           <button
             key={slide.image}
             type="button"
-            onClick={() => setActiveSlide(index)}
+            onClick={() => {
+              setRestReady(true);
+              setActiveSlide(index);
+            }}
             aria-label={locale === "en" ? `Go to slide ${index + 1}` : `Перейти до слайду ${index + 1}`}
             className={`h-2.5 rounded-full border border-white/70 transition-all duration-300 ${
               activeSlide === index ? "w-8 bg-white" : "w-2.5 bg-white/30 hover:bg-white/70"

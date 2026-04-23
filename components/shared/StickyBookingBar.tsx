@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
-import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
 const ConsultationModal = dynamic(
@@ -9,7 +8,7 @@ const ConsultationModal = dynamic(
 );
 import { useLocale } from "@/hooks/useLocale";
 import { cn } from "@/lib/utils";
-import { CHROME_SLIDE_DURATION, CHROME_SLIDE_EASE } from "@/lib/slideChrome";
+import { CHROME_SLIDE_DURATION, CHROME_SLIDE_EASE_CSS } from "@/lib/slideChrome";
 
 const BAR_PANEL_CLASS =
   "lg:hidden fixed bottom-0 inset-x-0 z-30 flex border-t border-[#e8e8e5] bg-white px-4 py-3";
@@ -39,18 +38,17 @@ export function StickyBookingBar({ overlayStyle, slideFromBottom, slideOpen = fa
   return (
     <>
       {slideFromBottom ? (
-        <motion.div
+        <div
           className={cn(BAR_PANEL_CLASS, "will-change-transform")}
-          initial={false}
-          animate={{
-            y: slideOpen ? 0 : "100%",
+          style={{
+            transform: slideOpen ? "translate3d(0, 0, 0)" : "translate3d(0, 100%, 0)",
             opacity: slideOpen ? 1 : 0,
+            transition: `transform ${CHROME_SLIDE_DURATION}s ${CHROME_SLIDE_EASE_CSS}, opacity ${CHROME_SLIDE_DURATION}s ${CHROME_SLIDE_EASE_CSS}`,
+            pointerEvents: slideOpen ? "auto" : "none",
           }}
-          transition={{ duration: CHROME_SLIDE_DURATION, ease: CHROME_SLIDE_EASE }}
-          style={{ pointerEvents: slideOpen ? "auto" : "none" }}
         >
           {button}
-        </motion.div>
+        </div>
       ) : (
         <div
           className={cn(BAR_PANEL_CLASS, overlayStyle == null && "sticky-bar")}

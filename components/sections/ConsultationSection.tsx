@@ -3,7 +3,7 @@
 import type { ChangeEvent, ReactNode } from "react";
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -137,23 +137,13 @@ export function ConsultationSection({ mode = "consultation" }: ConsultationSecti
           showTitleMarker
         />
 
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto max-w-lg"
-        >
+        <RevealOnScroll className="relative mx-auto max-w-lg">
           <div
             className="relative border border-[#e2e2de] bg-white p-8 shadow-[0_24px_64px_rgba(0,0,0,0.28)] md:p-11"
             style={{ borderRadius: "var(--radius-site)" }}
           >
             {success ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center py-4 text-center"
-              >
+              <div className="stats-reveal flex flex-col items-center py-4 text-center">
                 <CheckCircle2 size={52} className="mb-4 text-[#77d14d]" />
                 <h3
                   className="mb-2 text-xl font-normal text-[#131311]"
@@ -172,7 +162,7 @@ export function ConsultationSection({ mode = "consultation" }: ConsultationSecti
                 >
                   {tr.form.submitAnother}
                 </button>
-              </motion.div>
+              </div>
             ) : (
               <form key={locale} onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
                 <div>
@@ -235,7 +225,7 @@ export function ConsultationSection({ mode = "consultation" }: ConsultationSecti
               </form>
             )}
           </div>
-        </motion.div>
+        </RevealOnScroll>
       </div>
     </section>
   );

@@ -70,12 +70,16 @@ export function Header() {
     <>
       <header
         className={[
-          "fixed top-0 inset-x-0 z-50 h-[88px] border-b transition-[background-color,border-color,box-shadow,backdrop-filter,-webkit-backdrop-filter] duration-300 ease-out will-change-[background-color,border-color,backdrop-filter]",
+          "fixed top-0 inset-x-0 z-50 h-[88px] border-b transition-[background-color,border-color,box-shadow,backdrop-filter,-webkit-backdrop-filter] duration-300 ease-out",
           headerSurface,
         ].join(" ")}
         style={{
-          backdropFilter: !isHome ? "none" : frosted ? "blur(18px) saturate(180%)" : "blur(0px) saturate(100%)",
-          WebkitBackdropFilter: !isHome ? "none" : frosted ? "blur(18px) saturate(180%)" : "blur(0px) saturate(100%)",
+          // Застосовуємо backdrop-filter ЛИШЕ коли він справді потрібний (frosted).
+          // Порожній blur(0px) все одно створював окремий GPU layer і подовжував
+          // першу фарбу на мобільному — тому на початковому стані головної
+          // передаємо "none", щоб не платити за композитний шар до скролу.
+          backdropFilter: isHome && frosted ? "blur(18px) saturate(180%)" : undefined,
+          WebkitBackdropFilter: isHome && frosted ? "blur(18px) saturate(180%)" : undefined,
         }}
       >
         <div className="container-wide flex h-full min-w-0 items-center justify-between gap-3 lg:gap-5">
