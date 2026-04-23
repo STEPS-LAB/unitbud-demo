@@ -329,10 +329,16 @@ export function HeroSection() {
               setActiveSlide(index);
             }}
             aria-label={locale === "en" ? `Go to slide ${index + 1}` : `Перейти до слайду ${index + 1}`}
-            className={`h-2.5 rounded-full border border-white/70 transition-all duration-300 ${
-              activeSlide === index ? "w-8 bg-white" : "w-2.5 bg-white/30 hover:bg-white/70"
+            className={`flex size-11 items-center justify-center rounded-full transition-colors ${
+              activeSlide === index ? "bg-white/10" : "hover:bg-white/10"
             }`}
-          />
+          >
+            <span
+              className={`h-2.5 rounded-full border border-white/70 transition-all duration-300 ${
+                activeSlide === index ? "w-8 bg-white" : "w-2.5 bg-white/30 hover:bg-white/70"
+              }`}
+            />
+          </button>
         ))}
       </div>
 

@@ -74,7 +74,7 @@ export function FaqSection() {
 
           {/* CTA: last on mobile, under title on desktop */}
           <div className="order-3 lg:col-start-1 lg:row-start-2">
-            <p className="text-[14px] text-[#7c7c78] leading-relaxed">
+            <p className="text-[14px] text-[#555552] leading-relaxed">
               {locale === "en"
                 ? "Didn't find the answer? Call us or leave a request, and we'll answer any question."
                 : "Не знайшли відповідь? Зателефонуйте нам або залиште заявку — відповімо на будь-яке запитання."}

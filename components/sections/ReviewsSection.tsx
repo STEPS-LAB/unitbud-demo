@@ -86,10 +86,11 @@ export function ReviewsSection() {
                     aria-hidden
                   />
 
-                  <div className="relative flex gap-0.5 pl-1" aria-label={`${review.rating} / 5`}>
+                  <div className="relative flex gap-0.5 pl-1">
                     {Array.from({ length: review.rating }).map((_, j) => (
                       <Star key={j} className="size-3 fill-[#77d14d]/45 text-[#77d14d]/65" strokeWidth={0} />
                     ))}
+                    <span className="sr-only">{`${review.rating} / 5`}</span>
                   </div>
 
                   <p className="relative mt-4 flex-1 pl-1 text-[14px] font-light leading-relaxed tracking-tight text-white/88 md:text-[15px]">
