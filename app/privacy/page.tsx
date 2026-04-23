@@ -39,7 +39,7 @@ export default function PrivacyPage() {
         <div className="container-narrow">
           <h1
             className="text-3xl md:text-4xl font-300 text-[#131311] tracking-tight mb-8"
-            style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+            style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
           >
             {t.title}
           </h1>

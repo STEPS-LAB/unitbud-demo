@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   DraftingCompass,
   House,
@@ -10,12 +9,8 @@ import {
   Medal,
 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Reveal } from "@/components/ui/Reveal";
 import { useLocale } from "@/hooks/useLocale";
-
-/** Same motion curve / duration as process timeline cards (`ProcessDesktopRow`). */
-const processCardEase = [0.22, 1, 0.36, 1] as const;
-const processCardDuration = 0.65;
-const processCardViewport = { once: true, margin: "-80px" } as const;
 
 export function WhySection() {
   const { locale, tr } = useLocale();
@@ -86,7 +81,7 @@ export function WhySection() {
       ];
 
   return (
-    <section id="why" className="section-padding bg-[#1b1b19]">
+    <section id="why" data-lazy-paint="true" className="section-padding bg-[#1b1b19]">
       <div className="container-wide">
         <SectionHeader
           title={tr.sections.why}
@@ -97,12 +92,12 @@ export function WhySection() {
 
         <div className="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3">
           {reasons.map((r, i) => (
-            <motion.div
+            <Reveal
               key={i}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={processCardViewport}
-              transition={{ delay: i * 0.08, duration: processCardDuration, ease: processCardEase }}
+              y={28}
+              delay={i * 0.08}
+              duration={0.65}
+              rootMargin="-80px 0px"
               className="ios-motion-stable"
             >
               <div className="group rounded-2xl border border-[#dfdfda] bg-white p-6 md:p-7 shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:hover:-translate-y-[1%] md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]">
@@ -112,14 +107,14 @@ export function WhySection() {
                   </div>
                   <h3
                     className="text-[24px] leading-tight font-black tracking-tight text-[#131311] md:text-[30px]"
-                    style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                    style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
                   >
                     {r.title}
                   </h3>
                 </div>
                 <p className="mt-4 text-[16px] text-[#555552] leading-relaxed">{r.desc}</p>
               </div>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
       </div>

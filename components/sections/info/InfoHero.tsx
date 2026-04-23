@@ -44,7 +44,7 @@ export function InfoHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-4xl text-[clamp(1.55rem,4.2vw+0.6rem,2.25rem)] font-black uppercase leading-[1.08] tracking-[0.02em] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)] sm:text-4xl md:text-5xl lg:text-6xl"
-          style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+          style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
         >
           {p.heroTitle}
         </motion.h1>

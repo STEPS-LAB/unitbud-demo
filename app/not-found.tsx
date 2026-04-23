@@ -14,13 +14,13 @@ export default function NotFound() {
         <div className="text-center max-w-md">
           <p
             className="text-8xl font-300 text-[#e8e8e5] mb-6 leading-none"
-            style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+            style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
           >
             404
           </p>
           <h1
             className="text-2xl font-500 text-[#131311] mb-4 tracking-tight"
-            style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+            style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
           >
             {tr.notFound.title}
           </h1>

@@ -1,38 +1,50 @@
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 import { Header } from "@/components/shared/Header";
+
+// Навмисно force-dynamic: це активує experimental.inlineCss (див. next.config.ts).
+// Для prerendered-сторінок Next.js не інлайнить CSS, щоб не дублювати його в
+// статичному HTML + RSC payload. SSR-час додається ~100-200 мс, але натомість
+// ми виграємо ~700 мс LCP/FCP через зняття render-blocking CSS <link>.
+// Контент на сторінці статичний (тексти, картинки), тому "dynamic" не шкодить
+// — просто HTML рендериться на льоту при кожному запиті (кешується на CDN
+// Vercel як ISR-подібний resource).
+export const dynamic = "force-dynamic";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { StatsBar } from "@/components/sections/StatsBar";
 import { MOBILE_STICKY_MAIN_PAD } from "@/lib/mobileSticky";
 
-const Footer = dynamic(() =>
+const Footer = nextDynamic(() =>
   import("@/components/shared/Footer").then((m) => m.Footer),
 );
 
-const InstalledSection = dynamic(() =>
+const InstalledSection = nextDynamic(() =>
   import("@/components/sections/InstalledSection").then((m) => m.InstalledSection),
 );
-const PopularSection = dynamic(() =>
+const PopularSection = nextDynamic(() =>
   import("@/components/sections/PopularSection").then((m) => m.PopularSection),
 );
-const WhySection = dynamic(() =>
+const WhySection = nextDynamic(() =>
   import("@/components/sections/WhySection").then((m) => m.WhySection),
 );
-const ProcessSection = dynamic(() =>
+const ProcessSection = nextDynamic(() =>
   import("@/components/sections/ProcessSection").then((m) => m.ProcessSection),
 );
-const CalculatorSection = dynamic(() =>
-  import("@/features/calculator/CalculatorSection").then((m) => m.CalculatorSection),
+// Важкі нижче-fold секції з формами (zod + react-hook-form) винесено в
+// client-only обгортки, щоб їх ~68 КБ JS не вантажилися в критичному шляху.
+// Див. components/shared/DeferredFormSections.tsx.
+const DeferredCalculatorSection = nextDynamic(() =>
+  import("@/components/shared/DeferredFormSections").then((m) => m.DeferredCalculatorSection),
 );
-const ReviewsSection = dynamic(() =>
+const ReviewsSection = nextDynamic(() =>
   import("@/components/sections/ReviewsSection").then((m) => m.ReviewsSection),
 );
-const FaqSection = dynamic(() =>
+const FaqSection = nextDynamic(() =>
   import("@/components/sections/FaqSection").then((m) => m.FaqSection),
 );
-const ConsultationSection = dynamic(() =>
-  import("@/components/sections/ConsultationSection").then((m) => m.ConsultationSection),
+const DeferredConsultationSection = nextDynamic(() =>
+  import("@/components/shared/DeferredFormSections").then((m) => m.DeferredConsultationSection),
 );
-const HomeStickyChrome = dynamic(() =>
+const HomeStickyChrome = nextDynamic(() =>
   import("@/components/shared/HomeStickyChrome").then((m) => m.HomeStickyChrome),
 );
 
@@ -67,10 +79,10 @@ export default function HomePage() {
         <PopularSection />
         <WhySection />
         <ProcessSection />
-        <CalculatorSection />
+        <DeferredCalculatorSection />
         <ReviewsSection />
         <FaqSection />
-        <ConsultationSection />
+        <DeferredConsultationSection />
       </main>
       <Footer className={MOBILE_STICKY_MAIN_PAD} />
       <HomeStickyChrome />

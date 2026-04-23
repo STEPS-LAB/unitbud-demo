@@ -138,7 +138,7 @@ function TeamCard({ member, locale, labels }: { member: TeamMember; locale: "uk"
         <div className="flex min-w-0 flex-col">
           <h3
             className="text-xl font-semibold tracking-tight text-[#131311] md:text-2xl"
-            style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+            style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
           >
             {name}
           </h3>
@@ -342,7 +342,7 @@ export function AboutPageSections() {
                 {lead ? (
                   <p
                     className="text-lg font-light leading-relaxed text-[#131311] md:text-xl"
-                    style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+                    style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
                   >
                     {lead}
                   </p>

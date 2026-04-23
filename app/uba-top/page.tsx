@@ -46,7 +46,7 @@ export default function UbaTopPage() {
             <p className="section-label">Новина</p>
             <h1
               className="mt-4 text-4xl md:text-5xl font-300 text-[#131311] tracking-tight leading-tight"
-              style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+              style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
             >
               Unitbud у рейтингу провідних виробників модульних будинків України за версією UBA.TOP
             </h1>
@@ -61,7 +61,7 @@ export default function UbaTopPage() {
           <div className="container-wide">
             <h2
               className="text-3xl md:text-4xl font-300 text-[#131311] tracking-tight"
-              style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+              style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
             >
               Чому це важливо
             </h2>
@@ -82,7 +82,7 @@ export default function UbaTopPage() {
             <div className="glass rounded-[8px] border border-[#e8e8e5] p-8">
               <h3
                 className="text-2xl md:text-3xl font-300 text-[#131311] tracking-tight"
-                style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
               >
                 Плануєте модульний будинок?
               </h3>

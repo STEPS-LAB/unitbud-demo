@@ -147,7 +147,7 @@ export function ConsultationSection({ mode = "consultation" }: ConsultationSecti
                 <CheckCircle2 size={52} className="mb-4 text-[#77d14d]" />
                 <h3
                   className="mb-2 text-xl font-normal text-[#131311]"
-                  style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                  style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
                 >
                   {tr.form.success}
                 </h3>

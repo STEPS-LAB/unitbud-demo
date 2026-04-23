@@ -370,7 +370,7 @@ export function Mb75PageClient({ house }: Props) {
             <RevealOnScroll>
               <h2
                 className="mb-4 text-xl font-500 tracking-tight text-[#131311]"
-                style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
               >
                 {tr.housePage.descriptionTitle}
               </h2>
@@ -384,7 +384,7 @@ export function Mb75PageClient({ house }: Props) {
             <RevealOnScroll>
               <h2
                 className="mb-6 text-xl font-500 tracking-tight text-[#131311]"
-                style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
               >
                 {tr.housePage.features}
               </h2>
@@ -398,7 +398,7 @@ export function Mb75PageClient({ house }: Props) {
                     <div className="min-w-0">
                       <p
                         className="text-[16px] font-600 leading-snug text-[#131311]"
-                        style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                        style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
                       >
                         {item.title}
                       </p>
@@ -412,7 +412,7 @@ export function Mb75PageClient({ house }: Props) {
             <RevealOnScroll>
               <h2
                 className="mb-4 text-xl font-500 tracking-tight text-[#131311]"
-                style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
               >
                 {tr.housePage.specs}
               </h2>
@@ -452,7 +452,7 @@ export function Mb75PageClient({ house }: Props) {
                     </p>
                     <p
                       className="text-3xl font-300 tracking-tight text-[#131311]"
-                      style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                      style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
                     >
                       {formatUsd(house.price, locale)}
                     </p>
@@ -491,7 +491,7 @@ export function Mb75PageClient({ house }: Props) {
                 <article className="flex h-full flex-col rounded-[6px] border border-[#e8e8e5] bg-white p-6 shadow-[0_4px_22px_rgba(19,19,17,0.05)] md:p-7">
                   <h3
                     className="text-lg font-bold tracking-tight text-[#131311]"
-                    style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                    style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
                   >
                     {item.title}
                   </h3>
@@ -500,7 +500,7 @@ export function Mb75PageClient({ house }: Props) {
                   <div className="my-4 h-px bg-[#e0e0dc]" />
                   <p
                     className="mb-5 text-xl font-300 text-[#131311]"
-                    style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                    style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
                   >
                     {item.price}
                   </p>

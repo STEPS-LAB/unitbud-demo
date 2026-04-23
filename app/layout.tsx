@@ -1,28 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@/components/shared/Analytics";
 import { DocumentLang } from "@/components/shared/DocumentLang";
 
-const inter = Inter({
-  subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-inter",
-  display: "swap",
-  preload: true,
-});
-
-// Montserrat used only for display headings. `preload: false` keeps it OUT of
-// the critical request chain; text first paints in Inter (preloaded) and
-// swaps to Montserrat when ready (display: swap). Same visual end state,
-// ~50KB and one network chain removed from LCP path.
-const montserrat = Montserrat({
-  subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-montserrat",
-  display: "swap",
-  preload: false,
-});
+// next/font навмисно ВИМКНЕНО. Після переходу всіх секцій на system-ui
+// Inter і Montserrat більше не споживаються жодним CSS-правилом, але
+// next/font все одно інжектить 165 @font-face-декларацій (~60 КБ) у
+// inlined CSS і навіть за preload:false час від часу генерує preload-
+// хінти в _document. Це бʼє по LCP (зайві woff2 у мережевому критичному
+// шляху) і роздуває HTML. Повернути власні шрифти можна буде через
+// @font-face з конкретним підмножиною гліфів, якщо дизайн цього вимагатиме.
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://unitbud.com"),
@@ -79,8 +66,10 @@ export default function RootLayout({
   return (
     <html
       lang="uk"
-      className={`${inter.variable} ${montserrat.variable}`}
-      style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+      style={{
+        fontFamily:
+          "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      }}
     >
       <body className="min-h-full antialiased">
         <DocumentLang />

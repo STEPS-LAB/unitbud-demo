@@ -175,7 +175,7 @@ export function CalculatorSection() {
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.28 }}
                     className="mt-2 text-3xl font-300 tabular-nums tracking-tight text-white"
-                    style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+                    style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
                   >
                     {formatUsd(estimate, locale)}
                   </motion.p>
@@ -189,7 +189,7 @@ export function CalculatorSection() {
                   </label>
                   <span
                     className="text-2xl font-300 tabular-nums tracking-tight text-white"
-                    style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+                    style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
                   >
                     {area}
                     <span className="ml-1.5 text-sm font-400 text-white/40">
@@ -274,7 +274,7 @@ export function CalculatorSection() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.28 }}
               className="mt-2 text-4xl font-300 tracking-tight text-[#131311] md:text-[2.65rem]"
-              style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+              style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
             >
               {formatUsd(estimate, locale)}
             </motion.p>

@@ -47,7 +47,7 @@ export function MapSection() {
           <div className="absolute inset-0 flex items-center justify-center opacity-10">
             <svg viewBox="0 0 400 300" className="w-full h-full" style={{ maxWidth: "80%" }}>
               <rect x="40" y="60" width="320" height="180" rx="40" fill="#77d14d" />
-              <text x="200" y="160" textAnchor="middle" fill="#2e3b1e" fontSize="24" fontFamily="Montserrat, sans-serif">
+              <text x="200" y="160" textAnchor="middle" fill="#2e3b1e" fontSize="24" fontFamily="system-ui, sans-serif">
                 {tr.common.ukraine}
               </text>
             </svg>
@@ -125,7 +125,7 @@ export function MapSection() {
                   </button>
                 </div>
                 <div className="p-4">
-                  <p className="text-sm font-500 text-[#131311]" style={{ fontFamily: "Montserrat, Inter, sans-serif" }}>
+                  <p className="text-sm font-500 text-[#131311]" style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
                     {active.title}
                   </p>
                   <p className="text-[12px] text-[#7c7c78] mt-0.5 mb-3">

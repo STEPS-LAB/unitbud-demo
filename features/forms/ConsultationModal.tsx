@@ -153,7 +153,7 @@ export function ConsultationModal({ open, onClose }: Props) {
               <div>
                 <h2
                   className="text-xl font-400 text-[#131311] tracking-tight"
-                  style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                  style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
                 >
                   {success ? (locale === "en" ? "Thank you!" : "Дякуємо!") : tr.common.consultation}
                 </h2>

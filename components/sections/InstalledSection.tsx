@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback, type UIEventHandler, type MouseEvent, type KeyboardEvent } from "react";
 import Image from "next/image";
+import { LazyCardImage } from "@/components/shared/LazyCardImage";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
@@ -132,7 +133,11 @@ export function InstalledSection() {
   };
 
   return (
-    <section id="installed" className="section-padding bg-[#f2f2f0]">
+    <section
+      id="installed"
+      data-lazy-paint="true"
+      className="section-padding bg-[#f2f2f0]"
+    >
       <div className="container-wide">
         <SectionHeader
           title={tr.sections.installed}
@@ -171,7 +176,7 @@ export function InstalledSection() {
                           key={`${house.id}-${currentIdx}`}
                           className="absolute inset-0 card-fade-in"
                         >
-                          <Image
+                          <LazyCardImage
                             src={images[currentIdx]}
                             alt={`${houseDisplayName(house, locale)} — ${currentIdx + 1}/${images.length}`}
                             fill
@@ -220,14 +225,14 @@ export function InstalledSection() {
                 <div className="mt-6 flex flex-1 flex-col">
                   <h3
                     className="truncate text-[20px] font-semibold leading-snug tracking-tight text-[#131311]"
-                    style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+                    style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
                   >
                     {houseDisplayName(house, locale)}
                   </h3>
 
                   <div
                     className="mt-2 border-t border-[#e9e9e4] text-[15px] text-[#62625d]"
-                    style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                    style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif" }}
                   >
                     <div className="flex items-center justify-between py-4 border-b border-[#ededea]">
                       <span>{locale === "en" ? "Area" : "Площа"}</span>
@@ -250,7 +255,7 @@ export function InstalledSection() {
                       href="/mb75"
                       onClick={(e) => e.stopPropagation()}
                       className="cta-press inline-flex w-full items-center justify-center rounded-[8px] bg-[#131311] px-4 py-2 text-sm font-semibold uppercase tracking-[0.04em] text-white shadow-[0_10px_24px_rgba(19,19,17,0.28)] transition hover:bg-[#2a2a28]"
-                      style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                      style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif" }}
                     >
                       {locale === "en" ? "View" : "Переглянути"}
                     </Link>
@@ -297,7 +302,7 @@ export function InstalledSection() {
                             key={`${house.id}-grid-${currentIdx}`}
                             className="absolute inset-0 card-fade-in"
                           >
-                            <Image
+                            <LazyCardImage
                               src={images[currentIdx]}
                               alt={`${houseDisplayName(house, locale)} — ${currentIdx + 1}/${images.length}`}
                               fill
@@ -346,14 +351,14 @@ export function InstalledSection() {
                   <div className="mt-6 flex flex-1 flex-col">
                     <h3
                       className="truncate text-[20px] font-semibold leading-snug tracking-tight text-[#131311]"
-                      style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+                      style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
                     >
                       {houseDisplayName(house, locale)}
                     </h3>
 
                     <div
                       className="mt-2 border-t border-[#e9e9e4] text-[15px] text-[#62625d]"
-                      style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                      style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif" }}
                     >
                       <div className="flex items-center justify-between py-4 border-b border-[#ededea]">
                         <span>{locale === "en" ? "Area" : "Площа"}</span>
@@ -376,7 +381,7 @@ export function InstalledSection() {
                         href="/mb75"
                         onClick={(e) => e.stopPropagation()}
                         className="cta-press inline-flex w-full items-center justify-center rounded-[8px] bg-[#131311] px-4 py-2 text-sm font-semibold uppercase tracking-[0.04em] text-white shadow-[0_10px_24px_rgba(19,19,17,0.28)] transition hover:bg-[#2a2a28]"
-                        style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                        style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif" }}
                       >
                         {locale === "en" ? "View" : "Переглянути"}
                       </Link>

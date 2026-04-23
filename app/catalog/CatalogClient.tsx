@@ -53,7 +53,7 @@ function AreaSliderRow({
         <span className="text-[11px] font-600 uppercase tracking-[0.16em] text-[#8fdf6a]/90">{label}</span>
         <span
           className="text-xl font-300 tabular-nums tracking-tight text-white"
-          style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+          style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
         >
           {value}
           <span className="ml-1.5 text-sm font-400 text-white/40">{locale === "en" ? "m²" : "м²"}</span>
@@ -163,7 +163,7 @@ export function CatalogClient() {
           <span className="section-label mb-3">{tr.nav.catalog}</span>
           <h1
             className="mt-3 text-4xl font-300 tracking-tight text-[#131311] md:text-5xl"
-            style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+            style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
           >
             {tr.catalogPage.title}
           </h1>
@@ -259,7 +259,7 @@ export function CatalogClient() {
               >
                 <span
                   className="text-[11px] font-600 uppercase tracking-[0.2em] text-[#131311]"
-                  style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                  style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
                 >
                   {tr.catalogPage.residentialModelsTitle}
                 </span>
@@ -331,7 +331,7 @@ export function CatalogClient() {
                                     "min-w-0 flex-1 text-[14px] font-400 leading-snug tracking-tight transition-colors duration-200 sm:text-[15px]",
                                     selected ? "text-[#131311]" : "text-[#6b6b67]",
                                   )}
-                                  style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                                  style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
                                 >
                                   {residentialFilterLabel(tr.catalogPage, line)}
                                 </span>

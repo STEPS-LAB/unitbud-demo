@@ -243,7 +243,7 @@ export function ContactsView() {
           <div className="mb-8 flex flex-col justify-between gap-6 md:mb-10 md:flex-row md:items-start md:gap-10">
             <h2
               className="max-w-xs text-xl font-semibold uppercase tracking-[0.12em] text-[#131311] md:text-2xl"
-              style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+              style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
             >
               {cp.officeLabel}
             </h2>

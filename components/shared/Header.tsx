@@ -8,11 +8,7 @@ import { Menu, X, Phone } from "lucide-react";
 import { useScrolled } from "@/hooks/useScrolled";
 import { useLocale } from "@/hooks/useLocale";
 import { cn } from "@/lib/utils";
-import dynamic from "next/dynamic";
-
-const ConsultationModal = dynamic(
-  () => import("@/features/forms/ConsultationModal").then((m) => m.ConsultationModal),
-);
+import { useConsultationModal } from "@/components/shared/useConsultationModal";
 
 const navLinks = [
   { href: "/", labelUk: "Головна", labelEn: "Home" },
@@ -28,7 +24,7 @@ export function Header() {
   // As soon as user starts scrolling, switch to frosted glass.
   const scrolled = useScrolled(8);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const { open: openModal, modal: consultationModal } = useConsultationModal();
   const { locale, toggle } = useLocale();
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -137,7 +133,7 @@ export function Header() {
 
             {/* CTA */}
             <button
-              onClick={() => setModalOpen(true)}
+              onClick={openModal}
               className="btn-primary btn-text-graphite text-sm px-5 py-2.5"
             >
               {locale === "uk" ? "Консультація" : "Consultation"}
@@ -188,7 +184,7 @@ export function Header() {
                   href={link.href}
                   onClick={handleNavLinkClick(link.href)}
                   className="block text-3xl font-300 text-[#131311] tracking-tight py-3 border-b border-[#f2f2f0] hover:text-[#77d14d] transition-colors"
-                  style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                  style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
                 >
                   {locale === "uk" ? link.labelUk : link.labelEn}
                 </Link>
@@ -198,7 +194,7 @@ export function Header() {
           <a
             href="tel:+380800000000"
             className="mobile-menu-phone flex items-center gap-3 text-3xl font-300 tracking-tight text-[#131311] hover:text-[#77d14d] transition-colors pt-4 border-t border-[#f2f2f0]"
-            style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+            style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
           >
             <Phone size={22} className="text-[#77d14d] flex-shrink-0" />
             0 800 000 000
@@ -206,7 +202,7 @@ export function Header() {
         </div>
       )}
 
-      {modalOpen && <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />}
+      {consultationModal}
     </>
   );
 }

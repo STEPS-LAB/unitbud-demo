@@ -1,18 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { popularHouses } from "@/data/houses";
 import { PopularHouseCard } from "@/components/ui/PopularHouseCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Reveal } from "@/components/ui/Reveal";
 import { useLocale } from "@/hooks/useLocale";
 
 export function PopularSection() {
   const { tr } = useLocale();
 
   return (
-    <section id="popular" className="section-padding bg-white">
+    <section
+      id="popular"
+      data-lazy-paint="true"
+      className="section-padding bg-white"
+    >
       <div className="container-wide">
         <div className="mb-12 flex flex-wrap items-start justify-between gap-4 md:mb-16">
           <SectionHeader
@@ -32,15 +36,9 @@ export function PopularSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {popularHouses.slice(0, 3).map((house, i) => (
-            <motion.div
-              key={house.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            >
+            <Reveal key={house.id} y={24} delay={i * 0.1} duration={0.6}>
               <PopularHouseCard house={house} />
-            </motion.div>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { CalendarDays, Quote, Star } from "lucide-react";
 import { reviews } from "@/data/reviews";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Reveal } from "@/components/ui/Reveal";
 import { useLocale } from "@/hooks/useLocale";
 import { cn } from "@/lib/utils";
 
@@ -64,12 +64,13 @@ export function ReviewsSection() {
             ].filter(Boolean);
 
             return (
-              <motion.article
+              <Reveal
                 key={review.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-48px" }}
-                transition={{ delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                as="article"
+                y={20}
+                delay={i * 0.08}
+                duration={0.55}
+                rootMargin="-48px 0px"
                 className="group flex min-h-0 overflow-hidden border border-white/[0.1] bg-[#252523] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
               >
                 {/* суцільна смуга однакової ширини на всю висоту картки */}
@@ -126,7 +127,7 @@ export function ReviewsSection() {
                     </div>
                   </div>
                 </div>
-              </motion.article>
+              </Reveal>
             );
           })}
         </div>

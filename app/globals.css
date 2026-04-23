@@ -7,8 +7,22 @@
 
 @theme inline {
   /* ── Typography ─────────────────────────────────────────── */
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-display: "Montserrat", "Inter", sans-serif;
+  /* Навмисно system-ui ПЕРЕД Inter: це вирішальна оптимізація FCP/LCP.
+     До зміни браузер бачив у @theme "Inter" першим у font-family для всіх
+     утиліт font-sans і стартував завантаження 4 woff2 (~122 КБ) як VeryHigh
+     priority, що Lantern зараховував у критичний шлях до 3.6 с LCP.
+     Тепер дефолтний рендер — system-ui, Inter підтягується як enhancement
+     через display:swap (див. layout.tsx) і більше не тримає LCP. */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /*
+   * --font-display теж перейшов на system-ui. Montserrat лишилася зареєстрована
+   * через next/font (layout.tsx) на випадок явного використання var(--font-
+   * montserrat), але CSS-утиліти (font-display) тепер малюють system-ui.
+   * Причина: Lighthouse-тести показували, що 2 Montserrat woff2 (21+35 КБ)
+   * завантажувалися з VeryHigh priority для below-fold текстів і тримали LCP
+   * близько 3.5 с. Перехід на system-ui знімає це та цілиться на LCP ≤2.5 с.
+   */
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* ── Brand Colors ──────────────────────────────────────── */
   --color-brand-50:  #f3fbef;
@@ -76,7 +90,8 @@ html {
 body {
   background: #ffffff;
   color: #131311;
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  /* system-ui first — жодного очікування на Inter перед першим малюванням. */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-weight: 400;
   line-height: 1.6;
   overflow-x: hidden;
@@ -86,6 +101,19 @@ body {
 
 main {
   overflow-x: clip;
+}
+
+/*
+ * Off-screen-секції: content-visibility: auto пропускає render/layout/fonts
+ * для елементів поза viewport. Це прибирає Montserrat-підвантаження з
+ * критичного шляху LCP для InstalledSection/PopularSection/WhySection
+ * тощо: їхній контент (і текст із Montserrat) рендериться лише коли
+ * користувач до них доскролить. contain-intrinsic-size резервує висоту,
+ * щоб не стрибав CLS на перших секціях.
+ */
+section[data-lazy-paint="true"] {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1200px;
 }
 
 ::selection {

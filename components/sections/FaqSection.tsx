@@ -1,21 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { faqs } from "@/data/faq";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Reveal } from "@/components/ui/Reveal";
 import { useLocale } from "@/hooks/useLocale";
-import dynamic from "next/dynamic";
-
-const ConsultationModal = dynamic(
-  () => import("@/features/forms/ConsultationModal").then((m) => m.ConsultationModal),
-);
+import { useConsultationModal } from "@/components/shared/useConsultationModal";
 
 export function FaqSection() {
   const { locale, tr } = useLocale();
   const [openId, setOpenId] = useState<string | null>(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const { open: openModal, modal: consultationModal } = useConsultationModal();
 
   const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id));
 
@@ -36,43 +32,44 @@ export function FaqSection() {
 
           {/* FAQ list: after title on mobile, right column full height on desktop */}
           <div className="order-2 space-y-0 divide-y divide-[#e8e8e5] lg:col-start-2 lg:row-start-1 lg:row-span-2">
-            {faqs.map((faq, i) => (
-              <motion.div
-                key={faq.id}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05, duration: 0.5 }}
-              >
-                <button
-                  onClick={() => toggle(faq.id)}
-                  className="w-full flex items-center justify-between gap-4 py-5 text-left group"
-                >
-                  <span className="text-[15px] font-600 text-[#131311] group-hover:text-[#77d14d] transition-colors">
-                    {locale === "en" ? faq.questionEn ?? faq.question : faq.question}
-                  </span>
-                  <div className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e8e8e5] flex items-center justify-center text-[#77d14d]">
-                    {openId === faq.id ? <Minus size={14} strokeWidth={2} /> : <Plus size={14} />}
-                  </div>
-                </button>
+            {faqs.map((faq, i) => {
+              const isOpen = openId === faq.id;
+              return (
+                <Reveal key={faq.id} y={16} delay={i * 0.05} duration={0.5}>
+                  <button
+                    onClick={() => toggle(faq.id)}
+                    className="w-full flex items-center justify-between gap-4 py-5 text-left group"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="text-[15px] font-600 text-[#131311] group-hover:text-[#77d14d] transition-colors">
+                      {locale === "en" ? faq.questionEn ?? faq.question : faq.question}
+                    </span>
+                    <div className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e8e8e5] flex items-center justify-center text-[#77d14d]">
+                      {isOpen ? <Minus size={14} strokeWidth={2} /> : <Plus size={14} />}
+                    </div>
+                  </button>
 
-                <AnimatePresence initial={false}>
-                  {openId === faq.id && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                      style={{ overflow: "hidden" }}
-                    >
+                  {/*
+                   * CSS grid-rows-[0fr|1fr] trick: анімуємо висоту від 0 до auto
+                   * без JS. Це вирішує той самий ефект, що AnimatePresence з
+                   * framer-motion, але без ~40 КБ коду в бандлі.
+                   */}
+                  <div
+                    className="grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                    style={{
+                      gridTemplateRows: isOpen ? "1fr" : "0fr",
+                      opacity: isOpen ? 1 : 0,
+                    }}
+                  >
+                    <div className="overflow-hidden">
                       <p className="pb-5 text-[14px] text-[#555552] leading-relaxed">
                         {locale === "en" ? faq.answerEn ?? faq.answer : faq.answer}
                       </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            ))}
+                    </div>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
 
           {/* CTA: last on mobile, under title on desktop */}
@@ -84,7 +81,7 @@ export function FaqSection() {
             </p>
             <button
               type="button"
-              onClick={() => setModalOpen(true)}
+              onClick={openModal}
               className="mt-4 inline-flex btn-primary btn-text-graphite text-sm px-5 py-2.5"
             >
               {tr.common.consultation}
@@ -93,7 +90,7 @@ export function FaqSection() {
         </div>
       </div>
 
-      {modalOpen && <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />}
+      {consultationModal}
     </section>
   );
 }

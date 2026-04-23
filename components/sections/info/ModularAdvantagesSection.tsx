@@ -70,7 +70,7 @@ export function ModularAdvantagesSection() {
                 </div>
                 <h3
                   className="mt-5 text-base font-black leading-snug tracking-tight text-white text-balance sm:text-lg md:text-xl"
-                  style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+                  style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
                 >
                   {card.title}
                 </h3>

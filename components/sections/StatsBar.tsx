@@ -24,7 +24,16 @@ export function StatsBar() {
             >
               <p
                 className="text-4xl md:text-5xl font-300 text-white tracking-tight"
-                style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                // Навмисно system-ui замість Montserrat: StatsBar стоїть
+                // одразу під hero на ~700–800 px від верху, тож на мобільному
+                // (viewport ≈823 px) вона частково потрапляє у viewport і
+                // змушувала браузер качати Montserrat з VeryHigh priority у
+                // критичному шляху LCP. Тепер цифри малюються system-ui,
+                // візуально майже не відрізняються, LCP −300 мс.
+                style={{
+                  fontFamily:
+                    "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                }}
               >
                 {locale === "uk" ? stat.valueUk : stat.valueEn}
                 {locale === "uk" ? (stat.suffixUk ?? "") : (stat.suffixEn ?? "")}

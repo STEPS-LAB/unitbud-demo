@@ -52,7 +52,7 @@ export function DeliverySection() {
             <div className="absolute left-0 top-0 h-full w-1 bg-[#77d14d]" aria-hidden />
             <h3
               className="pl-4 text-lg font-bold uppercase tracking-[0.06em] text-[#131311] md:text-xl"
-              style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+              style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
             >
               {c.costTitle}
             </h3>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { LazyCardImage } from "@/components/shared/LazyCardImage";
 import Link from "next/link";
 import { ArrowRight, Bath, BedDouble, Maximize2 } from "lucide-react";
 import { House } from "@/types";
@@ -37,18 +38,29 @@ export function PopularHouseCard({ house, priority = false, badgeLabel }: Props)
       <Link href="/mb75" className="absolute inset-0 z-10" aria-label={`${displayName} ${tr.common.details}`} />
 
       <div className="relative aspect-[16/10] bg-[#f2f2f0]">
-        <Image
-          src={house.thumbnail}
-          alt={displayName}
-          fill
-          priority={priority}
-          fetchPriority={priority ? "high" : "auto"}
-          sizes="(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 34vw"
-          quality={68}
-          className="object-cover transition-transform duration-700 ease-[0.22,1,0.36,1] md:group-hover:scale-[1.04]"
-          placeholder="blur"
-          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjJmMmYwIi8+PC9zdmc+"
-        />
+        {priority ? (
+          <Image
+            src={house.thumbnail}
+            alt={displayName}
+            fill
+            priority
+            fetchPriority="high"
+            sizes="(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 34vw"
+            quality={68}
+            className="object-cover transition-transform duration-700 ease-[0.22,1,0.36,1] md:group-hover:scale-[1.04]"
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjJmMmYwIi8+PC9zdmc+"
+          />
+        ) : (
+          <LazyCardImage
+            src={house.thumbnail}
+            alt={displayName}
+            fill
+            sizes="(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 34vw"
+            quality={68}
+            className="object-cover transition-transform duration-700 ease-[0.22,1,0.36,1] md:group-hover:scale-[1.04]"
+          />
+        )}
 
         <div className="absolute left-4 top-4 z-20 flex items-center gap-2">
           <span className="inline-flex items-center rounded-full border border-white/45 bg-white/30 px-3 py-1 text-[11px] font-600 uppercase tracking-wider text-[#3f3f3c] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),0_6px_16px_rgba(19,19,17,0.16)] backdrop-blur-md">
@@ -62,7 +74,7 @@ export function PopularHouseCard({ house, priority = false, badgeLabel }: Props)
           <div className="min-w-0">
             <h3
               className="truncate text-[20px] font-semibold tracking-tight text-[#131311]"
-              style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+              style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
             >
               {displayName}
             </h3>

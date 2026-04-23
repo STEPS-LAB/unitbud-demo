@@ -1,14 +1,10 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
-import dynamic from "next/dynamic";
-
-const ConsultationModal = dynamic(
-  () => import("@/features/forms/ConsultationModal").then((m) => m.ConsultationModal),
-);
+import { type CSSProperties } from "react";
 import { useLocale } from "@/hooks/useLocale";
 import { cn } from "@/lib/utils";
 import { CHROME_SLIDE_DURATION, CHROME_SLIDE_EASE_CSS } from "@/lib/slideChrome";
+import { useConsultationModal } from "@/components/shared/useConsultationModal";
 
 const BAR_PANEL_CLASS =
   "lg:hidden fixed bottom-0 inset-x-0 z-30 flex border-t border-[#e8e8e5] bg-white px-4 py-3";
@@ -23,12 +19,12 @@ type Props = {
 
 export function StickyBookingBar({ overlayStyle, slideFromBottom, slideOpen = false }: Props) {
   const { tr } = useLocale();
-  const [open, setOpen] = useState(false);
+  const { open: openModal, modal } = useConsultationModal();
 
   const button = (
     <button
       type="button"
-      onClick={() => setOpen(true)}
+      onClick={openModal}
       className="btn-primary btn-text-graphite w-full py-3 text-sm"
     >
       {tr.common.consultation}
@@ -58,7 +54,7 @@ export function StickyBookingBar({ overlayStyle, slideFromBottom, slideOpen = fa
         </div>
       )}
 
-      {open && <ConsultationModal open={open} onClose={() => setOpen(false)} />}
+      {modal}
     </>
   );
 }

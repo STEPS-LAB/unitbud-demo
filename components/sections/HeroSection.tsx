@@ -1,13 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type MouseEventHandler, type TouchEventHandler } from "react";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useLocale } from "@/hooks/useLocale";
-
-const ConsultationModal = dynamic(
-  () => import("@/features/forms/ConsultationModal").then((m) => m.ConsultationModal),
-);
+import { useConsultationModal } from "@/components/shared/useConsultationModal";
 
 const HERO_SLIDES = [
   {
@@ -71,10 +67,12 @@ type HeroSlide = (typeof HERO_SLIDES)[number];
 function HeroSlideImage({
   slide,
   isFirst,
+  altText,
   objectClass = "object-center",
 }: {
   slide: HeroSlide;
   isFirst: boolean;
+  altText: string;
   objectClass?: string;
 }) {
   return (
@@ -82,7 +80,12 @@ function HeroSlideImage({
       <source media="(min-width: 768px)" srcSet={slide.image} />
       <img
         src={slide.mobileImage}
-        alt=""
+        // alt має значення для LCP: Chrome рахує порожні alt як "decorative"
+        // і може виключати картинку з LCP-кандидатів. Даємо значущий alt.
+        alt={altText}
+        // width/height допомагають LCP-алгоритму одразу знати розмір.
+        width={580}
+        height={1044}
         fetchPriority={isFirst ? "high" : "auto"}
         loading={isFirst ? "eager" : "lazy"}
         decoding="async"
@@ -96,7 +99,7 @@ function HeroSlideImage({
 export function HeroSection() {
   const { locale, tr } = useLocale();
   const [activeSlide, setActiveSlide] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
+  const { open: openModal, modal: consultationModal } = useConsultationModal();
   // Сусідні слайди вантажимо лише ПІСЛЯ LCP — щоб не конкурувати за мережу з LCP-картинкою.
   const [restReady, setRestReady] = useState(false);
   const touchStartXRef = useRef<number | null>(null);
@@ -222,6 +225,7 @@ export function HeroSection() {
                   <HeroSlideImage
                     slide={slide}
                     isFirst={isFirst}
+                    altText={slide.title?.[locale] ?? ""}
                     objectClass={
                       isFirst ? "object-[center_42%] md:object-center" : "object-center"
                     }
@@ -252,9 +256,17 @@ export function HeroSection() {
         }`}
       >
         {currentSlide.title ? (
+          // ВАЖЛИВО: цей H2 — LCP-елемент на мобільному. Lantern (simulator
+          // у Lighthouse) чекає на ВЕБ-ШРИФТ для "фінального" малювання LCP-тексту
+          // навіть з font-display: swap — через це LCP тягнувся до 4.7 s.
+          // Тому для саме LCP-елемента використовуємо ЧИСТО системний стек:
+          // браузер малює його одразу після FCP без жодного fetch-а.
           <h2
-            className="max-w-4xl text-3xl font-black uppercase leading-[1.08] tracking-[0.03em] text-white sm:text-4xl md:text-5xl"
-            style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+            className="max-w-4xl text-3xl font-bold uppercase leading-[1.08] tracking-[0.03em] text-white sm:text-4xl md:text-5xl"
+            style={{
+              fontFamily:
+                "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+            }}
           >
             {currentSlide.title?.[locale]}
           </h2>
@@ -269,9 +281,15 @@ export function HeroSection() {
             {currentSlide.action === "consultation" ? (
               <button
                 type="button"
-                onClick={() => setModalOpen(true)}
+                onClick={openModal}
                 className="cta-press inline-flex min-w-[220px] items-center justify-center rounded-[8px] border-[3px] border-white bg-white/8 px-10 py-4 text-xl font-black uppercase tracking-[0.08em] text-white shadow-[0_10px_32px_rgba(0,0,0,0.2)] transition hover:bg-white/35 hover:backdrop-blur-md"
-                style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                // Hero-CTA — єдиний above-the-fold елемент, що використовував
+                // Montserrat. Тепер system-ui: браузер не тягне woff2 у
+                // критичному шляху LCP. Візуально uppercase+bold залишається.
+                style={{
+                  fontFamily:
+                    "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                }}
               >
                 {currentSlide.buttonLabel[locale]}
               </button>
@@ -279,7 +297,10 @@ export function HeroSection() {
               <Link
                 href={currentSlide.href ?? "/"}
                 className="cta-press inline-flex min-w-[220px] items-center justify-center rounded-[8px] border-[3px] border-white bg-white/8 px-10 py-4 text-xl font-black uppercase tracking-[0.08em] text-white shadow-[0_10px_32px_rgba(0,0,0,0.2)] transition hover:bg-white/35 hover:backdrop-blur-md"
-                style={{ fontFamily: "Montserrat, Inter, sans-serif" }}
+                style={{
+                  fontFamily:
+                    "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                }}
               >
                 {currentSlide.buttonLabel[locale]}
               </Link>
@@ -291,7 +312,7 @@ export function HeroSection() {
       <div className="absolute bottom-20 left-1/2 z-30 -translate-x-1/2">
         <button
           type="button"
-          onClick={() => setModalOpen(true)}
+          onClick={openModal}
           className="btn-primary btn-text-graphite text-sm px-5 py-2.5"
         >
           {tr.hero.cta2}
@@ -315,7 +336,7 @@ export function HeroSection() {
         ))}
       </div>
 
-      {modalOpen && <ConsultationModal open={modalOpen} onClose={() => setModalOpen(false)} />}
+      {consultationModal}
     </section>
   );
 }

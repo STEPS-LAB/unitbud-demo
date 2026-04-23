@@ -67,7 +67,7 @@ export function SectionHeader({
                 onDark ? "text-white" : "text-[#131311]",
                 titleClassName,
               )}
-              style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+              style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
             >
               {title}
             </TitleTag>
@@ -102,7 +102,7 @@ export function SectionHeader({
                   alignResponsive && "lg:whitespace-nowrap",
                   titleClassName,
                 )}
-                style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+                style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
               >
                 {title}
               </TitleTag>

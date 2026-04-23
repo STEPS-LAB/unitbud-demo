@@ -52,7 +52,7 @@ export function PaymentSection() {
               </div>
               <h3
                 className="text-lg font-bold tracking-tight text-[#131311] text-balance sm:text-xl md:text-2xl"
-                style={{ fontFamily: "var(--font-display, Montserrat, Inter, sans-serif)" }}
+                style={{ fontFamily: "var(--font-display, system-ui, sans-serif)" }}
               >
                 {step.title}
               </h3>
