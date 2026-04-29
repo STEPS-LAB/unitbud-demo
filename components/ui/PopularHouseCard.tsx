@@ -13,9 +13,10 @@ interface Props {
   priority?: boolean;
   /** Наприклад на /catalog — підпис типу «Житлові» замість серії моделі */
   badgeLabel?: string;
+  surface?: "tinted" | "white";
 }
 
-export function PopularHouseCard({ house, priority = false, badgeLabel }: Props) {
+export function PopularHouseCard({ house, priority = false, badgeLabel, surface = "tinted" }: Props) {
   const { locale, tr } = useLocale();
   const displayName = locale === "en" ? house.nameEn ?? house.name : house.name;
   const isFirstPopularCard = house.id === "1";
@@ -33,11 +34,13 @@ export function PopularHouseCard({ house, priority = false, badgeLabel }: Props)
 
   return (
     <article
-      className="group relative overflow-hidden rounded-2xl border border-[#dfdfda] bg-[#f2f2f0] shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition md:hover:-translate-y-[1%] md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1]"
+      className={`group relative overflow-hidden rounded-2xl border border-[#dfdfda] shadow-[0_16px_42px_rgba(19,19,17,0.09)] transition md:hover:-translate-y-[1%] md:hover:shadow-[0_20px_48px_rgba(19,19,17,0.13)] md:will-change-transform md:transition-transform md:duration-500 md:ease-[0.22,1,0.36,1] ${
+        surface === "white" ? "bg-white" : "bg-[#f2f2f0]"
+      }`}
     >
       <Link href="/mb75" className="absolute inset-0 z-10" aria-label={`${displayName} ${tr.common.details}`} />
 
-      <div className="relative aspect-[16/10] bg-[#f2f2f0]">
+      <div className={`relative aspect-[16/10] ${surface === "white" ? "bg-white" : "bg-[#f2f2f0]"}`}>
         {priority ? (
           <Image
             src={house.thumbnail}

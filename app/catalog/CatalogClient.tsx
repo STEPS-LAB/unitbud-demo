@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { houses } from "@/data/houses";
 import { PopularHouseCard } from "@/components/ui/PopularHouseCard";
 import { House, type ResidentialModelLine } from "@/types";
@@ -82,6 +83,7 @@ function AreaSliderRow({
 
 export function CatalogClient() {
   const { tr, locale } = useLocale();
+  const searchParams = useSearchParams();
   const [segment, setSegment] = useState<CatalogSegmentTab>("residential");
   const [sort, setSort] = useState<SortKey>("price-asc");
   const [areaMin, setAreaMin] = useState(AREA_MIN);
@@ -126,6 +128,19 @@ export function CatalogClient() {
     document.addEventListener("mousedown", onDoc);
     return () => document.removeEventListener("mousedown", onDoc);
   }, [sortOpen]);
+
+  useEffect(() => {
+    const segmentParam = searchParams.get("segment");
+    if (segmentParam === "all" || segmentParam === "residential" || segmentParam === "commercial" || segmentParam === "sauna") {
+      setSegment(segmentParam);
+      return;
+    }
+
+    const filterParam = searchParams.get("filter");
+    if (filterParam === "commercial") {
+      setSegment("commercial");
+    }
+  }, [searchParams]);
 
   const filtered = useMemo(() => {
     let list = houses.filter((h) => {
@@ -401,7 +416,7 @@ export function CatalogClient() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.4 }}
                 >
-                  <PopularHouseCard house={house} priority={i < 3} />
+                  <PopularHouseCard house={house} priority={i < 3} surface="white" />
                 </motion.div>
               ))}
             </motion.div>

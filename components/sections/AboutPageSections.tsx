@@ -295,18 +295,11 @@ function ProductionSlider({ alt }: { alt: string }) {
               type="button"
               onClick={() => setIndex(i)}
               className={cn(
-                "no-outline flex size-11 items-center justify-center rounded-full transition-colors",
-                i === index ? "bg-white/10" : "hover:bg-white/10",
+                "no-outline h-2.5 rounded-full border border-white/70 transition-all duration-300",
+                i === index ? "w-8 bg-white" : "w-2.5 bg-white/30 hover:bg-white/70",
               )}
               aria-label={`Slide ${i + 1}`}
-            >
-              <span
-                className={cn(
-                  "h-2.5 rounded-full border border-white/70 transition-all duration-300",
-                  i === index ? "w-8 bg-white" : "w-2.5 bg-white/30 hover:bg-white/70",
-                )}
-              />
-            </button>
+            />
           ))}
         </div>
       </div>

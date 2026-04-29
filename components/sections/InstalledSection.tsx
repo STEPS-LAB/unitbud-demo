@@ -274,16 +274,10 @@ export function InstalledSection() {
                 type="button"
                 onClick={() => scrollToCard(index)}
                 aria-label={locale === "en" ? `Go to card ${index + 1}` : `Перейти до картки ${index + 1}`}
-                className={`flex size-11 items-center justify-center rounded-full transition-colors ${
-                  activeCard === index ? "bg-white/10" : "hover:bg-white/10"
+                className={`h-2.5 rounded-full border border-white/70 transition-all duration-300 ${
+                  activeCard === index ? "w-8 bg-white" : "w-2.5 bg-white/30 hover:bg-white/70"
                 }`}
-              >
-                <span
-                  className={`h-2.5 rounded-full border border-white/70 transition-all duration-300 ${
-                    activeCard === index ? "w-8 bg-white" : "w-2.5 bg-white/30 hover:bg-white/70"
-                  }`}
-                />
-              </button>
+              />
             ))}
           </div>
 
