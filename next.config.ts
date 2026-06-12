@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Дозволяємо запити до dev-сервера з пристроїв у локальній мережі
+  // (наприклад, телефон за IP), інакше Next блокує HMR і клієнтський JS,
+  // через що інтерактив (бургер-меню тощо) не працює при заході по LAN-IP.
+  allowedDevOrigins: ["192.168.31.211"],
   async redirects() {
     return [
       {

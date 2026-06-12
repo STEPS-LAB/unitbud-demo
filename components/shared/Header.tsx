@@ -37,10 +37,35 @@ export function Header() {
       ? "border-[#e8e8e5]/80 bg-white/65"
       : "border-transparent bg-transparent";
 
-  // Lock body scroll when mobile menu open
+  // Lock body scroll when mobile menu open.
+  // На iOS Safari самого `overflow: hidden` недостатньо, тому фіксуємо body
+  // на поточній позиції прокрутки й відновлюємо її при закритті.
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (!mobileOpen) return;
+    const scrollY = window.scrollY;
+    const { body } = document;
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    return () => {
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      body.style.width = "";
+      body.style.overflow = "";
+      // Глобально задано html { scroll-behavior: smooth }, тому простий
+      // scrollTo тут анімовано «перелистував» сторінку до точки відкриття.
+      // Тимчасово вимикаємо плавний скрол, щоб повернути позицію миттєво.
+      const html = document.documentElement;
+      const prevBehavior = html.style.scrollBehavior;
+      html.style.scrollBehavior = "auto";
+      window.scrollTo(0, scrollY);
+      html.style.scrollBehavior = prevBehavior;
+    };
   }, [mobileOpen]);
 
   const handleLogoClick = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -169,7 +194,7 @@ export function Header() {
       {/* Mobile Fullscreen Overlay (CSS transitions, no framer-motion) */}
       {mobileOpen && (
         <div
-          className="mobile-menu-overlay fixed inset-0 z-40 bg-white flex flex-col pt-20 pb-8 px-6 lg:hidden"
+          className="mobile-menu-overlay fixed inset-0 z-[45] bg-white flex flex-col pt-20 pb-8 px-6 lg:hidden"
         >
           <nav className="flex-1 flex flex-col justify-center gap-2">
             {navLinks.map((link, i) => (
